@@ -9,26 +9,12 @@ using ClassManagementSystem.Models;
 namespace ClassManagementSystem.Controllers
 {
     [Route("")]
+    [Produces("application/json")]
     public class GroupController : Controller
     {
 
         public GroupController()
         { }
-
-        public class GroupGrade
-        {
-            public struct PresentationGrade
-            {
-                public int TopicId { get; set; }
-                public int Grade { get; set; }
-            }
-
-            public List<PresentationGrade> PresentationGrades { get; } = new List<PresentationGrade>();
-
-            public int ReportGrade { get; set; }
-
-            public int Grade { get; set; }
-        }
 
         [HttpGet("/group/{groupId:long}")]
         public IActionResult GetGroupById(long groupId)

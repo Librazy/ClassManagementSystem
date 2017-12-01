@@ -7,5 +7,8 @@ namespace ClassManagementSystem.Models
 {
     public class Jwt
     {
+        public int Id { get; set; }
+        public string Type { get; set; }
+        public long Exp { get; set; }
     }
 }

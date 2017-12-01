@@ -9,6 +9,7 @@ using ClassManagementSystem.Models;
 namespace ClassManagementSystem.Controllers
 {
     [Route("")]
+    [Produces("application/json")]
     public class UserController : Controller
     {
         public class UsernameAndPassword {

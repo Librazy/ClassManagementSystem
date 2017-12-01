@@ -7,5 +7,23 @@ namespace ClassManagementSystem.Models
 {
     public class Seminar
     {
+        public Seminar()
+        {
+            Id = 0;
+        }
+
+        public long Id { get; }
+
+        public string Name { get; set; }
+
+        public string Description { get; set; }
+
+        public string StartTime { get; set; }
+
+        public string EndTime { get; set; }
+
+        public string GroupingMethod { get; set; }
+
+        public Proportions Proportions { get; set; }
     }
 }

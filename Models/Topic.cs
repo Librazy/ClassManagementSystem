@@ -7,5 +7,21 @@ namespace ClassManagementSystem.Models
 {
     public class Topic
     {
+        public Topic()
+        {
+            Id = 0;
+        }
+
+        public long Id { get; }
+
+        public string Name { get; set; }
+
+        public string Description { get; set; }
+
+        public int GroupLimit { get; set; }
+
+        public List<Group> Groups { get; set; }
+
+        public int GroupLeft => GroupLimit - Groups.Count;
     }
 }

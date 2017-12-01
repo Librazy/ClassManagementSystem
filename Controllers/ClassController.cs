@@ -9,6 +9,7 @@ using ClassManagementSystem.Models;
 namespace ClassManagementSystem.Controllers
 {
     [Route("")]
+    [Produces("application/json")]
     public class ClassController : Controller
     {
 
@@ -51,7 +52,7 @@ namespace ClassManagementSystem.Controllers
         [HttpGet("/class/{classId:long}")]
         public IActionResult GetClassById(long classId)
         {
-            return Json(new Class());
+            return Json(new Class(0));
         }
 
         [HttpDelete("/class/{classId:long}")]
@@ -73,7 +74,7 @@ namespace ClassManagementSystem.Controllers
         }
 
         [HttpPost("/class/{classId:long}/student")]
-        public IActionResult SelectClass(long classId, [FromBody] Student student)
+        public IActionResult SelectClass(long classId, [FromBody] User student)
         {
             return Created("/class/1/student/1", new Dictionary<string, string> { ["url"] = " /class/1/student/1"});
         }

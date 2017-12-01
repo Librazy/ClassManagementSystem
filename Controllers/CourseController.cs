@@ -9,6 +9,7 @@ using ClassManagementSystem.Models;
 namespace ClassManagementSystem.Controllers
 {
     [Route("")]
+    [Produces("application/json")]
     public class CourseController : Controller
     {
 
@@ -30,7 +31,7 @@ namespace ClassManagementSystem.Controllers
         [HttpGet("/course/{courseId:long}")]
         public IActionResult GetCourseById(long courseId)
         {
-            return Json(new Course());
+            return Json(new Course(0));
         }
 
         [HttpDelete("/course/{courseId:long}")]
