@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using System.Collections.Generic;
 using ClassManagementSystem.Models;
+using Microsoft.AspNetCore.Mvc;
 
 namespace ClassManagementSystem.Controllers
 {
@@ -12,48 +8,45 @@ namespace ClassManagementSystem.Controllers
     [Produces("application/json")]
     public class GroupController : Controller
     {
-
-        public GroupController()
-        { }
-
         [HttpGet("/group/{groupId:long}")]
-        public IActionResult GetGroupById(long groupId)
+        public IActionResult GetGroupById([FromRoute] long groupId)
         {
             return Json(new Topic());
         }
 
         [HttpPut("/group/{groupId:long}")]
-        public IActionResult UpdateGroupById(long groupId, [FromBody] Group updated)
+        public IActionResult UpdateGroupById([FromRoute] long groupId, [FromBody] Group updated)
         {
             return NoContent();
         }
 
         [HttpPost("/group/{groupId:long}/topic")]
-        public IActionResult SelectTopic(long groupId, [FromBody] Topic selected)
+        public IActionResult SelectTopic([FromRoute] long groupId, [FromBody] Topic selected)
         {
-            return Created("/group/1/topic/1", new Dictionary<string, string> { ["url"] = " /group/1/topic/1" });
+            return Created("/group/1/topic/1", new Dictionary<string, string> {["url"] = " /group/1/topic/1"});
         }
 
         [HttpDelete("/group/{groupId:long}/topic/{topicId:long}")]
-        public IActionResult DeselectTopic(long groupId, long topicId)
+        public IActionResult DeselectTopic([FromRoute] long groupId, [FromRoute] long topicId)
         {
             return NoContent();
         }
 
         [HttpGet("/group/{groupId:long}/grade")]
-        public IActionResult GetGradeByGroupId(long groupId)
+        public IActionResult GetGradeByGroupId([FromRoute] long groupId)
         {
             return Json(new GroupGrade());
         }
 
         [HttpPut("/group/{groupId:long}/grade")]
-        public IActionResult UpdateGradeByGroupId(long groupId, GroupGrade updated)
+        public IActionResult UpdateGradeByGroupId([FromRoute] long groupId, [FromBody] GroupGrade updated)
         {
             return NoContent();
         }
 
         [HttpPut("/group/{groupId:long}/grade/{studentId:long}")]
-        public IActionResult SubmitStudentGradeByGroupId(long groupId, long studentId, GroupGrade updated)
+        public IActionResult SubmitStudentGradeByGroupId([FromBody] long groupId, [FromBody] long studentId,
+            [FromBody] GroupGrade updated)
         {
             return NoContent();
         }

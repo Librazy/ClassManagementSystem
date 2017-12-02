@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using System.Collections.Generic;
 using ClassManagementSystem.Models;
+using Microsoft.AspNetCore.Mvc;
 
 namespace ClassManagementSystem.Controllers
 {
@@ -12,42 +8,38 @@ namespace ClassManagementSystem.Controllers
     [Produces("application/json")]
     public class SeminarController : Controller
     {
-
-        public SeminarController()
-        { }
-
         [HttpGet("/seminar/{seminarId:long}")]
-        public IActionResult GetSeminarById(long seminarId)
+        public IActionResult GetSeminarById([FromRoute] long seminarId)
         {
             return Json(new Seminar());
         }
 
         [HttpDelete("/seminar/{seminarId:long}")]
-        public IActionResult DeleteSeminarById(long seminarId)
+        public IActionResult DeleteSeminarById([FromRoute] long seminarId)
         {
             return NoContent();
         }
 
         [HttpPut("/seminar/{seminarId:long}")]
-        public IActionResult UpdateSeminarById(long seminarId, [FromBody] Seminar updated)
+        public IActionResult UpdateSeminarById([FromRoute] long seminarId, [FromBody] Seminar updated)
         {
             return NoContent();
         }
 
         [HttpGet("/seminar/{seminarId:long}/topic")]
-        public IActionResult GetTopicsBySeminarId(long seminarId)
+        public IActionResult GetTopicsBySeminarId([FromRoute] long seminarId)
         {
             return Json(new List<Topic>());
         }
 
         [HttpPut("/seminar/{seminarId:long}/topic")]
-        public IActionResult CreateTopicBySeminarId(long seminarId, [FromBody] Seminar newSeminar)
+        public IActionResult CreateTopicBySeminarId([FromRoute] long seminarId, [FromBody] Seminar newSeminar)
         {
             return Created("/topic/1", newSeminar);
         }
 
         [HttpGet("/seminar/{seminarId:long}/group")]
-        public IActionResult GetGroupsBySeminarId(long seminarId)
+        public IActionResult GetGroupsBySeminarId([FromRoute] long seminarId)
         {
             return Json(new List<Group>());
         }

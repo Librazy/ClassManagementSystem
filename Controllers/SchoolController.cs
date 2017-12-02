@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using System.Collections.Generic;
 using ClassManagementSystem.Models;
+using Microsoft.AspNetCore.Mvc;
 
 namespace ClassManagementSystem.Controllers
 {
@@ -12,23 +8,20 @@ namespace ClassManagementSystem.Controllers
     [Produces("application/json")]
     public class SchoolController : Controller
     {
-        public SchoolController()
-        { }
-
         [HttpGet("/school")]
-        public IActionResult GetSchools()
+        public IActionResult GetSchools([FromQuery] string city)
         {
             return Json(new List<School>());
         }
 
         [HttpGet("/school/{schoolId:long}")]
-        public IActionResult GetSchoolById(long schoolId)
+        public IActionResult GetSchoolById([FromRoute] long schoolId)
         {
             return Json(new School());
         }
 
         [HttpPost("/school")]
-        public IActionResult CreateSchool(School newSchool)
+        public IActionResult CreateSchool([FromBody] School newSchool)
         {
             return Created("/school/1", newSchool);
         }

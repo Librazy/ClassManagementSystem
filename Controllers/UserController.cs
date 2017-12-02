@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using ClassManagementSystem.Models;
 using Microsoft.AspNetCore.Mvc;
-using ClassManagementSystem.Models;
 
 namespace ClassManagementSystem.Controllers
 {
@@ -12,14 +7,6 @@ namespace ClassManagementSystem.Controllers
     [Produces("application/json")]
     public class UserController : Controller
     {
-        public class UsernameAndPassword {
-            public string Phone { get; set; }
-            public string Password { get; set; }
-        }
-
-        public UserController()
-        { }
-
         [HttpGet("/me")]
         public IActionResult GetCurrentUser()
         {
@@ -33,7 +20,8 @@ namespace ClassManagementSystem.Controllers
         }
 
         [HttpGet("/signin")]
-        public IActionResult SigninWechat([FromQuery] string code, [FromQuery] string state, [FromQuery(Name = "success_url")] string successUrl)
+        public IActionResult SigninWechat([FromQuery] string code, [FromQuery] string state,
+            [FromQuery(Name = "success_url")] string successUrl)
         {
             return Json(new Jwt());
         }
@@ -48,6 +36,12 @@ namespace ClassManagementSystem.Controllers
         public IActionResult RegisterPassword([FromBody] UsernameAndPassword uap)
         {
             return Json(new Jwt());
+        }
+
+        public class UsernameAndPassword
+        {
+            public string Phone { get; set; }
+            public string Password { get; set; }
         }
     }
 }
