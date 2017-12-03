@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=gb2312">
@@ -7,29 +7,34 @@
                                      maximum-scale=1.0,
                                      user-scalable=no">
     <title>ClassManage</title>
-    <!-- ���°汾�� Bootstrap ���� CSS �ļ� -->
+    <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
     <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css"
           integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
-    <!-- ��ѡ�� Bootstrap �����ļ���һ�㲻�����룩 -->
+    <!-- 可选的 Bootstrap 主题文件（一般不用引入） -->
     <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
           integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
 
-    <!-- ���µ� Bootstrap ���� JavaScript �ļ� -->
+    <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
     <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"
             integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
             crossorigin="anonymous"></script>
-    <link href="../../css/common/WechatLoginPage.css" rel="stylesheet" type="text/css"/>
+            <link href="../../css/common/AccountLoginPage.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
 <div class="GreyPanel"></div>
-<div class="ClassManage">���ù���ϵͳ</div>
-<div class="LoginWayOne"> <a href="ykp_home.html">�˺������¼</a></div>
-<div class="LoginWayTwo"> <a href="ykp_wechat.html">΢�ŵ�¼</a></div>
-<div class="WechatText">ʹ��΢��ɨһɨ</div>
-<Identity>
-<input id="man" type="radio" checked="checked" name="1" />��ʦ<input id="woman" type="radio"  name="1"/>ѧ��
-</Identity>
-<img src="../../Img/qrcode.png" class="QRCode">
+<!-- cxcxzczx -->
+<div class="ClassManage">课堂管理系统</div>
+<div class="LoginWayOne"> <a href="home.html">账号密码登录</a></div>
+<div class="LoginWayTwo"> <a href="wechat.html">微信登录</a></div>
+<div class="UserName"> 用户名</div>
+<input type="text" class="UserNameField"/>
+<div class="Password"> 密码</div>
+<input type="password" class="PasswordField"/>
+<button class="Login">登录</button>
+<div class="Enroll"><a href="enroll.html">注册</a></div>
+<script type="text/javascript">
+    
+</script>
 </body>
 </html>

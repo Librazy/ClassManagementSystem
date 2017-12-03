@@ -5,6 +5,35 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Include="Views\student\StudentBindPage.html" />
+    <Content Include="Views\student\StudentChooseCoursePage.html" />
+    <Content Include="Views\student\StudentCourseHome.html" />
+    <Content Include="Views\student\StudentCourseInformation.html" />
+    <Content Include="Views\student\StudentDiscussionClassPage%28fixed%29.html" />
+    <Content Include="Views\student\StudentDiscussionClassPage%28random%29.html" />
+    <Content Include="Views\student\StudentHomePage.html" />
+    <Content Include="Views\student\StudentModifyGroupPage.html" />
+    <Content Include="Views\student\StudentViewGradePage.html" />
+    <Content Include="Views\student\StudentViewGroupPage.html" />
+    <Content Include="Views\student\StudentViewTopicPage%28fixed%29.html" />
+    <Content Include="Views\student\StudentViewTopicPage%28random%29.html" />
+    <Content Include="Views\teacher\TeacherBindPage.html" />
+    <Content Include="Views\teacher\TeacherClassInfo.html" />
+    <Content Include="Views\teacher\TeacherCourseHomePage.html" />
+    <Content Include="Views\teacher\TeacherCourseInformation.html" />
+    <Content Include="Views\teacher\TeacherCreateClass.html" />
+    <Content Include="Views\teacher\TeacherCreateCoursePage.html" />
+    <Content Include="Views\teacher\TeacherCreateTopic.html" />
+    <Content Include="Views\teacher\TeacherHomePage.html" />
+    <Content Include="Views\teacher\TeacherInfoModifyPage.html" />
+    <Content Include="Views\teacher\TeacherScoreHome.html" />
+    <Content Include="Views\teacher\TeacherScoreReportPage.html" />
+    <Content Include="Views\teacher\TeacherTopicCheck.html" />
+    <Content Include="Views\teacher\TeacherUpdateSenimar.html" />
+    <Content Include="Views\teacher\TeacherUpdateTopic.html" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.3" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="2.0.1" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.0.0" />
@@ -15,7 +44,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Views\" />
+    <Folder Include="wwwroot\html\common\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Views\Login\RegisterPage.cshtml" />
   </ItemGroup>
 
 </Project>
