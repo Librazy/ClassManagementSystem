@@ -23,19 +23,19 @@ namespace ClassManagementSystem.Controllers
         public IActionResult SigninWechat([FromQuery] string code, [FromQuery] string state,
             [FromQuery(Name = "success_url")] string successUrl)
         {
-            return Json(new Jwt());
+            return Json(new SigninResult());
         }
 
         [HttpPost("/signin")]
         public IActionResult SigninPassword([FromBody] UsernameAndPassword uap)
         {
-            return Json(new Jwt());
+            return Json(new SigninResult());
         }
 
         [HttpPost("/register")]
         public IActionResult RegisterPassword([FromBody] UsernameAndPassword uap)
         {
-            return Json(new Jwt());
+            return Json(new SigninResult());
         }
 
         public class UsernameAndPassword
