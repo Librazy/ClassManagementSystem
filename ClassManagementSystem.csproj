@@ -4,6 +4,10 @@
     <TargetFramework>netcoreapp2.0</TargetFramework>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <NoWarn>1701;1702;1705;TS6053;6053;</NoWarn>
+  </PropertyGroup>
+
   <ItemGroup>
     <Content Include="Views\student\StudentBindPage.html" />
     <Content Include="Views\student\StudentChooseCoursePage.html" />
