@@ -23,7 +23,6 @@
     <Content Include="Views\student\StudentViewTopicPage%28random%29.html" />
     <Content Include="Views\teacher\TeacherBindPage.html" />
     <Content Include="Views\teacher\TeacherClassInfo.html" />
-    <Content Include="Views\teacher\TeacherCourseHomePage.html" />
     <Content Include="Views\teacher\TeacherCourseInformation.html" />
     <Content Include="Views\teacher\TeacherCreateClass.html" />
     <Content Include="Views\teacher\TeacherCreateCoursePage.html" />
@@ -112,6 +111,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="Views\teacher\TeacherCourseHomePage.cshtml" />
     <None Include="wwwroot\bower_components\bootstrap\CHANGELOG.md" />
     <None Include="wwwroot\bower_components\bootstrap\dist\css\bootstrap-grid.css.map" />
     <None Include="wwwroot\bower_components\bootstrap\dist\css\bootstrap-grid.min.css.map" />
