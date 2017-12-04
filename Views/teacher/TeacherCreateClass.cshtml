@@ -1,10 +1,10 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 <head lang="en">
     <meta charset="UTF-8">
-    <title>创建讨论课</title>
-    <link rel="stylesheet" href="./bootstrap.min.css">
-    <link rel="stylesheet" href="../../css/teacher/content.css">
+    <title>创建班级</title>
+    <link rel="stylesheet" href="{$base}/raffle/bootstrap.min.css">
+     <link rel="stylesheet" href="~/css/teacher/content.css">
 </head>
 <body>
     
@@ -13,9 +13,9 @@
             课堂管理系统
           </div>
           <div class="icon">
-            <img src="../../Img/home.png">首页
-           <img src="../../Img/home.png">帮助
-           <img src="../../Img/home.png">退出
+           <img src="~/Img/home.png">首页
+            <img src="~/Img/help.png">帮助
+            <img src="~/Img/exit.png">退出
           </div>
           <div class="clear"></div>
         </div>
@@ -27,27 +27,24 @@
             </div>
             <div class="content">
                 <div class="block">
-                    <div class="title">创建讨论课</div>
+                    <div class="title">创建班级</div>
                     <div class="returnButton">返回上一页</div>
                     <div class="line"></div>
                     <div class="itemBody">
                         <div class="item">
-                          <label class="itemName">讨论课名称:</label>
-                          <input type="text" name="seminarName" class="bigInput">
-                        </div>
-                        <div class="item" style="height:40%;">
-                          <label class="itemName">讨论课说明:</label>
-                          <textarea class="textStyle"></textarea>
+                          <label class="itemName">班级名称:</label>
+                          <input type="text" name="className" class="bigInput">
                         </div>
                         <div class="item">
-                          <label class="itemName">分组方式: </label>
+                          <label class="itemName">班级代号:</label>
+                          <input type="text" name="classNickname" class="bigInput">
+                        </div>
+                        <div class="item">
+                          <label class="itemName">上课时间:</label>
                           <select class="bigSelect"></select>
-                        </div>
-                        <div class="item">
-                          <label class="itemName">开始时间: </label>
-                          <input type="date" name="startTime" class="timeStyle">
-                          <label class="itemName" style="margin-left: 15%">结束时间: </label>
-                          <input type="date" name="startTime" class="timeStyle">
+                          <select class="smallSelect"></select>
+                          <select class="smallSelect"></select>
+                          <button class="addButton">添加</button>
                         </div>
                         <div class="item">
                           <label class="itemName">评分规则:</label>
@@ -65,8 +62,13 @@
                           <input type="text" name="seminarGrade" class="smallInput">
                         </div>
                         <div class="item">
-                          <button class="submit">提 交</button>
-                          <button class="reset">重 置</button>
+                          <label class="itemName">导入学生名单:</label>
+                          <label class="itemName">文件名</label>
+                          <button class="selectFile">选择文件</button>
+                        </div>
+                        <div class="item">
+                          <button class="submit">提交</button>
+                          <button class="reset">重置</button>
                           <div class="clear"></div>
                         </div>
                     </div>
