@@ -10,5 +10,11 @@ namespace ClassManagementSystem.Controllers.Teacher
         {
             return View();
         }
+
+        [Route("/TeacherCourseInformation")]
+        public IActionResult TeacherCourseInformation()
+        {
+            return View();
+        }
     }
 }

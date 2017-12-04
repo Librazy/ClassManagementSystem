@@ -26,7 +26,7 @@ namespace ClassManagementSystem.Controllers
                 EndTime = "2017-12-31",
                 StartTime = "2017-10-01"
             };
-            return Json(new List<Course> {c1 , c2}, Ignoring("Classes", "Proportions"));
+            return Json(new List<Course> { c1, c2 }, Ignoring("Classes", "Proportions", "TeacherName", "Teacher", "TeacherEmail", "Seminars"));
         }
 
         [HttpPost("/course")]
@@ -38,7 +38,7 @@ namespace ClassManagementSystem.Controllers
         [HttpGet("/course/{courseId:long}")]
         public IActionResult GetCourseById([FromRoute] long courseId)
         {
-            return Json(new Course(0));
+            return Json(new Course(0), Ignoring("Classes", "Proportions", "Teacher", "Seminars"));
         }
 
         [HttpDelete("/course/{courseId:long}")]
@@ -56,7 +56,15 @@ namespace ClassManagementSystem.Controllers
         [HttpGet("/course/{courseId:long}/class")]
         public IActionResult GetClassesByCourseId([FromRoute] long courseId)
         {
-            return Json(new List<Class>());
+            var c1 = new Class(1)
+            {
+                Name = "周三1-2"
+            };
+            var c2 = new Class(1)
+            {
+                Name = "周三910"
+            };
+            return Json(new List<Class>{c1, c2});
         }
 
         [HttpPost("/course/{courseId:long}/class")]
@@ -68,7 +76,15 @@ namespace ClassManagementSystem.Controllers
         [HttpGet("/course/{courseId:long}/seminar")]
         public IActionResult GetSeminarsByCourseId([FromRoute] long courseId)
         {
-            return Json(new List<Class>());
+            var s1 = new Seminar(1)
+            {
+                Name = "讨论课1"
+            };
+            var s2 = new Seminar(3)
+            {
+                Name = "讨论2"
+            };
+            return Json(new List<Seminar>{s1, s2});
         }
 
         [HttpPost("/course/{courseId:long}/seminar")]

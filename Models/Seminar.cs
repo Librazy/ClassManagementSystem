@@ -7,9 +7,9 @@ namespace ClassManagementSystem.Models
 {
     public class Seminar
     {
-        public Seminar()
+        public Seminar(long id)
         {
-            Id = 0;
+            Id = id;
         }
 
         public long Id { get; }

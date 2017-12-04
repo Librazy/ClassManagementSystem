@@ -11,7 +11,7 @@ namespace ClassManagementSystem.Controllers
         [HttpGet("/seminar/{seminarId:long}")]
         public IActionResult GetSeminarById([FromRoute] long seminarId)
         {
-            return Json(new Seminar());
+            return Json(new Seminar(1));
         }
 
         [HttpDelete("/seminar/{seminarId:long}")]

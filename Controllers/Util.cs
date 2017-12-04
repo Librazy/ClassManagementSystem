@@ -12,12 +12,17 @@ namespace ClassManagementSystem.Controllers
     {
         public static JsonSerializerSettings Ignoring(params string[] strs) => new JsonSerializerSettings() { ContractResolver = new ShouldSerializeContractResolver(new List<string> (strs)),  };
 
-        public class ShouldSerializeContractResolver : CamelCasePropertyNamesContractResolver
+        public class ShouldSerializeContractResolver : DefaultContractResolver
         {
             private readonly List<string> _ignored;
 
             public ShouldSerializeContractResolver(List<string> ignored)
             {
+                NamingStrategy = new CamelCaseNamingStrategy
+                {
+                    ProcessDictionaryKeys = true,
+                    OverrideSpecifiedNames = true
+                };
                 _ignored = ignored;
             }
 

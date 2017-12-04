@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace ClassManagementSystem.Models
 {
@@ -18,7 +16,15 @@ namespace ClassManagementSystem.Models
 
         public int NumClass => Classes.Count;
 
+        public User Teacher { get; set; } = new User(0) {Type = User.UserType.Teacher};
+
+        public string TeacherName => Teacher.Name;
+
+        public string TeacherEmail => Teacher.Email;
+
         public List<Class> Classes { get; set; } = new List<Class>();
+
+        public List<Seminar> Seminars { get; set; } = new List<Seminar>();
 
         public int NumStudent => Classes.Aggregate(0, (total, current) => total + current.NumStudent);
 

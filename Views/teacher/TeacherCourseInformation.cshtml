@@ -1,59 +1,94 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>教师课程内页</title>
- <link href="~/css/teacher/TeacherCourseInformation.css" rel="stylesheet" type="text/css"/>
+    <meta charset="UTF-8">
+    <title>教师课程内页</title>
+    <link href="~/css/teacher/TeacherCourseInformation.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
 <div class="top">
-        	<div class="font">
-        		课堂管理系统
-        	</div>
-        	<div class="icon">
-        		<img src="~/Img/home.png">首页
-        		<img src="~/Img/help.png">帮助
-        		<img src="~/Img/exit.png">退出
-        	</div>
-        	<div class="clear"></div>
-    	</div>
-        <div class="body">
-            <div class="navigation">
-                <div class="courseName">OOAD</div>
-                <div class="line"></div>
-                <div class="courseIntroduction">ooad is xxx</div>
-            </div>
-            <div class="content">
-                <div class="classInfo">
-                    <div class="title">课程班级</div>
-                    <div class="returnButton">返回上一页</div>
-                    <div class="line"></div>
-                    <div class="blockBody">
-                        <div class="block"><div class="blockFont">周三1-2节</div></div>
-                        <div class="block"><div class="blockFont">周三3-4节</div></div>
-                        <div class="block"><div class="blockFont">周三5-6节</div></div>
-                         <div class="block">
-                <img class="addImg" src="~/Img/smalladd.png" alt="添加">
-            </div>
-
-                    </div>
-                </div>
-                <div class="seminarInfo">
-                    <div class="title">讨论课</div>
-                    <div class="line"></div>
-                    <div class="blockBody">
-                        <div class="block"><div class="blockFont">讨论课1</div></div>
-                        <div class="block"><div class="blockFont">讨论课2</div></div>
-                        <div class="block"><div class="blockFont">讨论课3</div></div>
-                        <div class="block"><div class="blockFont">讨论课4</div></div>
-                        <div class="block"><div class="blockFont">讨论课5</div></div>
-                       <div class="block">
-                <img class="addImg" src="~/Img/smalladd.png" alt="添加">
-            </div>
-                    </div>
+    <div class="font">
+        课堂管理系统
+    </div>
+    <div class="icon">
+        <img src="~/Img/home.png">首页
+        <img src="~/Img/help.png">帮助
+        <img src="~/Img/exit.png">退出
+    </div>
+    <div class="clear"></div>
+</div>
+<div class="body">
+    <div class="navigation">
+        <div class="courseName">OOAD</div>
+        <div class="line"></div>
+        <div class="courseIntroduction">ooad is xxx</div>
+    </div>
+    <div class="content">
+        <div class="classInfo">
+            <div class="title">课程班级</div>
+            <div class="returnButton">返回上一页</div>
+            <div class="line"></div>
+            <div class="blockBody" id="classes">
+                <div class="block">
+                    <img class="addImg" src="~/Img/smalladd.png" alt="添加">
                 </div>
             </div>
-            <div class="clear"></div>
         </div>
+        <div class="seminarInfo">
+            <div class="title">讨论课</div>
+            <div class="line"></div>
+            <div class="blockBody" id="seminars">
+                <div class="block">
+                    <img class="addImg" src="~/Img/smalladd.png" alt="添加">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="clear"></div>
+</div>
+<script src="~/js/query.js"></script>
+<script src="~/js/jquery.min.js"></script>
+<script async src="~/js/tether.min.js"></script>
+<script defer src="~/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+    var id = getQuery()["id"];
+    $(function() {
+        $.ajax({
+            url: '/course/' + id,
+            type: 'GET',
+            dataType: 'json',
+            success: function(result) {
+                $(".courseName").text(result.name);
+                $(".courseIntroduction").text(result.description);
+            }
+        });
+        $.ajax({
+            url: '/course/' + id + "/class",
+            type: 'GET',
+            dataType: 'json',
+            success: function (result) {
+                for (var i = result.length; i--;) {
+                    $("#classes").prepend("<div class=\"block classblock\" data-class-id=" + result[i].id + "> <div class=\"blockFont\">" + result[i].name + "</div></div>");
+                }
+                $(".classblock").click(function() {
+                    window.location.href = "/TeacherClassInfo?id=" + $(this).attr("data-class-id");
+                });
+            }
+        });
+        $.ajax({
+            url: '/course/' + id + "/seminar",
+            type: 'GET',
+            dataType: 'json',
+            success: function (result) {
+                for (var i = result.length; i--;) {
+                    $("#seminars").prepend("<div class=\"block seminarblock\" data-seminar-id=" + result[i].id + "> <div class=\"blockFont\">" + result[i].name + "</div></div>");
+                }
+                $(".seminarblock").click(function() {
+                    window.location.href = "/TeacherSenimarInfo?id=" + $(this).attr("data-seminar-id");
+                });
+            }
+        });
+    });
+</script>
 </body>
 </html>
