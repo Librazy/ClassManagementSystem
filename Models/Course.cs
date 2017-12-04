@@ -14,9 +14,11 @@ namespace ClassManagementSystem.Models
 
         public long Id { get; }
 
+        public string Name { get; set; }
+
         public int NumClass => Classes.Count;
 
-        public List<Class> Classes { get; set; }
+        public List<Class> Classes { get; set; } = new List<Class>();
 
         public int NumStudent => Classes.Aggregate(0, (total, current) => total + current.NumStudent);
 

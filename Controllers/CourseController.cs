@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using ClassManagementSystem.Models;
 using Microsoft.AspNetCore.Mvc;
+using static ClassManagementSystem.Controllers.Util;
 
 namespace ClassManagementSystem.Controllers
 {
@@ -11,7 +12,21 @@ namespace ClassManagementSystem.Controllers
         [HttpGet("/course")]
         public IActionResult GetUserCourses()
         {
-            return Json(new List<Course>());
+            var c1 = new Course(1)
+            {
+                Name = "OOAD",
+                Description = "Description",
+                EndTime = "2017-12-31",
+                StartTime = "2017-10-01"
+            };
+            var c2 = new Course(2)
+            {
+                Name = "J2EE",
+                Description = "Description",
+                EndTime = "2017-12-31",
+                StartTime = "2017-10-01"
+            };
+            return Json(new List<Course> {c1 , c2}, Ignoring("Classes", "Proportions"));
         }
 
         [HttpPost("/course")]

@@ -4,61 +4,68 @@
     <meta charset="UTF-8">
     <title>教师主页</title>
     <link href="~/css/teacher/TeacherCourseHomePage.css" rel="stylesheet" type="text/css"/>
-    
 </head>
 <body>
-        <div class="top">
-            <div class="font">
-                课堂管理系统
-            </div>
-            <div class="icon">
-                <img src="~/Img/home.png">首页
-                <img src="~/Img/help.png">帮助
-                <img src="~/Img/exit.png">退出
-            </div>
-            <div class="clear"></div>
+<div class="top">
+    <div class="font">
+        课堂管理系统
+    </div>
+    <div class="icon">
+        <img src="~/Img/home.png" alt="">首页
+        <img src="~/Img/help.png" alt="">帮助
+        <img src="~/Img/exit.png" alt="">退出
+    </div>
+    <div class="clear"></div>
+</div>
+<div class="body">
+    <div class="navigation">
+        <div class="title">导航</div>
+        <div class="line"></div>
+        <div class="courseIntroduction">
+            <a class="guidefont" href="#">基本信息</a>
+            <a class="guidefont" href="#">课程信息</a>
+            <a class="guidefont" href="#">新建课程</a>
         </div>
-        <div class="body">
-            <div class="navigation">
-                <div class="title">导航</div>
-                <div class="line"></div>
-                <div class="courseIntroduction">
-           <a class="guidefont" href="#">基本信息</a>
-                  <a class="guidefont" href="#">课程信息</a>
-                  <a class="guidefont" href="#">新建课程</a>
-                </div>
-            </div>
-            <div class="content">
-              <div class="title">课程信息</div>
-              <hr class="line"/>
-                
-              
-          <div class="main_box_right_content">
-                <h3 class="classtitle">J2EE
-                    <button>删除课程</button>
-                    <button>修改课程</button>
-                </h3>
-            <div class="divideline"></div>
-                <div  class="classinfo">
-                          
-                       <table class="table">
-                <tr>
-                <td>班级数：<span>1</span></td>  <td>学生人数：60</td>
-                </tr>
-                 <tr>
-                <td>开始时间：XXXX</td>  <td>结束时间:XXXX</td>
-                </tr>
-                </table>
-                </div>
-            </div>
-          <div class="main_box_right_content">
-                <img class="addcourse" src="~/Img/add.png">
-                
-            </div>
-            </div>
-            
-           
-            <div class="clear"></div>
+    </div>
+    <div class="content">
+        <div class="title">课程信息</div>
+        <hr class="line" id="courses"/>
+        <div class="main_box_right_content">
+            <img class="addcourse" src="~/Img/add.png" alt="">
         </div>
+    </div>
+    <div class="clear"></div>
+</div>
+<script src="~/js/jquery.min.js"></script>
+<script async src="~/js/tether.min.js"></script>
+<script defer src="~/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+    $(function() {
+        $.ajax({
+            url: '/course',
+            type: 'GET',
+            dataType: 'json',
+            success: function(result) {
+                for (var i = result.length; i--;) {
+                    $("#courses").after(
+                        "<div class=\"main_box_right_content courseinfo\" data-course-id=" + i + "><h3 class=\"classtitle\" data-course-id=" + i + ">" +
+                        result[i].name +
+                        "<button>删除课程</button> <button>修改课程</button></h3><div class=\"divideline\"></div><div  class=\"classinfo\"><table class=\"table\"><tr><td>班级数：<span>" +
+                        result[i].numClass +
+                        "</span></td>  <td>学生人数：" +
+                        result[i].numStudent +
+                        "</td></tr><tr><td>开始时间：" +
+                        result[i].startTime +
+                        "</td>  <td>结束时间:" +
+                        result[i].endTime +
+                        "</td></tr></table></div></div>");
+                }
+                $(".courseinfo").click(function() {
+                    window.location.href = "/TeacherCourseInformation?id=" + $(this).attr("data-course-id");
+                });
+            }
+        });
+    });
+</script>
 </body>
 </html>

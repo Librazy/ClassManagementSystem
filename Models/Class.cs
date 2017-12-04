@@ -18,12 +18,11 @@ namespace ClassManagementSystem.Models
             Id = id;
         }
 
-
         public long Id { get; }
 
         public int NumStudent => Students.Count;
 
-        public List<User> Students { get; set; }
+        public List<User> Students { get; set; } = new List<User>();
 
         public string Name { get; set; }
 

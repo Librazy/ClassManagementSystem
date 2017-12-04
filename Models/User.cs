@@ -1,13 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Runtime.Serialization;
 using Newtonsoft.Json;
 
 namespace ClassManagementSystem.Models
 {
     public class User
     {
+        public enum UserType
+        {
+            [EnumMember(Value = "student")] Student,
+            [EnumMember(Value = "teacher")] Teacher
+        }
+
         public User(long id)
         {
             Id = id;
@@ -15,7 +18,7 @@ namespace ClassManagementSystem.Models
 
         public long Id { get; }
 
-        public string Type { get; set; }
+        public UserType Type { get; set; }
 
         public string Number { get; set; }
 
