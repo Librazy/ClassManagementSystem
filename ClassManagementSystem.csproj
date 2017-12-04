@@ -9,18 +9,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Include="Views\student\StudentBindPage.html" />
-    <Content Include="Views\student\StudentChooseCoursePage.html" />
-    <Content Include="Views\student\StudentCourseHome.html" />
-    <Content Include="Views\student\StudentCourseInformation.html" />
-    <Content Include="Views\student\StudentDiscussionClassPage%28fixed%29.html" />
-    <Content Include="Views\student\StudentDiscussionClassPage%28random%29.html" />
-    <Content Include="Views\student\StudentHomePage.html" />
-    <Content Include="Views\student\StudentModifyGroupPage.html" />
-    <Content Include="Views\student\StudentViewGradePage.html" />
-    <Content Include="Views\student\StudentViewGroupPage.html" />
-    <Content Include="Views\student\StudentViewTopicPage%28fixed%29.html" />
-    <Content Include="Views\student\StudentViewTopicPage%28random%29.html" />
     <Content Include="Views\teacher\TeacherBindPage.html" />
     <Content Include="Views\teacher\TeacherClassInfo.html" />
     <Content Include="Views\teacher\TeacherCourseInformation.html" />
@@ -107,6 +95,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Controllers\Teacher\" />
     <Folder Include="wwwroot\html\common\" />
   </ItemGroup>
 
