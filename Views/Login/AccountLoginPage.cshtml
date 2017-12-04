@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+锘�<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=gb2312">
@@ -7,31 +7,41 @@
                                      maximum-scale=1.0,
                                      user-scalable=no">
     <title>ClassManage</title>
-    <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
-    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css"
-          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="~/bower_components/bootstrap/dist/css/bootstrap.min.css">
 
-    <!-- 可选的 Bootstrap 主题文件（一般不用引入） -->
-    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
-          integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
-
-    <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
-    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"
-            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
-            crossorigin="anonymous"></script>
-            <link href="~/css/common/AccountLoginPage.css" rel="stylesheet" type="text/css"/>
+    <link href="~/css/common/AccountLoginPage.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
 <div class="GreyPanel"></div>
 <!-- cxcxzczx -->
-<div class="ClassManage">课堂管理系统</div>
-<div class="LoginWayOne"> <a href="home.html">账号密码登录</a></div>
-<div class="LoginWayTwo"> <a href="wechat.html">微信登录</a></div>
-<div class="UserName"> 用户名</div>
-<input type="text" class="UserNameField"></input>
-<div class="Password"> 密码</div>
-<input type="password" class="PasswordField"></input>
-<button class="Login">登录</button>
-<div class="Enroll"><a href="enroll.html">注册</a></div>
+<div class="ClassManage" style="font-size: 6rem">璇惧爞绠＄悊绯荤粺</div>
+<div class="UserName"> 鐢ㄦ埛鍚�</div>
+<input type="text" class="UserNameField" id="phone"/>
+<div class="Password"> 瀵嗙爜</div>
+<input type="password" class="PasswordField" id="password"/>
+<button class="Login" id="login">鐧诲綍</button>
+<div class="Enroll"><a href="~/RegisterPage">娉ㄥ唽</a></div>
+<script src="~/bower_components/jquery/dist/jquery.min.js"></script>
+<script async src="~/bower_components/tether/dist/js/tether.min.js"></script>
+<script defer src="~/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+    $("#login").click(function() {
+        $.ajax({
+            url: '/signin',
+            type: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify({ phone: $("#phone").val(), password: $("#password").val() }),
+            dataType: 'json',
+            success: function(result) {
+                if (result.type === "student") {
+                    window.location.href = "/Student/";
+                } else {
+                    window.location.href = "/Teacher/";
+                }
+                window.localStorage.setItem('jwt', result.jwt);
+            }
+        });
+    });
+</script>
 </body>
 </html>
