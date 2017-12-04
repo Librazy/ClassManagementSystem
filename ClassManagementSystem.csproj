@@ -9,22 +9,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Include="Views\teacher\TeacherBindPage.html" />
-    <Content Include="Views\teacher\TeacherClassInfo.html" />
-    <Content Include="Views\teacher\TeacherCourseInformation.html" />
-    <Content Include="Views\teacher\TeacherCreateClass.html" />
-    <Content Include="Views\teacher\TeacherCreateCoursePage.html" />
-    <Content Include="Views\teacher\TeacherCreateTopic.html" />
-    <Content Include="Views\teacher\TeacherHomePage.html" />
-    <Content Include="Views\teacher\TeacherInfoModifyPage.html" />
-    <Content Include="Views\teacher\TeacherScoreHome.html" />
-    <Content Include="Views\teacher\TeacherScoreReportPage.html" />
-    <Content Include="Views\teacher\TeacherTopicCheck.html" />
-    <Content Include="Views\teacher\TeacherUpdateSenimar.html" />
-    <Content Include="Views\teacher\TeacherUpdateTopic.html" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="BuildBundlerMinifier" Version="2.6.362" />
     <PackageReference Include="BundlerMinifier.Core" Version="2.6.362" />
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.3" />
