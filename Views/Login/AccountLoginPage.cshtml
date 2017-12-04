@@ -7,8 +7,7 @@
                                      maximum-scale=1.0,
                                      user-scalable=no">
     <title>ClassManage</title>
-    <link rel="stylesheet" href="~/bower_components/bootstrap/dist/css/bootstrap.min.css">
-
+    <link rel="stylesheet" href="~/css/vendor/bootstrap.min.css">
     <link href="~/css/common/AccountLoginPage.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
@@ -21,9 +20,9 @@
 <input type="password" class="PasswordField" id="password"/>
 <button class="Login" id="login">登录</button>
 <div class="Enroll"><a href="~/RegisterPage">注册</a></div>
-<script src="~/bower_components/jquery/dist/jquery.min.js"></script>
-<script async src="~/bower_components/tether/dist/js/tether.min.js"></script>
-<script defer src="~/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="~/js/jquery.min.js"></script>
+<script async src="~/js/tether.min.js"></script>
+<script defer src="~/js/bootstrap.min.js"></script>
 <script type="text/javascript">
     $("#login").click(function() {
         $.ajax({
