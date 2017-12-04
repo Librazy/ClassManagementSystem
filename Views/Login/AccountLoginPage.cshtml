@@ -32,13 +32,13 @@
             contentType: 'application/json',
             data: JSON.stringify({ phone: $("#phone").val(), password: $("#password").val() }),
             dataType: 'json',
-            success: function(result) {
+            success: function (result) {
+                window.localStorage.setItem('jwt', result.jwt);
                 if (result.type === "student") {
                     window.location.href = "/Student/";
                 } else {
                     window.location.href = "/Teacher/";
                 }
-                window.localStorage.setItem('jwt', result.jwt);
             }
         });
     });
