@@ -9,6 +9,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="wwwroot\html\common\**" />
+    <Content Remove="wwwroot\html\common\**" />
+    <EmbeddedResource Remove="wwwroot\html\common\**" />
+    <None Remove="wwwroot\html\common\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Content Include="Views\teacher\TeacherBindPage.html" />
     <Content Include="Views\teacher\TeacherClassInfo.html" />
     <Content Include="Views\teacher\TeacherCourseInformation.html" />
@@ -96,7 +103,6 @@
 
   <ItemGroup>
     <Folder Include="Controllers\Teacher\" />
-    <Folder Include="wwwroot\html\common\" />
   </ItemGroup>
 
   <ItemGroup>
