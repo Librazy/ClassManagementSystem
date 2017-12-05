@@ -16,5 +16,24 @@ namespace ClassManagementSystem.Controllers.Teacher
         {
             return View();
         }
+
+        [Route("/TeacherClassInfo")]
+        public IActionResult TeacherClassInfo()
+        {
+            return View();
+        }
+
+        [Route("/TeacherUpdateClass")]
+        public IActionResult TeacherUpdateClass()
+        {
+            return View();
+        }
+
+
+        [Route("/TeacherSeminarInfo")]
+        public IActionResult TeacherSeminarInfo()
+        {
+            return View("TeacherSenimarInfo");
+        }
     }
 }
