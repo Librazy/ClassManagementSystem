@@ -24,6 +24,8 @@ namespace ClassManagementSystem.Models
 
         public string GroupingMethod { get; set; }
 
+        public List<Topic> Topics { get; set; }
+
         public Proportions Proportions { get; set; }
     }
 }

@@ -88,7 +88,7 @@ namespace ClassManagementSystem.Controllers
             {
                 Name = "概要设计",
                 Description = "模型层与数据库设计",
-                GroupingMethod = "fixed",
+                GroupingMethod = "random",
                 StartTime = "2017-10-10",
                 EndTime = "2017-10-24"
             };

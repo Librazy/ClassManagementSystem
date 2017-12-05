@@ -8,10 +8,44 @@ namespace ClassManagementSystem.Controllers
     [Produces("application/json")]
     public class SeminarController : Controller
     {
-        [HttpGet("/seminar/{seminarId:long}")]
-        public IActionResult GetSeminarById([FromRoute] long seminarId)
+        [HttpGet("/seminar/{seminarId:long}/fixed")]
+        public IActionResult GetSeminarByIdFixed([FromRoute] long seminarId)
         {
-            return Json(new Seminar(1));
+            var s1 = new Seminar(29)
+            {
+                Name = "界面原型设计",
+                Description = "界面原型设计",
+                StartTime = "2017-09-25",
+                EndTime = "2017-10-09",
+                Topics = new List<Topic>()
+                {
+                    new Topic()
+                    {
+                        Name = "界面原型设计"
+                    }
+                }
+            };
+            return Json(s1);
+        }
+
+        [HttpGet("/seminar/{seminarId:long}/random")]
+        public IActionResult GetSeminarByIdRandom([FromRoute] long seminarId)
+        {
+            var s1 = new Seminar(32)
+            {
+                Name = "概要设计",
+                Description = "模型层与数据库设计",
+                StartTime = "2017-10-10",
+                EndTime = "2017-10-24",
+                Topics = new List<Topic>()
+                {
+                    new Topic()
+                    {
+                        Name = "领域模型与模块"
+                    }
+                }
+            };
+            return Json(s1);
         }
 
         [HttpDelete("/seminar/{seminarId:long}")]

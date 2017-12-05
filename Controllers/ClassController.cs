@@ -107,7 +107,28 @@ namespace ClassManagementSystem.Controllers
         [HttpGet("/class/{classId}/classgroup")]
         public IActionResult GetUserClassGroupByClassId([FromRoute] long classId)
         {
-            return Json(new ClassGroup());
+            var gu1 = new GroupUser()
+            {
+                IsLeader=true,
+                Id= 2757,
+                Name="张三",
+                Number= "23320152202333"
+            };
+            var gu2 = new GroupUser()
+            {
+                IsLeader = false,
+                Id = 2756,
+                Name = "李四",
+                Number = "23320152202443"
+            };
+            var gu3 = new GroupUser()
+            {
+                IsLeader = false,
+                Id = 2777,
+                Name = "王五",
+                Number = "23320152202433"
+            };
+            return Json(new List<GroupUser> {gu1, gu2, gu3});
         }
 
         [HttpPut("/class/{classId}/classgroup")]
@@ -132,8 +153,12 @@ namespace ClassManagementSystem.Controllers
             public double Elevation { get; set; }
         }
 
-        public class ClassGroup
+        public class GroupUser
         {
+            public bool IsLeader { get; set; }
+            public long Id { get; set; }
+            public string Name { get; set; }
+            public string Number { get; set; }
         }
     }
 }

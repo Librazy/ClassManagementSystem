@@ -20,8 +20,9 @@ namespace ClassManagementSystem.Models
 
         public int GroupLimit { get; set; }
 
-        public List<Group> Groups { get; set; }
+        public List<Group> Groups { get; set; } = new List<Group>();
 
         public int GroupLeft => GroupLimit - Groups.Count;
+
     }
 }

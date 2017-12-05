@@ -33,13 +33,13 @@ namespace ClassManagementSystem.Controllers
             return View();
         }
 
-        [Route("Student/Course/Seminar/fixed")]
+        [Route("Student/Seminar/Fixed")]
         public IActionResult StudentSeminarPageFixed()
         {
             return View();
         }
 
-        [Route("Student/Course/Seminar/Random")]
+        [Route("Student/Seminar/Random")]
         public IActionResult StudentSeminarPageRandom()
         {
             return View();

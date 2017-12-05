@@ -32,6 +32,7 @@
             <div class="returnButton">返回上一页</div>
             <div class="line" id="insertinfo"></div>
             <div class="blockBody" id="seminars">
+                
             </div>
         </div>
         <div class="seminarInfo">
@@ -57,13 +58,30 @@
             dataType: 'json',
             success: function (result) {
                 for (var i = result.length; i--;) {
-                    $("#seminars").prepend("<div class=\"block seminarblock\" data-seminar-id=" + result[i].id + "> <div class=\"blockFont\">" + result[i].name + "</div></div>");
+                    $("#seminars").prepend("<div class=\"block seminarblock\" id=" +
+                        i +
+                        " data-seminar-id=" +
+                        result[i].id +
+                        "> <div class=\"blockFont\">" +
+                        result[i].name +
+                        "</div></div>");
+                    
+                    if (result[i].groupingMethod === "fixed") {
+                        $("#" + i).click(function () {
+                            window.location.href = "/Student/Seminar/Fixed?id=" + id;
+                        });
+                    } else {
+                        $("#" + i).click(function () {
+                            window.location.href = "/Student/Seminar/Random?id=" + id;
+                        });
+                    }
                 }
+                
             }
         });
     });
     $("#groupclick").click(function () {
-        window.location.href = "/Student/Course/Managegroup";
+        window.location.href = "/Student/Course/Managegroup?id=" + id;
     });
 </script>
 </body>
