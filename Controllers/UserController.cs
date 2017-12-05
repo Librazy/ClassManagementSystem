@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using ClassManagementSystem.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ClassManagementSystem.Controllers
@@ -55,6 +57,12 @@ namespace ClassManagementSystem.Controllers
         public IActionResult RegisterPassword([FromBody] UsernameAndPassword uap)
         {
             return Json(new SigninResult());
+        }
+
+        [HttpPost("/upload/avatar")]
+        public IActionResult UploadAvatar(IFormFile file)
+        {
+            return Created("/upload/avatar.png", new{ url = "/upload/avatar.png"});
         }
 
         public class UsernameAndPassword
