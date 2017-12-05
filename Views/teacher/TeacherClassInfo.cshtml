@@ -6,81 +6,120 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>班级信息</title>
-   <link rel="stylesheet" href="~/css/teacher/content.css">
- 
+    <link rel="stylesheet" href="~/css/teacher/content.css">
+
 </head>
 <body>
-    
-        <div class="top">
-          <div class="font">
-            课堂管理系统
-          </div>
-          <div class="icon">
-            <img src="~/Img/home.png">首页
-            <img src="~/Img/help.png">帮助
-            <img src="~/Img/exit.png">退出
-          </div>
-          <div class="clear"></div>
-        </div>
-        <div class="body">
-            <div class="navigation">
-                <div class="courseName">OOAD</div>
-                <div class="line"></div>
-                <div class="courseIntroduction">ooad is xxx</div>
-            </div>
-            <div class="content">
-                <div class="block">
-                    <div class="title">XXXX</div>
-                    <div class="returnButton">返回上一页</div>
-                    <div class="line"></div>
-                    <div class="itemBody">
-                        <div class="item">
-                          <label class="itemName">班级名称:</label>
-                          <label class="itemName">周三1-2节</label>
-                        </div>
-                        <div class="item">
-                          <label class="itemName">上课地点:</label>
-                          <label class="itemName">海韵212</label>
-                        </div>
-                        <div class="item">
-                          <label class="itemName">上课时间:</label>
-                          <label class="itemName">单周周一12节 </label>
-                          <label class="itemName"> 周三12节</label>
-                        </div>
-                        <div class="item">
-                          <label class="itemName">评分规则:</label>
-                          <label class="itemName">讨论课分数占比</label>
-                          <label class="itemName">60% </label>
-                          <label class="itemName"> 报告分数占比</label>
-                          <label class="itemName">40%</label>
-                        </div>
-                        <div class="item" style="margin-left: 25%">
-                          <label class="smallItemName">5分占比</label>
-                          <label class="itemName" name="seminarGrade">30%</label>
-                          <label class="smallItemName">4分占比</label>
-                           <label class="itemName" name="seminarGrade">40%</label>
-                          <label class="smallItemName">3分占比</label>
-                           <label class="itemName" name="seminarGrade">30%</label>
-                        </div>
-                
-                        <div class="item">
-                          <label class="itemName">导入学生名单:</label>
-                          <button class="selectFile">下载文件</button>
-                        </div>
-                        <div class="item">
-                          <button class="submit">修改</button>
-                          <button class="reset">删除班级</button>
-                          <div class="clear"></div>
-                        </div>
-                        <div class="item">
-                          <div class="clear"></div>
-                        </div>
-                      
-                        
-                    </div>
+
+<div class="top">
+    <div class="font">
+        课堂管理系统
+    </div>
+    <div class="icon">
+        <img src="~/Img/home.png">首页
+        <img src="~/Img/help.png">帮助
+        <img src="~/Img/exit.png">退出
+    </div>
+    <div class="clear"></div>
+</div>
+<div class="body">
+    <div class="navigation">
+        <div class="courseName">OOAD</div>
+        <div class="line"></div>
+        <div class="courseIntroduction">ooad is xxx</div>
+    </div>
+    <div class="content">
+        <div class="block">
+            <div class="title">XXXX</div>
+            <div class="returnButton">返回上一页</div>
+            <div class="line"></div>
+            <div class="itemBody">
+                <div class="item">
+                    <label class="itemName">班级名称:</label>
+                    <label class="itemName" id="name">周三1-2节</label>
                 </div>
+                <div class="item">
+                    <label class="itemName">上课地点:</label>
+                    <label class="itemName" id="site">海韵212</label>
+                </div>
+                <div class="item">
+                    <label class="itemName">上课时间:</label>
+                    <label class="itemName" id="time">单周周一12节 </label>
+                </div>
+                <div class="item">
+                    <label class="itemName">评分规则:</label>
+                    <label class="itemName">讨论课分数占比</label>
+                    <label class="itemName" id="presentation">60% </label>
+                    <label class="itemName"> 报告分数占比</label>
+                    <label class="itemName" id="report">40%</label>
+                </div>
+                <div class="item" style="margin-left: 25%">
+                    <label class="smallItemName">5分占比</label>
+                    <label class="itemName" name="seminarGrade" id="a">30%</label>
+                    <label class="smallItemName">4分占比</label>
+                    <label class="itemName" name="seminarGrade" id="b">40%</label>
+                    <label class="smallItemName">3分占比</label>
+                    <label class="itemName" name="seminarGrade" id="c">30%</label>
+                </div>
+
+                <div class="item">
+                    <label class="itemName">导入学生名单:</label>
+                    <button class="selectFile" id="roster">下载文件</button>
+                </div>
+                <div class="item">
+                    <button class="submit" id="update">修改</button>
+                    <button class="reset" id="delete">删除班级</button>
+                    <div class="clear"></div>
+                </div>
+                <div class="item">
+                    <div class="clear"></div>
+                </div>
+
+
             </div>
-            <div class="clear"></div>
         </div>
+    </div>
+    <div class="clear"></div>
+</div>
+<script src="~/js/query.js"></script>
+<script src="~/js/jquery.min.js"></script>
+<script type="text/javascript">
+    var id = getQuery()["id"];
+    var course = getQuery()["course"];
+    $(function() {
+        $.ajax({
+            url: '/class/' + id,
+            type: 'GET',
+            dataType: 'json',
+            success: function(result) {
+                $("#name").text(result.name);
+                $("#time").text(result.time);
+                $("#site").text(result.site);
+                $("#presentation").text(result.proportions.presentation + "%");
+                $("#report").text(result.proportions.report + "%");
+                $("#c").text(result.proportions.c + "%");
+                $("#b").text(result.proportions.b + "%");
+                $("#a").text(result.proportions.a + "%");
+                $("#roster").click(function() {
+                    window.location.href = result.roster;
+                });
+            }
+        });
+        $("#update").click(function() {
+            window.location.href = "/TeacherUpdateClass?id=" + id + "&course=" + course;
+        });
+        $("#delete").click(function() {
+            if (confirm("是否确认删除班级？")) {
+                $.ajax({
+                    url: '/class/' + id,
+                    type: 'DELETE',
+                    success: function() {
+                        window.location.href = "/TeacherCourseInformation?id=" + course;
+                    }
+                });
+            }
+        });
+    });
+</script>
 </body>
 </html>

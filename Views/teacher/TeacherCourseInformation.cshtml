@@ -71,7 +71,7 @@
                     $("#classes").prepend("<div class=\"block classblock\" data-class-id=" + result[i].id + "> <div class=\"blockFont\">" + result[i].name + "</div></div>");
                 }
                 $(".classblock").click(function() {
-                    window.location.href = "/TeacherClassInfo?id=" + $(this).attr("data-class-id");
+                    window.location.href = "/TeacherClassInfo?id=" + $(this).attr("data-class-id") + "&course=" + id;
                 });
             }
         });
@@ -84,7 +84,7 @@
                     $("#seminars").prepend("<div class=\"block seminarblock\" data-seminar-id=" + result[i].id + "> <div class=\"blockFont\">" + result[i].name + "</div></div>");
                 }
                 $(".seminarblock").click(function() {
-                    window.location.href = "/TeacherSenimarInfo?id=" + $(this).attr("data-seminar-id");
+                    window.location.href = "/TeacherSenimarInfo?id=" + $(this).attr("data-seminar-id") + "&course=" + id;
                 });
             }
         });

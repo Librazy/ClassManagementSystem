@@ -28,7 +28,7 @@ namespace ClassManagementSystem.Controllers
                 Teacher="杨律青",
                 Time = "周三34节 周五12节"
             };
-            return Json(new List<Class> {c1, c2}, Ignoring("Id", "Calling", "NumStudent", "Students", "Proportions"));
+            return Json(new List<Class> {c1, c2}, Ignoring("Id", "Calling", "NumStudent", "Students", "Proportions", "Roster"));
         }
 
         [HttpPost("/class")]
@@ -40,7 +40,24 @@ namespace ClassManagementSystem.Controllers
         [HttpGet("/class/{classId:long}")]
         public IActionResult GetClassById([FromRoute] long classId)
         {
-            return Json(new Class(0));
+            var c2 = new Class(42)
+            {
+                Name = "一班",
+                Site = "海韵202",
+                CourseName = ".Net 平台开发",
+                Teacher = "杨律青",
+                Time = "周三34节 周五12节",
+                Roster = "/upload/roster.xlsx",
+                Proportions = new Proportions
+                {
+                    A = 20,
+                    B = 70,
+                    C = 10,
+                    Presentation = 40,
+                    Report = 60
+                }
+            };
+            return Json(c2);
         }
 
         [HttpDelete("/class/{classId:long}")]

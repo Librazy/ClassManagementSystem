@@ -36,6 +36,8 @@ namespace ClassManagementSystem.Models
 
         public string Teacher { get; set; }
 
+        public string Roster { get; set; }
+
         public Proportions Proportions { get; set; }
     }
 }
