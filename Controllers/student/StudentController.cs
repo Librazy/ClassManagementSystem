@@ -44,5 +44,12 @@ namespace ClassManagementSystem.Controllers
         {
             return View();
         }
+
+        [Route("Student/Course/Managegroup")]
+        public IActionResult StudentModifyGroupPage()
+        {
+            return View();
+        }
+
     }
 }

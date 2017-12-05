@@ -61,7 +61,10 @@
                         result[i].teacher +
                         "</td><td></td></tr></table></div></div>");
                 }
-                
+
+                $(".courseinfo").click(function () {
+                    window.location.href = "/Student/Course/Courseinfo?id=" + $(this).attr("data-course-id");
+                });
             }
         });
     });

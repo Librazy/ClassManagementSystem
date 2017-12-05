@@ -33,33 +33,50 @@
         <div class="title">选择课程</div>
         <hr class="line"/>
 
-        <div class="checkcourse">
+        <div id="insertinfo" class="checkcourse">
             <form class="itemName">
                 任课教师：<input type="text" name="teacher"><br/>
                 课程名称：<input type="text" name="course"><input type="submit" value="查询">
 
             </form>
         </div>
-        <div class="main_box_right_content">
-
-            <h3 class="classtitle">J2EE
-                <button>选择课程</button>
-            </h3>
-            <div class="divideline"></div>
-            <div class="classinfo">
-                <table class="table">
-                    <tr>
-                        <td class="tabletext">班级：<span>周三一二节</span></td> <td class="tabletext">课程地点：海韵</td>
-                    </tr>
-                    <tr>
-                        <td class="tabletext">班级人数：60</td> <td class="tabletext">时间：周三一二节，周四五六节</td>
-                    </tr>
-                </table>
-            </div>
-        </div>
-
+        
     </div>
     <div class="clear"></div>
 </div>
+<script src="~/js/jquery.min.js"></script>
+<script async src="~/js/tether.min.js"></script>
+<script defer src="~/js/bootstrap.min.js"></script>
+@*<script type="text/javascript">
+    $("#classclick").click(function () {
+        window.location.href = "/Student/Course/Courseinfo";
+    });
+</script>*@
+<script type="text/javascript">
+    $(function () {
+        //本json中，由于numStudent是通过service层对用户统计得来的，因此统计数据通过常数展示在这里
+        $.ajax({
+            url: '/class',
+            type: 'GET',
+            dataType: 'json',
+            success: function(result) {
+                for (var i = result.length; i--;) {
+                    $("#insertinfo").after(
+                        "<div class=\"main_box_right_content\">" +
+                        "<h3 class=\"classtitle\">" + result[i].courseName+
+                        "<button>选择课程</button></h3><div class=\"divideline\"></div>"+
+                        "<div class=\"classinfo\">"+
+                        "<table class=\"table\"><tr>" +
+                        "<td class=\"tabletext\">班级：<span>" + result[i].name + "</span></td>" +
+                        "<td class=\"tabletext\">课程地点：" + result[i].site + "</td>" +
+                        "</tr><tr><td class=\"tabletext\">班级人数：" + 60 + "</td>" +
+                        "<td class=\"tabletext\">时间：" + result[i].time +
+                        "</td></tr></table></div>");
+                }
+                
+            }
+        });
+    });
+</script>
 </body>
 </html>

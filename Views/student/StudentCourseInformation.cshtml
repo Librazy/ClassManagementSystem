@@ -20,35 +20,51 @@
         	</div>
         	<div class="clear"></div>
     	</div>
-        <div class="body">
-            <div class="navigation">
-                <div class="courseName">OOAD</div>
-                <div class="line"></div>
-                <div class="courseIntroduction">ooad is xxx</div>
+<div class="body">
+    <div class="navigation">
+        <div class="courseName">OOAD</div>
+        <div class="line"></div>
+        <div class="courseIntroduction">ooad is xxx</div>
+    </div>
+    <div class="content">
+        <div class="classInfo">
+            <div class="title">讨论课</div>
+            <div class="returnButton">返回上一页</div>
+            <div class="line" id="insertinfo"></div>
+            <div class="blockBody" id="seminars">
             </div>
-        <div class="content">
-            <div class="classInfo">
-                <div class="title">讨论课</div>
-                <div class="returnButton">返回上一页</div>
-                <div class="line"></div>
-                <div class="blockBody">
-                    <div class="block"><div class="blockFont">讨论课1</div></div>
-                    <div class="block"><div class="blockFont">讨论课2</div></div>
-                    <div class="block"><div class="blockFont">讨论课3</div></div>
-                    <div class="block"><div class="blockFont">讨论课4</div></div>
-                    <div class="block"><div class="blockFont">讨论课5</div></div>
-						
-                </div>
-            </div>
-            <div class="seminarInfo">
-                <div class="title">课程分组</div>
-                <div class="line"></div>
-                <div class="blockBody">
-                    <div class="block"><div class="blockFont">固定分组</div></div>
-                </div>
-            </div>
-            <div class="clear"></div>
         </div>
-     </div>
+        <div class="seminarInfo">
+            <div class="title">课程分组</div>
+            <div class="line"></div>
+            <div class="blockBody">
+                <div class="block" id="groupclick"><div class="blockFont">固定分组</div></div>
+            </div>
+        </div>
+        <div class="clear"></div>
+    </div>
+</div>
+<script src="~/js/query.js"></script>
+<script src="~/js/jquery.min.js"></script>
+<script async src="~/js/tether.min.js"></script>
+<script defer src="~/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+    var id = getQuery()["id"];
+    $(function () {
+        $.ajax({
+            url: '/course/'+id+"/seminar",
+            type: 'GET',
+            dataType: 'json',
+            success: function (result) {
+                for (var i = result.length; i--;) {
+                    $("#seminars").prepend("<div class=\"block seminarblock\" data-seminar-id=" + result[i].id + "> <div class=\"blockFont\">" + result[i].name + "</div></div>");
+                }
+            }
+        });
+    });
+    $("#groupclick").click(function () {
+        window.location.href = "/Student/Course/Managegroup";
+    });
+</script>
 </body>
 </html>

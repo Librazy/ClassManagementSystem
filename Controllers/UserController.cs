@@ -17,6 +17,7 @@ namespace ClassManagementSystem.Controllers
                 Name ="张三",
                 Number= "23320152202333",
                 Gender= "male",
+                
                 School=new School()
                 {
                     Name="厦门市人民公园",

@@ -17,6 +17,7 @@ namespace ClassManagementSystem.Controllers
                 Name= "周三1-2节",
                 Site="公寓405",
                 CourseName="OOAD",
+                
                 Teacher="邱明",
                 Time= "周三1-2、周五1-2"  
             };

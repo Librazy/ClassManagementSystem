@@ -76,13 +76,21 @@ namespace ClassManagementSystem.Controllers
         [HttpGet("/course/{courseId:long}/seminar")]
         public IActionResult GetSeminarsByCourseId([FromRoute] long courseId)
         {
-            var s1 = new Seminar(1)
+            var s1 = new Seminar(29)
             {
-                Name = "讨论课1"
+                Name = "界面原型设计",
+                Description = "界面原型设计",
+                GroupingMethod = "fixed",
+                StartTime = "2017-09-25",
+                EndTime = "2017-10-09",
             };
-            var s2 = new Seminar(3)
+            var s2 = new Seminar(32)
             {
-                Name = "讨论2"
+                Name = "概要设计",
+                Description = "模型层与数据库设计",
+                GroupingMethod = "fixed",
+                StartTime = "2017-10-10",
+                EndTime = "2017-10-24"
             };
             return Json(new List<Seminar>{s1, s2});
         }
