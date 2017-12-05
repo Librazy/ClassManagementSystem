@@ -32,6 +32,10 @@ namespace ClassManagementSystem.Models
 
         public bool Calling { get; set; }
 
+        public string CourseName { get; set; }
+
+        public string Teacher { get; set; }
+
         public Proportions Proportions { get; set; }
     }
 }

@@ -1,4 +1,5 @@
-﻿using ClassManagementSystem.Models;
+﻿using System.Collections.Generic;
+using ClassManagementSystem.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ClassManagementSystem.Controllers
@@ -10,7 +11,24 @@ namespace ClassManagementSystem.Controllers
         [HttpGet("/me")]
         public IActionResult GetCurrentUser()
         {
-            return Json(new User(0));
+            var u1 = new User(3486)
+            {
+                Phone= "18911114514",
+                Name ="张三",
+                Number= "23320152202333",
+                Gender= "male",
+                School=new School()
+                {
+                    Name="厦门市人民公园",
+                    Province="福建",
+                    City="厦门"
+                },
+                Email= "23320152202333@stu.xmu.edu.cn",
+                Title ="本科",
+                
+            };
+
+            return Json(u1);
         }
 
         [HttpPut("/me")]
@@ -43,5 +61,7 @@ namespace ClassManagementSystem.Controllers
             public string Phone { get; set; }
             public string Password { get; set; }
         }
+
+        
     }
 }

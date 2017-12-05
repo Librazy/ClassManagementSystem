@@ -11,7 +11,13 @@ namespace ClassManagementSystem.Controllers
         [HttpGet("/school")]
         public IActionResult GetSchools([FromQuery] string city)
         {
-            return Json(new List<School>());
+            var s1 = new School()
+            {
+                Name="厦门市人民公园",
+                Province="福建",
+                City="厦门"
+            };
+            return Json(new List<School>{s1});
         }
 
         [HttpGet("/school/{schoolId:long}")]
