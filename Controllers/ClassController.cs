@@ -58,7 +58,7 @@ namespace ClassManagementSystem.Controllers
                     Report = 60
                 }
             };
-            return Json(c2);
+            return Json(c2, Ignoring("Id", "Calling", "NumStudent", "Students"));
         }
 
         [HttpDelete("/class/{classId:long}")]
