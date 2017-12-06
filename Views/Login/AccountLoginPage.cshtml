@@ -15,23 +15,31 @@
 <!-- cxcxzczx -->
 <div class="ClassManage" style="font-size: 6rem">课堂管理系统</div>
 <div class="UserName"> 用户名</div>
-<input type="text" class="UserNameField" id="phone"/>
+<input type="text" class="UserNameField" id="phone" placeholder="请输入用户名"/>
 <div class="Password"> 密码</div>
-<input type="password" class="PasswordField" id="password"/>
+<input type="password" class="PasswordField" id="password" placeholder="请输入密码"/>
 <button class="Login" id="login">登录</button>
 <div class="Enroll"><a href="~/RegisterPage">注册</a></div>
 <script src="~/js/jquery.min.js"></script>
 <script async src="~/js/tether.min.js"></script>
 <script defer src="~/js/bootstrap.min.js"></script>
 <script type="text/javascript">
-    $("#login").click(function() {
+    $("#login").click(function () {
+        if ($("#phone").val() === "") {
+            alert("用户名不能为空");
+            return false;
+        }
+        if ($("#password").val() === "") {
+            alert("密码不能为空");
+            return false;
+        }
         $.ajax({
             url: '/signin',
             type: 'POST',
             contentType: 'application/json',
             data: JSON.stringify({ phone: $("#phone").val(), password: $("#password").val() }),
             dataType: 'json',
-            success: function (result) {
+            success: function(result) {
                 window.localStorage.setItem('jwt', result.jwt);
                 if (result.type === "student") {
                     window.location.href = "/Student/";
@@ -41,6 +49,7 @@
             }
         });
     });
+
 </script>
 </body>
 </html>

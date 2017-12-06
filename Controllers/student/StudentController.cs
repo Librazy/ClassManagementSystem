@@ -15,6 +15,12 @@ namespace ClassManagementSystem.Controllers
             return View();
         }
 
+        [Route("/Student/Modify")]
+        public IActionResult StudentInfoModifyPage()
+        {
+            return View();
+        }
+
         [Route("/Student/Course")]
         public IActionResult StudentCourseHome()
         {
@@ -65,6 +71,12 @@ namespace ClassManagementSystem.Controllers
 
         [Route("Student/Seminar/Grade/Fixed")]
         public IActionResult StudentViewGradePage()
+        {
+            return View();
+        }
+
+        [Route("Student/Course/Group")]
+        public IActionResult StudentViewGroupPage()
         {
             return View();
         }
