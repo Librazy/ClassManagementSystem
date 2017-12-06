@@ -88,14 +88,14 @@
                 }
                 $(".topicBlock").click(function () {
                     if ($(this).attr("data-topic-id")) {
-                        window.location.href = "/TeacherTopicInfo?id=" +
+                        window.location.href = "/Teacher/Topic?id=" +
                             $(this).attr("data-topic-id") +
                             "&course=" +
                             course +
                             "&seminar=" +
                             id;
                     } else {
-                        window.location.href = "/TeacherCreateSeminar?id=" +
+                        window.location.href = "/Teacher/Seminar/Create?id=" +
                             $(this).attr("data-topic-id") +
                             "&course=" +
                             course +
@@ -106,7 +106,7 @@
             }
         });
         $("#update").click(function() {
-            window.location.href = "/TeacherUpdateSeminar?id=" + id + "&course=" + course;
+            window.location.href = "/Teacher/Seminar/Update?id=" + id + "&course=" + course;
         });
         $("#delete").click(function() {
             if (confirm("是否确认删除讨论课？")) {
@@ -114,7 +114,7 @@
                     url: '/seminar/' + id,
                     type: 'DELETE',
                     success: function() {
-                        window.location.href = "/TeacherCourseInformation?id=" + course;
+                        window.location.href = "/Teacher/Course/Courseinfo?id=" + course;
                     }
                 });
             }

@@ -15,6 +15,8 @@ gulp.task("js", function () {
         .pipe(gulp.dest(dest_js));
     gulp.src("./node_modules/bootstrap/dist/js/bootstrap.min.js")
         .pipe(gulp.dest(dest_js));
+    gulp.src("./node_modules/bootstrap/dist/js/bootstrap.bundle.min.js")
+        .pipe(gulp.dest(dest_js));
 });
 
 gulp.task("default",function(){

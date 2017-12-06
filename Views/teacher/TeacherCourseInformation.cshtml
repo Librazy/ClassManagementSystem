@@ -49,7 +49,7 @@
 <script src="~/js/query.js"></script>
 <script src="~/js/jquery.min.js"></script>
 <script async src="~/js/tether.min.js"></script>
-<script defer src="~/js/bootstrap.min.js"></script>
+<script defer src="~/js/bootstrap.bundle.min.js"></script>
 <script type="text/javascript">
     var id = getQuery()["id"];
     $(function() {
@@ -73,10 +73,10 @@
                 $(".classblock").click(function() {
                     if ($(this).attr("data-class-id")) {
                         window.location.href =
-                            "/TeacherClassInfo?id=" + $(this).attr("data-class-id") + "&course=" + id;
+                            "/Teacher/Class?id=" + $(this).attr("data-class-id") + "&course=" + id;
                     } else {
                         window.location.href =
-                            "/TeacherCreateClass?course=" + id;
+                            "/Teacher/Class/Create?course=" + id;
                     }
                 });
             }
@@ -92,10 +92,10 @@
                 $(".seminarblock").click(function () {
                     if ($(this).attr("data-seminar-id")) {
                         window.location.href =
-                            "/TeacherSeminarInfo?id=" + $(this).attr("data-seminar-id") + "&course=" + id;
+                            "/Teacher/Seminar?id=" + $(this).attr("data-seminar-id") + "&course=" + id;
                     } else {
                         window.location.href =
-                            "/TeacherCreateSeminar?course=" + id;
+                            "/Teacher/Seminar/Create?course=" + id;
                     }
                 });
             }

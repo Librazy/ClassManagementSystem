@@ -9,7 +9,7 @@ namespace ClassManagementSystem.Controllers
     [Route("")]
     public class StudentController : Controller
     {
-        [Route("/Student/")]
+        [Route("/Student")]
         public IActionResult StudentHomePage()
         {
             return View();

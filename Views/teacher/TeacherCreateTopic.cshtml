@@ -79,7 +79,7 @@
                     groupLimit: $("#groupLimit").val()
                 }),
                 success: function(result) {
-                    window.location.href = '/TeacherTopicInfo?id=' + result.id + "&course=" + course;
+                    window.location.href = '/Teacher/Topic?id=' + result.id + "&course=" + course;
                 }
             });
         });

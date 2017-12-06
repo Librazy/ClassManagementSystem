@@ -6,7 +6,8 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>学生查看讨论课（固定）</title>
-    <link href="~/css/student/content.css" rel="stylesheet" type="text/css"/>>
+    <link href="~/css/student/content.css" rel="stylesheet" type="text/css"/>
+    <link href="~/css/vendor/bootstrap.min.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
 <div class="top">
@@ -32,17 +33,17 @@
             <div class="returnButton" id="returnpage">返回上一页</div>
             <div class="line"></div>
             <div class="itemBody" id="insertinfo">
-               
+
             </div>
         </div>
         <div class="block">
             <div class="title">话题</div>
             <div class="line"></div>
             <div class="blockBody" id="inserttopic">
-                
+
             </div>
             <div class="item">
-                <button class="uploadbutton" id="uploadReport">上传报告</button>
+                <button class="uploadbutton" id="uploadReport" data-toggle="modal" data-target="#uploadDialog">上传报告</button>
             </div>
             <div class="item">
                 <button class="viewscorebutton" id="checkGrade">查看分数</button>
@@ -52,18 +53,42 @@
     </div>
     <div class="clear"></div>
 </div>
+<div class="modal fade" id="uploadDialog" tabindex="-1" role="dialog" aria-labelledby="uploadDialogLabel" aria-hidden="true">
+    <form class="modal-dialog" role="document" method="post">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="uploadDialogLabel">上传报告</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div>
+                    <div class="form-group">
+                        <label for="recipient-name" class="col-form-label">选择文件：</label>
+                        <input type="file" accept="application/pdf" class="form-control" id="recipient-name">
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-primary">提交</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
+            </div>
+        </div>
+    </form>
+</div>
 <script src="~/js/query.js"></script>
 <script src="~/js/jquery.min.js"></script>
 <script async src="~/js/tether.min.js"></script>
-<script defer src="~/js/bootstrap.min.js"></script>
+<script defer src="~/js/bootstrap.bundle.min.js"></script>
 <script type="text/javascript">
     var id = getQuery()["id"];
-    $(function () {
+    $(function() {
         $.ajax({
             url: '/seminar/' + id,
             type: 'GET',
             dataType: 'json',
-            success: function (result) {
+            success: function(result) {
                 $("#insertinfo").prepend(
                     "<div class=\"item\">" +
                     "<label class=\"itemName\">" +
@@ -102,19 +127,19 @@
     //function selectFile() {
     //    alert($("#file").attr("value"));
     //}
-    $("#checkGrade").click(function () {
+    $("#checkGrade").click(function() {
         window.location.href = "/Student/Seminar/Grade/Fixed?id=" + id;
     });
-    $("#skiphome").click(function () {
+    $("#skiphome").click(function() {
         window.location.href = "/Student";
     });
-    $("#skiphelp").click(function () {
+    $("#skiphelp").click(function() {
         alert("需要帮助吗？");
     });
-    $("#skipexit").click(function () {
+    $("#skipexit").click(function() {
         window.location.href = "/Login";
     });
-    $("#returnpage").click(function () {
+    $("#returnpage").click(function() {
         window.location.href = "/Student/Course/Courseinfo?id=" + id;
     });
 </script>

@@ -38,7 +38,7 @@
 </div>
 <script src="~/js/jquery.min.js"></script>
 <script async src="~/js/tether.min.js"></script>
-<script defer src="~/js/bootstrap.min.js"></script>
+<script defer src="~/js/bootstrap.bundle.min.js"></script>
 <script type="text/javascript">
     $(function() {
         $.ajax({
@@ -61,7 +61,7 @@
                         "</td></tr></table></div></div>");
                 }
                 $(".courseinfo").click(function() {
-                    window.location.href = "/TeacherCourseInformation?id=" + $(this).attr("data-course-id");
+                    window.location.href = "/Teacher/Course/Courseinfo?id=" + $(this).attr("data-course-id");
                 });
             }
         });

@@ -88,7 +88,7 @@
             }
         });
         $("#update").click(function() {
-            window.location.href = "/TeacherUpdateTopic?id=" + id + "&course=" + course + "&seminar=" + seminar;
+            window.location.href = "/Teacher/Topic/Update?id=" + id + "&course=" + course + "&seminar=" + seminar;
         });
         $("#delete").click(function() {
             if (confirm("是否确认删除话题？")) {
@@ -96,7 +96,7 @@
                     url: '/topic/' + id,
                     type: 'DELETE',
                     success: function() {
-                        window.location.href = "/TeacherSeminarInfo?id=" + seminar;
+                        window.location.href = "/Teacher/Seminar?id=" + seminar;
                     }
                 });
             }

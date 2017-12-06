@@ -5,79 +5,79 @@ namespace ClassManagementSystem.Controllers.Teacher
     [Route("")]
     public class TeacherController : Controller
     {
-        [Route("/TeacherHomePage")]
+        [Route("/Teacher")]
         public IActionResult TeacherHomePage()
         {
             return View();
         }
 
-        [Route("/TeacherInfoModifyPage")]
+        [Route("/Teacher/Modify")]
         public IActionResult TeacherInfoModifyPage()
         {
             return View();
         }
 
-        [Route("/TeacherCourseHomePage")]
+        [Route("/Teacher/Course")]
         public IActionResult TeacherCourseHomePage()
         {
             return View();
         }
 
-        [Route("/TeacherCourseInformation")]
+        [Route("/Teacher/Course/Courseinfo")]
         public IActionResult TeacherCourseInformation()
         {
             return View();
         }
 
-        [Route("/TeacherClassInfo")]
+        [Route("/Teacher/Class")]
         public IActionResult TeacherClassInfo()
         {
             return View();
         }
 
-        [Route("/TeacherUpdateClass")]
+        [Route("/Teacher/Class/Modify")]
         public IActionResult TeacherUpdateClass()
         {
             return View();
         }
 
-        [Route("/TeacherCreateClass")]
+        [Route("/Teacher/Class/Create")]
         public IActionResult TeacherCreateClass()
         {
             return View();
         }
 
-        [Route("/TeacherSeminarInfo")]
+        [Route("/Teacher/Seminar")]
         public IActionResult TeacherSeminarInfo()
         {
             return View("TeacherSenimarInfo");
         }
 
-        [Route("/TeacherUpdateSeminar")]
+        [Route("/Teacher/Seminar/Update")]
         public IActionResult TeacherUpdateSeminar()
         {
             return View("TeacherUpdateSenimar");
         }
 
-        [Route("/TeacherCreateSeminar")]
+        [Route("/Teacher/Seminar/Create")]
         public IActionResult TeacherCreateSeminar()
         {
             return View();
         }
 
-        [Route("/TeacherTopicInfo")]
+        [Route("/Teacher/Topic")]
         public IActionResult TeacherTopicInfo()
         {
             return View();
         }
 
-        [Route("/TeacherUpdateTopic")]
+        [Route("/Teacher/Topic/Update")]
         public IActionResult TeacherUpdateTopic()
         {
             return View();
         }
 
-        [Route("/TeacherCreateTopic")]
+        [Route("/Teacher/Topic/Create")]
         public IActionResult TeacherCreateTopic()
         {
             return View();

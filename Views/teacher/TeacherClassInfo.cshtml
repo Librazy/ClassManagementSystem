@@ -106,7 +106,7 @@
             }
         });
         $("#update").click(function() {
-            window.location.href = "/TeacherUpdateClass?id=" + id + "&course=" + course;
+            window.location.href = "/Teacher/Class/Modify?id=" + id + "&course=" + course;
         });
         $("#delete").click(function() {
             if (confirm("是否确认删除班级？")) {
@@ -114,7 +114,7 @@
                     url: '/class/' + id,
                     type: 'DELETE',
                     success: function() {
-                        window.location.href = "/TeacherCourseInformation?id=" + course;
+                        window.location.href = "/Teacher/Course/Courseinfo?id=" + course;
                     }
                 });
             }
