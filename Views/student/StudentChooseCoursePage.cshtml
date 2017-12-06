@@ -63,7 +63,7 @@
                     $("#insertinfo").after(
                         "<div class=\"main_box_right_content\">" +
                         "<h3 class=\"classtitle\">" + result[i].courseName+
-                        "<button>选择课程</button></h3><div class=\"divideline\"></div>"+
+                        "<button id="+i+">选择课程</button></h3><div class=\"divideline\"></div>"+
                         "<div class=\"classinfo\">"+
                         "<table class=\"table\"><tr>" +
                         "<td class=\"tabletext\">班级：<span>" + result[i].name + "</span></td>" +
@@ -71,6 +71,9 @@
                         "</tr><tr><td class=\"tabletext\">班级人数：" + 60 + "</td>" +
                         "<td class=\"tabletext\">时间：" + result[i].time +
                         "</td></tr></table></div>");
+                    $("#" + i).click(function () {
+                        alert("选课成功");
+                    });
                 }
                 
             }

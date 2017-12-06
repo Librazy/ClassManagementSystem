@@ -53,13 +53,18 @@
                         i +
                         ">" +
                         result[i].courseName +
-                        "<button>退选课程</button></h3><div class=\"divideline\"></div><div  class=\"classinfo\"><table class=\"table\"><tr><td>班级：<span>" +
+                        "<button id=" +
+                        i +
+                        ">退选课程</button></h3><div class=\"divideline\"></div><div  class=\"classinfo\"><table class=\"table\"><tr><td>班级：<span>" +
                         result[i].name +
                         "</span></td>  <td>课程地点：" +
                         result[i].site +
                         "</td></tr><tr><td>教师：" +
                         result[i].teacher +
                         "</td><td></td></tr></table></div></div>");
+                    $("#" + i).click(function() {
+                        alert("退选课程成功");
+                    });
                 }
 
                 $(".courseinfo").click(function() {
