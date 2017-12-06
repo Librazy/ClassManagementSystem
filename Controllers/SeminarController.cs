@@ -8,27 +8,7 @@ namespace ClassManagementSystem.Controllers
     [Produces("application/json")]
     public class SeminarController : Controller
     {
-        [HttpGet("/seminar/{seminarId:long}/fixed")]
-        public IActionResult GetSeminarByIdFixed([FromRoute] long seminarId)
-        {
-            var s1 = new Seminar(29)
-            {
-                Name = "界面原型设计",
-                Description = "界面原型设计",
-                StartTime = "2017-09-25",
-                EndTime = "2017-10-09",
-                Topics = new List<Topic>()
-                {
-                    new Topic(344)
-                    {
-                        Name = "界面原型设计"
-                    }
-                }
-            };
-            return Json(s1);
-        }
-
-        [HttpGet("/seminar/{seminarId:long}/random")]
+        [HttpGet("/seminar/{seminarId:long}")]
         public IActionResult GetSeminarByIdRandom([FromRoute] long seminarId)
         {
             var s1 = new Seminar(32)
@@ -45,7 +25,21 @@ namespace ClassManagementSystem.Controllers
                     }
                 }
             };
-            return Json(s1);
+            var s2 = new Seminar(29)
+            {
+                Name = "界面原型设计",
+                Description = "界面原型设计",
+                StartTime = "2017-09-25",
+                EndTime = "2017-10-09",
+                Topics = new List<Topic>()
+                {
+                    new Topic(344)
+                    {
+                        Name = "界面原型设计"
+                    }
+                }
+            };
+            return Json(seminarId == 1 ? s2 : s1);
         }
 
         [HttpDelete("/seminar/{seminarId:long}")]

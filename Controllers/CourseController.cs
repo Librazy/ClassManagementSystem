@@ -70,7 +70,7 @@ namespace ClassManagementSystem.Controllers
         [HttpPost("/course/{courseId:long}/class")]
         public IActionResult CreateClassByCourseId([FromRoute] long courseId, [FromBody] Class newClass)
         {
-            return Created("/course/1", newClass);
+            return Created("/class/1", new { id = 1 });
         }
 
         [HttpGet("/course/{courseId:long}/seminar")]
@@ -98,7 +98,7 @@ namespace ClassManagementSystem.Controllers
         [HttpPost("/course/{courseId:long}/seminar")]
         public IActionResult CreateSeminarByCourseId([FromRoute] long courseId, [FromBody] Seminar newSeminar)
         {
-            return Created("/course/1", newSeminar);
+            return Created("/seminar/1", new { id = 1 });
         }
 
         [HttpGet("/course/{courseId:long}/grade")]

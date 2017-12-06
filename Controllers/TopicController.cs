@@ -36,7 +36,13 @@ namespace ClassManagementSystem.Controllers
         [HttpGet("/topic/{topicId:long}/group")]
         public IActionResult GetGroupsByTopicId([FromRoute] long topicId)
         {
-            return Json(new List<Group>());
+            return Json(new List<dynamic>
+            {
+                new {id = 1, name = "1A1"},
+                new {id = 2, name = "1A2"},
+                new {id = 43, name = "2A1"},
+                new {id = 65, name = "2A2"},
+            });
         }
     }
 }

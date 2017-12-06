@@ -84,7 +84,7 @@
                     $("#seminars").prepend("<div class=\"block seminarblock\" data-seminar-id=" + result[i].id + "> <div class=\"blockFont\">" + result[i].name + "</div></div>");
                 }
                 $(".seminarblock").click(function() {
-                    window.location.href = "/TeacherSenimarInfo?id=" + $(this).attr("data-seminar-id") + "&course=" + id;
+                    window.location.href = "/TeacherSeminarInfo?id=" + $(this).attr("data-seminar-id") + "&course=" + id;
                 });
             }
         });

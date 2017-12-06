@@ -88,14 +88,39 @@
                 $("#name").val(result.name);
                 $("#time").val(result.time);
                 $("#site").val(result.site);
-                $("#presentation").val(result.proportions.presentation + "%");
-                $("#c").val(result.proportions.c + "%");
-                $("#b").val(result.proportions.b + "%");
-                $("#a").val(result.proportions.a + "%");
+                $("#presentation").val(result.proportions.presentation);
+                $("#report").val(result.proportions.report);
+                $("#c").val(result.proportions.c);
+                $("#b").val(result.proportions.b);
+                $("#a").val(result.proportions.a);
                 $("#roster").click(function() {
                     window.location.href = result.roster;
                 });
             }
+        });
+        $(".submit").click(function (e) {
+            e.preventDefault();
+            $.ajax({
+                url: '/class/' + id,
+                type: 'PUT',
+                contentType: 'application/json',
+                dataType: 'json',
+                data: JSON.stringify({
+                    name: $("#name").val(),
+                    time: $("#time").val(),
+                    site: $("#site").val(),
+                    proportions: {
+                        presentation: $("#presentation").valueOf(),
+                        report: $("#report").valueOf(),
+                        c: $("#c").valueOf(),
+                        b: $("#b").valueOf(),
+                        a: $("#a").valueOf()
+                    }
+                }),
+                success: function() {
+                    window.location.href = '/TeacherClassInfo?id=' + id;
+                }
+            });
         });
     });
 </script>
