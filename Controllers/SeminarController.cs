@@ -19,7 +19,7 @@ namespace ClassManagementSystem.Controllers
                 EndTime = "2017-10-09",
                 Topics = new List<Topic>()
                 {
-                    new Topic()
+                    new Topic(344)
                     {
                         Name = "界面原型设计"
                     }
@@ -39,7 +39,7 @@ namespace ClassManagementSystem.Controllers
                 EndTime = "2017-10-24",
                 Topics = new List<Topic>()
                 {
-                    new Topic()
+                    new Topic(257)
                     {
                         Name = "领域模型与模块"
                     }

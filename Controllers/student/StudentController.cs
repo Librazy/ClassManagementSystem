@@ -51,5 +51,23 @@ namespace ClassManagementSystem.Controllers
             return View();
         }
 
+        [Route("Student/Seminar/Topic/Fixed")]
+        public IActionResult StudentViewTopicPageFixed()
+        {
+            return View();
+        }
+
+        [Route("Student/Seminar/Topic/Random")]
+        public IActionResult StudentViewTopicPageRandom()
+        {
+            return View();
+        }
+
+        [Route("Student/Seminar/Grade/Fixed")]
+        public IActionResult StudentViewGradePage()
+        {
+            return View();
+        }
+
     }
 }

@@ -42,10 +42,10 @@
                 
             </div>
             <div class="item">
-                <button class="uploadbutton">上传报告</button>
+                <button class="uploadbutton" id="uploadReport">上传报告</button>
             </div>
             <div class="item">
-                <button class="viewscorebutton">查看分数</button>
+                <button class="viewscorebutton" id="checkGrade">查看分数</button>
                 <div class="clear"></div>
             </div>
         </div>
@@ -84,14 +84,23 @@
                 );
                 for (var i = result.topics.length; i--;) {
                     $("#inserttopic").prepend(
-                        "<div class=\"smallblock\">" +
-                        "<div class=\"blockFont\">" + result.topics[i].name + "</div>" +
+                        "<div class=\"smallblock\" id=" +
+                        i +
+                        ">" +
+                        "<div class=\"blockFont\">" +
+                        result.topics[i].name +
+                        "</div>" +
                         "</div>"
                     );
+                    $("#" + i).click(function() {
+                        window.location.href = "/Student/Seminar/Topic/Fixed?id=" + id;
+                    });
                 }
-                
             }
         });
+    });
+    $("#checkGrade").click(function () {
+        window.location.href = "/Student/Seminar/Grade/Fixed?id=" + id;
     });
    
 </script>

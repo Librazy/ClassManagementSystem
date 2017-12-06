@@ -100,5 +100,29 @@ namespace ClassManagementSystem.Controllers
         {
             return Created("/course/1", newSeminar);
         }
+
+        [HttpGet("/course/{courseId:long}/grade")]
+        public IActionResult GetGradeByCourseId([FromRoute] long courseId)
+        {
+            var gd1 = new Grade(1)
+            {
+                SeminarName="需求分析",
+                GroupName="3A2",
+                LeaderName="张三",
+                PresentationGrade=3,
+                ReportGrade=4,
+                FinalGrade=4
+            };
+            var gd2 = new Grade(2)
+            {
+                SeminarName="界面原型设计",
+                GroupName="3A3",
+                LeaderName="张三",
+                PresentationGrade=4,
+                ReportGrade=4,
+                FinalGrade=4
+            };
+            return Json(new List<Grade> {gd1, gd2});
+        }
     }
 }

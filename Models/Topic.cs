@@ -7,9 +7,9 @@ namespace ClassManagementSystem.Models
 {
     public class Topic
     {
-        public Topic()
+        public Topic(long id)
         {
-            Id = 0;
+            Id = id;
         }
 
         public long Id { get; }
@@ -19,6 +19,8 @@ namespace ClassManagementSystem.Models
         public string Description { get; set; }
 
         public int GroupLimit { get; set; }
+
+        public int GroupMemberLimit { get; set; }
 
         public List<Group> Groups { get; set; } = new List<Group>();
 

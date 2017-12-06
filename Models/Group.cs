@@ -28,6 +28,8 @@ namespace ClassManagementSystem.Models
             Id = 0;
         }
 
+        public string GroupOrder { get; set; }
+
         public long Id { get; }
 
         public User Leader { get; set; }

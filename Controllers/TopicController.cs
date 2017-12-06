@@ -11,7 +11,14 @@ namespace ClassManagementSystem.Controllers
         [HttpGet("/topic/{topicId:long}")]
         public IActionResult GetTopicById([FromRoute] long topicId)
         {
-            return Json(new Topic());
+            var t = new Topic(257)
+            {
+                Name= "领域模型与模块",
+                Description= "Domain model与模块划分",
+                GroupLimit= 5,
+                GroupMemberLimit= 6
+            };
+            return Json(t);
         }
 
         [HttpDelete("/topic/{topicId:long}")]

@@ -11,7 +11,34 @@ namespace ClassManagementSystem.Controllers
         [HttpGet("/group/{groupId:long}")]
         public IActionResult GetGroupById([FromRoute] long groupId)
         {
-            return Json(new Topic());
+            var g1 = new Group()
+            {
+                GroupOrder="3A2",
+                Leader = new User(8888)
+                {
+                    Name = "张三"
+                },
+                Members = new List<User>()
+                {
+                    new User(5324)
+                    {
+                        Name = "李四"
+                    },
+                    new User(5678)
+                    {
+                        Name= "王五"
+                    }
+                },
+                Topics =new List<Topic>()
+                {
+                    new Topic(257)
+                    {
+                        Name= "领域模型与模块"
+                    }
+                },
+                Report=""
+            };
+            return Json(g1);
         }
 
         [HttpPut("/group/{groupId:long}")]
