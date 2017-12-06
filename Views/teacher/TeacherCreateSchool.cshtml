@@ -8,21 +8,49 @@
                                      maximum-scale=1.0,
                                      user-scalable=no">
     <title>ClassManage</title>
-<link href="~/css/teacher/TeacherCreateSchool.css" rel="stylesheet" type="text/css"/>
+    <link href="~/css/teacher/TeacherCreateSchool.css" rel="stylesheet" type="text/css"/>
 </head>
 
 <body>
 <div class="titleBackground"></div>
-<div class="title">�γ̹���ϵͳ</div>
+<div class="title">课程管理系统</div>
 <div class="icon">
-<img src="~/Img/home.png">��ҳ
-				<img src="~/Img/help.png">����
-				<img src="~/Img/exit.png">�˳�
+    <img src="~/Img/home.png">首页
+    <img src="~/Img/help.png">帮助
+    <img src="~/Img/exit.png">退�?
 </div>
-<div class="province">����ʡ��:<select class="provinceSelect"></select></div>
-<div class="city">���ڳ���:<select class="citySelect"></select></div>
-<div class="school">ѧУ����:<input type="text" name="school"/></div>
-<div class="submit">�ύ</div>
+<div class="province">
+    所在省�?<select class="provinceSelect" id="province"></select>
+</div>
+<div class="city">
+    所在城�?<select class="citySelect" id="city"></select>
+</div>
+<div class="school">
+    学校名称:<input type="text" name="school" id="name"/>
+</div>
+<div class="submit">提交</div>
+<script src="~/js/query.js"></script>
+<script src="~/js/jquery.min.js"></script>
+<script type="text/javascript">
+    $(function() {
+        $(".submit").click(function(e) {
+            e.preventDefault();
+            $.ajax({
+                url: '/school',
+                type: 'POST',
+                contentType: 'application/json',
+                dataType: 'json',
+                data: JSON.stringify({
+                    province: $("#province").val(),
+                    city: $("#city").val(),
+                    name: $("#name").val()
+                }),
+                success: function(result) {
+                    window.location.href = "/RegisterPage?school=" + result.id;
+                }
+            });
+        });
+    });
+</script>
 </body>
-
 </html>
