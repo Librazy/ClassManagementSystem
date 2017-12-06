@@ -23,12 +23,12 @@ namespace ClassManagementSystem.Models
 
     public class Group
     {
-        public Group()
+        public Group(long id)
         {
-            Id = 0;
+            Id = id;
         }
 
-        public string GroupOrder { get; set; }
+        public string Name { get; set; }
 
         public long Id { get; }
 

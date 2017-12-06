@@ -18,6 +18,8 @@ namespace ClassManagementSystem.Models
 
         public string Description { get; set; }
 
+        public string Serial { get; set; }
+
         public int GroupLimit { get; set; }
 
         public int GroupMemberLimit { get; set; }

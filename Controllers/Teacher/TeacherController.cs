@@ -82,5 +82,17 @@ namespace ClassManagementSystem.Controllers.Teacher
         {
             return View();
         }
+
+        [Route("/Teacher/Seminar/Score")]
+        public IActionResult TeacherScoreHome()
+        {
+            return View();
+        }
+
+        [Route("/Teacher/Seminar/GroupReport")]
+        public IActionResult TeacherScoreReportPage()
+        {
+            return View();
+        }
     }
 }

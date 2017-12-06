@@ -11,34 +11,114 @@ namespace ClassManagementSystem.Controllers
         [HttpGet("/group/{groupId:long}")]
         public IActionResult GetGroupById([FromRoute] long groupId)
         {
-            var g1 = new Group()
+            var ta = new Topic(3)
             {
-                GroupOrder="3A2",
-                Leader = new User(8888)
-                {
-                    Name = "张三"
-                },
-                Members = new List<User>()
-                {
-                    new User(5324)
-                    {
-                        Name = "李四"
-                    },
-                    new User(5678)
-                    {
-                        Name= "王五"
-                    }
-                },
-                Topics =new List<Topic>()
-                {
-                    new Topic(257)
-                    {
-                        Name= "领域模型与模块"
-                    }
-                },
-                Report=""
+                Description = "Topic Topic A A",
+                Name = "Topic A",
+                GroupLimit = 3,
+                GroupMemberLimit = 4,
+                Serial = "A"
             };
-            return Json(g1);
+            var tb = new Topic(3)
+            {
+                Description = "Topic Topic B B",
+                Name = "Topic B",
+                GroupLimit = 3,
+                GroupMemberLimit = 4,
+                Serial = "B"
+            };
+            var gs = new List<Group>
+            {
+                new Group(0)
+                {
+                    Name = "1A1",
+                    Grade = new GroupGrade
+                    {
+                        Grade = 5,
+                        PresentationGrades =
+                        {
+                            new GroupGrade.PresentationGrade {Grade = 4, TopicId = 3}
+                        },
+                        ReportGrade = 5
+                    },
+                    Members = new List<User>
+                    {
+                        new User(5324)
+                        {
+                            Name = "李四"
+                        },
+                        new User(5678)
+                        {
+                            Name = "王五"
+                        }
+                    },
+                    Leader = new User(34) {Type = Models.User.UserType.Student, Name = "伊艾一"},
+                    Topics = new List<Topic>
+                    {
+                        ta
+                    },
+                    Report = "/upload/report/0_3.pdf"
+                },
+                new Group(1)
+                {
+                    Name = "1A2",
+                    Grade = new GroupGrade
+                    {
+                        Grade = 5,
+                        PresentationGrades =
+                        {
+                            new GroupGrade.PresentationGrade {Grade = 5, TopicId = 3}
+                        },
+                        ReportGrade = 5
+                    },
+                    Members = new List<User>
+                    {
+                        new User(12324)
+                        {
+                            Name = "李有四"
+                        },
+                        new User(56783)
+                        {
+                            Name = "王我五"
+                        }
+                    },
+                    Leader = new User(45) {Type = Models.User.UserType.Student, Name = "伊艾尔"},
+                    Topics = new List<Topic>
+                    {
+                        ta
+                    }
+                },
+                new Group(2)
+                {
+                    Name = "2B1",
+                    Grade = new GroupGrade
+                    {
+                        Grade = 5,
+                        PresentationGrades =
+                        {
+                            new GroupGrade.PresentationGrade {Grade = 4, TopicId = 5}
+                        },
+                        ReportGrade = 5
+                    },
+                    Leader = new User(435) {Type = Models.User.UserType.Student, Name = "贰碧一"},
+                    Members = new List<User>
+                    {
+                        new User(25324)
+                        {
+                            Name = "李呃四"
+                        },
+                        new User(35678)
+                        {
+                            Name = "台王五"
+                        }
+                    },
+                    Topics = new List<Topic>
+                    {
+                        tb
+                    }
+                }
+            };
+            return Json(gs[(int) groupId]);
         }
 
         [HttpPut("/group/{groupId:long}")]
@@ -65,13 +145,13 @@ namespace ClassManagementSystem.Controllers
             return Json(new GroupGrade());
         }
 
-        [HttpPut("/group/{groupId:long}/grade")]
+        [HttpPut("/group/{groupId:long}/grade/report")]
         public IActionResult UpdateGradeByGroupId([FromRoute] long groupId, [FromBody] GroupGrade updated)
         {
             return NoContent();
         }
 
-        [HttpPut("/group/{groupId:long}/grade/{studentId:long}")]
+        [HttpPut("/group/{groupId:long}/grade/presentation/{studentId:long}")]
         public IActionResult SubmitStudentGradeByGroupId([FromBody] long groupId, [FromBody] long studentId,
             [FromBody] GroupGrade updated)
         {

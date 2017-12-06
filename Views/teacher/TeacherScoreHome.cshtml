@@ -46,45 +46,6 @@
                     </tr>
                     </thead>
                     <tbody class="tableContent">
-                    <tr>
-                        <td>A</td>
-                        <td>Bangalore</td>
-                        <td>xxx</td>
-                        <td>5</td>
-                        <td>已提交</td>
-                        <td>5</td>
-                        <td>5</td>
-                        <td>
-                            <img src="~/Img/view.png" alt="预览">
-                            <img src="~/Img/download.png" alt="下载">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>A</td>
-                        <td>Bangalore</td>
-                        <td>xxx</td>
-                        <td>5</td>
-                        <td>已提交</td>
-                        <td>5</td>
-                        <td>5</td>
-                        <td>
-                            <img src="~/Img/view.png" alt="预览">
-                            <img src="~/Img/download.png" alt="下载">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>A</td>
-                        <td>Bangalore</td>
-                        <td>xxx</td>
-                        <td>5</td>
-                        <td>已提交</td>
-                        <td>5</td>
-                        <td>5</td>
-                        <td>
-                            <img src="~/Img/view.png" alt="预览">
-                            <img src="~/Img/download.png" alt="下载">
-                        </td>
-                    </tr>
                     </tbody>
                 </table>
             </div>
@@ -97,51 +58,64 @@
 <script type="text/javascript">
     var id = getQuery()["id"];
     var course = getQuery()["course"];
+    var groups = [];
+    var remain = 0;
+
+    function showGroups() {
+        for (var i = groups.length; i--;) {
+            var hasReport = !(groups[i].report === null || groups[i].report === "");
+            $(".tableContent").prepend("<tr><td>" +
+                $.map(groups[i].topics, function(g) { return g.name }).join(",") +
+                "</td><td>" +
+                groups[i].name +
+                "</td><td>" +
+                groups[i].leader.name +
+                "</td><td>" +
+                $.map(groups[i].grade.presentationGrades, function(g) { return g.grade }).join(", ") +
+                "</td><td>" +
+                (hasReport ? "已提交" : "未提交") +
+                "</td><td>" +
+                groups[i].grade.reportGrade +
+                "</td><td>" +
+                groups[i].grade.grade +
+                "</td><td>" +
+                (hasReport
+                    ? (
+                    "<a href=\"/Teacher/Seminar/GroupReport?" +
+                            "id=" + groups[i].id + "&course=" + course + "&seminar=" + id +
+                            "\"><img src=\"/img/view.png\" alt=\"预览\"></a><a href=\"" +
+                            groups[i].report +
+                            "\"><img src=\"/img/download.png\" alt=\"下载\"></a>")
+                    : "") +
+                "</td></tr>");
+        }
+    }
+
+    function groupCallBack(i) {
+        return function(result) {
+            groups[i] = result;
+            if (--remain === 0) {
+                showGroups();
+            }
+        };
+    }
+
     $(function() {
         $.ajax({
-            url: '/seminar/' + id,
+            url: '/seminar/' + id + '/group',
             type: 'GET',
             dataType: 'json',
             success: function(result) {
-                $("#name").text(result.name);
-                $("#description").text(result.description);
-                $("#groupingMethod").text(result.groupingMethod === "fixed" ? "固定分组" : "随机分组");
-                $("#startTime").text(result.startTime);
-                $("#endTime").text(result.endTime);
-                for (var i = result.topics.length; i--;) {
-                    $(".topicBlockBody").prepend("<div class=\"topicBlock\" data-topic-id=\"" + result.topics[i].id + "\"><div class=\"topicBlockFont\">"+ result.topics[i].name +"</div></div>");
+                groups = result;
+                remain = groups.length;
+                for (var i = groups.length; i--;) {
+                    $.ajax({
+                        url: '/group/' + groups[i].id,
+                        type: 'GET',
+                        dataType: 'json',
+                        success: groupCallBack(i)
+                    });
                 }
-                $(".topicBlock").click(function () {
-                    if ($(this).attr("data-topic-id")) {
-                        window.location.href = "/Teacher/Topic?id=" +
-                            $(this).attr("data-topic-id") +
-                            "&course=" +
-                            course +
-                            "&seminar=" +
-                            id;
-                    } else {
-                        window.location.href = "/Teacher/Seminar/Create?id=" +
-                            $(this).attr("data-topic-id") +
-                            "&course=" +
-                            course +
-                            "&seminar=" +
-                            id;
-                    }
-                });
-            }
-        });
-        $("#update").click(function() {
-            window.location.href = "/Teacher/Seminar/Update?id=" + id + "&course=" + course;
-        });
-        $("#delete").click(function() {
-            if (confirm("是否确认删除讨论课？")) {
-                $.ajax({
-                    url: '/seminar/' + id,
-                    type: 'DELETE',
-                    success: function() {
-                        window.location.href = "/Teacher/Course/Courseinfo?id=" + course;
-                    }
-                });
             }
         });
     });

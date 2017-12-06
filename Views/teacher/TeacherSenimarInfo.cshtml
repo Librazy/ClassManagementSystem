@@ -83,6 +83,7 @@
                 $("#groupingMethod").text(result.groupingMethod === "fixed" ? "固定分组" : "随机分组");
                 $("#startTime").text(result.startTime);
                 $("#endTime").text(result.endTime);
+                window.localStorage.setItem("seminar" + id, JSON.stringify(result));
                 for (var i = result.topics.length; i--;) {
                     $(".topicBlockBody").prepend("<div class=\"topicBlock\" data-topic-id=\"" + result.topics[i].id + "\"><div class=\"topicBlockFont\">"+ result.topics[i].name +"</div></div>");
                 }
