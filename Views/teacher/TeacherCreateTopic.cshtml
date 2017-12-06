@@ -8,55 +8,82 @@
     <link rel="stylesheet" href="~/css/teacher/frame.css">
 </head>
 <body>
-    
-        <div class="top">
-          <div class="font">
-            课堂管理系统
-          </div>
-          <div class="icon">
-            <img src="~/Img/home.png">首页
-            <img src="~/Img/help.png">帮助
-            <img src="~/Img/exit.png">退出
-          </div>
-          <div class="clear"></div>
-        </div>
-        <div class="body">
-            <div class="navigation">
-                <div class="courseName">OOAD</div>
-                <div class="line"></div>
-                <div class="courseIntroduction">ooad is xxx</div>
-            </div>
-            <div class="content">
-                <div class="block">
-                    <div class="title">讨论课</div>
-                    <div class="returnButton">返回上一页</div>
-                    <div class="line"></div>
-                    <div class="itemBody">
-                        <div class="item">
-                          <label class="itemName">题   目 :</label>
-                          <input type="text" name="seminarName" class="bigInput">
-                        </div>
-                        <div class="item" style="height:40%;">
-                          <label class="itemName">说   明 :</label>
-                          <textarea class="textStyle"></textarea>
-                        </div>
-                        <div class="item">
-                          <label class="itemName">组数限制: </label>
-                          <input type="text" name="groupLimit" class="middleInput">
-                        </div>
-                        <div class="item">
-                          <label class="itemName">组内人数上限: </label>
-                          <input type="text" name="groupLimit" class="middleInput">
-                        </div>
-                        <div class="item">
-                          <button class="submit">提 交</button>
-                          <button class="reset">重 置</button>
-                          <div class="clear"></div>
-                        </div>
-                    </div>
+
+<div class="top">
+    <div class="font">
+        课堂管理系统
+    </div>
+    <div class="icon">
+        <img src="~/Img/home.png">首页
+        <img src="~/Img/help.png">帮助
+        <img src="~/Img/exit.png">退出
+    </div>
+    <div class="clear"></div>
+</div>
+<div class="body">
+    <div class="navigation">
+        <div class="courseName">OOAD</div>
+        <div class="line"></div>
+        <div class="courseIntroduction">ooad is xxx</div>
+    </div>
+    <div class="content">
+        <div class="block">
+            <div class="title">讨论课</div>
+            <div class="returnButton">返回上一页</div>
+            <div class="line"></div>
+            <div class="itemBody">
+                <div class="item">
+                    <label class="itemName">题 目 :</label>
+                    <input type="text" id="name" name="seminarName" class="bigInput">
+                </div>
+                <div class="item" style="height: 40%;">
+                    <label class="itemName">说 明 :</label>
+                    <textarea class="textStyle" id="description"></textarea>
+                </div>
+                <div class="item">
+                    <label class="itemName">组数限制: </label>
+                    <input type="text" id="groupLimit" name="groupLimit" class="middleInput">
+                </div>
+                <div class="item">
+                    <label class="itemName">组内人数上限: </label>
+                    <input type="text" id="groupMemberLimit" name="groupLimit" class="middleInput">
+                </div>
+                <div class="item">
+                    <button class="submit" type="button">提 交</button>
+                    <button class="reset" type="reset">重 置</button>
+                    <div class="clear"></div>
                 </div>
             </div>
-            <div class="clear"></div>
         </div>
+    </div>
+    <div class="clear"></div>
+</div>
+<script src="~/js/query.js"></script>
+<script src="~/js/jquery.min.js"></script>
+<script type="text/javascript">
+    var course = getQuery()["course"];
+    var seminar = getQuery()["seminar"];
+    $(function() {
+        $("form").attr("action", window.location.href);
+        $(".submit").click(function(e) {
+            e.preventDefault();
+            $.ajax({
+                url: '/seminar/' + seminar + '/topic',
+                type: 'POST',
+                contentType: 'application/json',
+                dataType: 'json',
+                data: JSON.stringify({
+                    name: $("#name").val(),
+                    description: $("#description").val(),
+                    groupMemberLimit: $("#groupMemberLimit").val(),
+                    groupLimit: $("#groupLimit").val()
+                }),
+                success: function(result) {
+                    window.location.href = '/TeacherTopicInfo?id=' + result.id + "&course=" + course;
+                }
+            });
+        });
+    });
+</script>
 </body>
 </html>

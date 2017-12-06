@@ -2,7 +2,7 @@
 <html>
 <head lang="en">
     <meta charset="UTF-8">
-	<meta name="viewport"
+    <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>学生查看讨论课（随机）</title>
@@ -63,7 +63,7 @@
     var id = getQuery()["id"];
     $(function () {
         $.ajax({
-            url: '/seminar/' + id +'/random',
+            url: '/seminar/' + id,
             type: 'GET',
             dataType: 'json',
             success: function (result) {

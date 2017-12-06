@@ -19,60 +19,82 @@
           </div>
           <div class="clear"></div>
         </div>
-        <div class="body">
-            <div class="navigation">
-                <div class="courseName">OOAD</div>
-                <div class="line"></div>
-                <div class="courseIntroduction">ooad is xxx</div>
-            </div>
-            <div class="content">
-                <div class="block">
-                    <div class="title">讨论课</div>
-                    <div class="returnButton">返回上一页</div>
-                    <div class="line"></div>
-                    <div class="itemBody">
-                        <div class="item">
-                          <label class="itemName">讨论课名称:</label>
-                          <input type="text" name="seminarName" class="bigInput">
-                        </div>
-                        <div class="item" style="height:40%;">
-                          <label class="itemName">讨论课说明:</label>
-                          <textarea class="textStyle"></textarea>
-                        </div>
-                        <div class="item">
-                          <label class="itemName">分组方式: </label>
-                          <select class="bigSelect"></select>
-                        </div>
-                        <div class="item">
-                          <label class="itemName">开始时间: </label>
-                          <input type="date" name="startTime" class="timeStyle">
-                          <label class="itemName" style="margin-left: 15%">结束时间: </label>
-                          <input type="date" name="startTime" class="timeStyle">
-                        </div>
-                        <div class="item">
-                          <label class="itemName">评分规则:</label>
-                          <label class="itemName">讨论课分数占比</label>
-                          <input type="text" name="seminarGrade" class="smallInput">
-                          <label class="itemName">报告分数占比</label>
-                          <input type="text" name="seminarGrade" class="smallInput">
-                        </div>
-                        <div class="item" style="margin-left: 18%">
-                          <label class="itemName">5分占比</label>
-                          <input type="text" name="seminarGrade" class="smallInput">
-                          <label class="itemName">4分占比</label>
-                          <input type="text" name="seminarGrade" class="smallInput">
-                          <label class="itemName">3分占比</label>
-                          <input type="text" name="seminarGrade" class="smallInput">
-                        </div>
-                       <div class="item">
-                          <button class="submit">提 交</button>
-                          <button class="reset">重 置</button>
-                          <div class="clear"></div>
-                        </div>
-                    </div>
+<div class="body">
+    <div class="navigation">
+        <div class="courseName">OOAD</div>
+        <div class="line"></div>
+        <div class="courseIntroduction">ooad is xxx</div>
+    </div>
+    <div class="content">
+        <div class="block">
+            <div class="title">话题</div>
+            <div class="returnButton">返回上一页</div>
+            <div class="line"></div>
+            <div class="itemBody">
+                <div class="item">
+                    <label class="itemName">话题名称:</label>
+                    <input type="text" id="name" name="seminarName" class="bigInput">
+                </div>
+                <div class="item" style="height:40%;">
+                    <label class="itemName">话题说明:</label>
+                    <textarea id="description" class="textStyle"></textarea>
+                </div>
+                <div class="item">
+                    <label class="itemName">话题小组限制:</label>
+                    <input type="text" id="groupLimit" name="seminarName" class="bigInput">
+                </div>
+                <div class="item">
+                    <label class="itemName">话题小组人数限制</label>
+                    <input type="text" id="groupMemberLimit" name="seminarName" class="bigInput">
+                </div>
+                <div class="item">
+                    <button class="submit" type="button">提 交</button>
+                    <button class="reset" type="reset">重 置</button>
+                    <div class="clear"></div>
                 </div>
             </div>
-            <div class="clear"></div>
         </div>
+    </div>
+    <div class="clear"></div>
+</div>
+<script src="~/js/query.js"></script>
+<script src="~/js/jquery.min.js"></script>
+<script type="text/javascript">
+    var id = getQuery()["id"];
+    var course = getQuery()["course"];
+    var seminar = getQuery()["seminar"];
+    $(function () {
+        $("form").attr("action", window.location.href);
+        $.ajax({
+            url: '/topic/' + id,
+            type: 'GET',
+            dataType: 'json',
+            success: function(result) {
+                $("#name").val(result.name);
+                $("#description").val(result.description);
+                $("#groupLimit").val(result.groupLimit);
+                $("#groupMemberLimit").val(result.groupMemberLimit);
+            }
+        });
+        $(".submit").click(function (e) {
+            e.preventDefault();
+            $.ajax({
+                url: '/topic/' + id,
+                type: 'PUT',
+                contentType: 'application/json',
+                dataType: 'json',
+                data: JSON.stringify({
+                    name: $("#name").val(),
+                    description: $("#description").val(),
+                    groupMemberLimit: $("#groupMemberLimit").val(),
+                    groupLimit: $("#groupLimit").val()
+                }),
+                success: function() {
+                    window.location.href = '/TeacherTopicInfo?id=' + id + "&seminar=" + seminar + "&course=" + course;
+                }
+            });
+        });
+    });
+</script>
 </body>
 </html>

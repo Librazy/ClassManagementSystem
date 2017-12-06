@@ -42,13 +42,6 @@ namespace ClassManagementSystem
 
             app.UseStaticFiles();
 
-            app.UseStaticFiles(new StaticFileOptions()
-            {
-                FileProvider = new PhysicalFileProvider(
-                Path.Combine(Directory.GetCurrentDirectory(), @"node_modules")),
-                RequestPath = new PathString("/bower_components")
-            });
-
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
