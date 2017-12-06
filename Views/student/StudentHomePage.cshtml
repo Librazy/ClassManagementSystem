@@ -12,9 +12,9 @@
         课堂管理系统
     </div>
     <div class="icon">
-        <img src="~/Img/home.png">首页
-        <img src="~/Img/help.png">帮助
-        <img src="~/Img/exit.png">退出
+        <img id="skiphome" src="~/Img/home.png">首页
+        <img id="skiphelp" src="~/Img/help.png">帮助
+        <img id="skipexit" src="~/Img/exit.png">退出
     </div>
     <div class="clear"></div>
 </div>
@@ -31,28 +31,14 @@
             
         <div class="title">基本信息</div>
         <div class="line"></div>
-        <div id="insertinfo" class="imgarea"><img class="img" src="~/Img/link.jpg"/></div>  
-        @*<div class="info">
-            <hr class="line" id="infoinsert"/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <div class="button">
-                <button>修改</button>
-            </div>
-        </div>*@
+        <div id="insertinfo" class="imgarea"><img class="img" src="~/Img/link.jpg"/>
+        </div>
     </div>
     <div class="clear"></div>
 </div>
 <script src="~/js/jquery.min.js"></script>
 <script async src="~/js/tether.min.js"></script>
 <script defer src="~/js/bootstrap.min.js"></script>
-@*<script type="text/javascript">
-    $("#classclick").click(function () {
-        window.location.href = "/Student/Course/Courseinfo";
-    });
-</script>*@
 <script type="text/javascript">
     $(function() {
         $.ajax({
@@ -80,7 +66,15 @@
             }
         });
     });
-    
+    $("#skiphome").click(function () {
+        window.location.href = "/Student";
+    });
+    $("#skiphelp").click(function () {
+        alert("需要帮助吗？");
+    });
+    $("#skipexit").click(function () {
+        window.location.href = "/Login";
+    });
 </script>
 </body>
 

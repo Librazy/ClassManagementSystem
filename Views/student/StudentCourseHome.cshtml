@@ -7,41 +7,37 @@
 
 </head>
 <body>
-    	<div class="top">
-        	<div class="font">
-        		课堂管理系统
-        	</div>
-        	<div class="icon">
-        		<img src="~/Img/home.png">首页
-        		<img src="~/Img/help.png">帮助
-        		<img src="~/Img/exit.png">退出
-        	</div>
-        	<div class="clear"></div>
-    	</div>
+
+<div class="top">
+    <div class="font">
+        课堂管理系统
+    </div>
+    <div class="icon">
+        <img id="skiphome" src="~/Img/home.png">首页
+        <img id="skiphelp" src="~/Img/help.png">帮助
+        <img id="skipexit" src="~/Img/exit.png">退出
+    </div>
+    <div class="clear"></div>
+</div>
 <div class="body">
     <div class="navigation">
         <div class="title">导航</div>
         <div class="line"></div>
         <div class="courseIntroduction">
             <a class="guidefont" href="~/Student">基本信息</a>
-            <a class="guidefont" href="~/Student/Course">课程信息</a> 
+            <a class="guidefont" href="~/Student/Course">课程信息</a>
             <a class="guidefont" href="~/Student/Choosecourse">选择课程</a>
         </div>
     </div>
     <div class="content">
         <div class="title">课程信息</div>
-        <hr class="line" id="courses"/> 
+        <hr class="line" id="courses"/>
     </div>
     <div class="clear"></div>
 </div>
 <script src="~/js/jquery.min.js"></script>
 <script async src="~/js/tether.min.js"></script>
 <script defer src="~/js/bootstrap.min.js"></script>
-@*<script type="text/javascript">
-    $("#classclick").click(function () {
-        window.location.href = "/Student/Course/Courseinfo";
-    });
-</script>*@
 <script type="text/javascript">
     $(function() {
         $.ajax({
@@ -51,7 +47,11 @@
             success: function(result) {
                 for (var i = result.length; i--;) {
                     $("#courses").after(
-                        "<div class=\"main_box_right_content courseinfo\" data-course-id=" + i + "><h3 class=\"classtitle\" data-course-id=" + i + ">" +
+                        "<div class=\"main_box_right_content courseinfo\" data-course-id=" +
+                        i +
+                        "><h3 class=\"classtitle\" data-course-id=" +
+                        i +
+                        ">" +
                         result[i].courseName +
                         "<button>退选课程</button></h3><div class=\"divideline\"></div><div  class=\"classinfo\"><table class=\"table\"><tr><td>班级：<span>" +
                         result[i].name +
@@ -62,11 +62,20 @@
                         "</td><td></td></tr></table></div></div>");
                 }
 
-                $(".courseinfo").click(function () {
+                $(".courseinfo").click(function() {
                     window.location.href = "/Student/Course/Courseinfo?id=" + $(this).attr("data-course-id");
                 });
             }
         });
+    });
+    $("#skiphome").click(function() {
+        window.location.href = "/Student";
+    });
+    $("#skiphelp").click(function() {
+        alert("需要帮助吗？");
+    });
+    $("#skipexit").click(function() {
+        window.location.href = "/Login";
     });
 </script>
 </body>

@@ -14,9 +14,9 @@
         课堂管理系统
     </div>
     <div class="icon">
-        <img src="~/Img/home.png">首页
-        <img src="~/Img/help.png">帮助
-        <img src="~/Img/exit.png">退出
+        <img id="skiphome" src="~/Img/home.png">首页
+        <img id="skiphelp" src="~/Img/help.png">帮助
+        <img id="skipexit" src="~/Img/exit.png">退出
     </div>
     <div class="clear"></div>
 </div>
@@ -29,7 +29,7 @@
     <div class="content">
         <div class="block">
             <div class="title">话题A</div>
-            <div class="returnButton">返回上一页</div>
+            <div class="returnButton" id="returnpage">返回上一页</div>
             <div class="line" id="insertinfo"></div>
             
         </div>
@@ -62,12 +62,26 @@
                     "<label class=\"itemName\">组内人数上限:</label>" +
                     "<label class=\"itemName\">"+result.groupMemberLimit+"</label>" +
                     "</div><div class=\"item\">" +
-                    "<div class=\"modifyButton\">选择话题</div></div></div>"
+                    "<div id=\"choosetopic\" class=\"modifyButton\">选择话题</div></div></div>"
                 );
+                $("#choosetopic").click(function () {
+                    window.location.href = "/Student/Seminar/Fixed?id=" + id;
+                });
             }
         });
     });
-   
+    $("#skiphome").click(function () {
+        window.location.href = "/Student";
+    });
+    $("#skiphelp").click(function () {
+        alert("需要帮助吗？");
+    });
+    $("#skipexit").click(function () {
+        window.location.href = "/Login";
+    });
+    $("#returnpage").click(function () {
+        window.location.href = "/Student/Seminar/Fixed?id=" + id;
+    });
 </script>
 </body>
 </html>

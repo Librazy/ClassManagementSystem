@@ -12,9 +12,9 @@
         课堂管理系统
     </div>
     <div class="icon">
-        <img src="~/Img/home.png">首页
-        <img src="~/Img/help.png">帮助
-        <img src="~/Img/exit.png">退出
+        <img id="skiphome" src="~/Img/home.png">首页
+        <img id="skiphelp" src="~/Img/help.png">帮助
+        <img id="skipexit" src="~/Img/exit.png">退出
     </div>
     <div class="clear"></div>
 </div>
@@ -28,6 +28,7 @@
         </div>
     </div>
     <div class="content">
+        
         <div class="title">基本信息</div>
         <hr class="line"/>
         <div id="insertinfo" class="imgarea"><img class="img" src="~/Img/link.jpg"/>
@@ -38,7 +39,7 @@
 <script src="~/js/jquery.min.js"></script>
 <script async src="~/js/tether.min.js"></script>
 <script defer src="~/js/bootstrap.min.js"></script>
-    <script type="text/javascript">
+<script type="text/javascript">
     $(function () {
         $.ajax({
             url: '/me',
@@ -65,6 +66,15 @@
             }
         });
     });
-    </script>
+    $("#skiphome").click(function () {
+        window.location.href = "/Student";
+    });
+    $("#skiphelp").click(function () {
+        alert("需要帮助吗？");
+    });
+    $("#skipexit").click(function () {
+        window.location.href = "/Login";
+    });
+</script>
 </body>
 </html>

@@ -12,9 +12,9 @@
         课堂管理系统
     </div>
     <div class="icon">
-        <img src="~/Img/home.png">首页
-        <img src="~/Img/help.png">帮助
-        <img src="~/Img/exit.png">退出
+        <img id="skiphome" src="~/Img/home.png">首页
+        <img id="skiphelp" src="~/Img/help.png">帮助
+        <img id="skipexit" src="~/Img/exit.png">退出
     </div>
     <div class="clear"></div>
 </div>
@@ -75,6 +75,15 @@
                 
             }
         });
+    });
+    $("#skiphome").click(function () {
+        window.location.href = "/Student";
+    });
+    $("#skiphelp").click(function () {
+        alert("需要帮助吗？");
+    });
+    $("#skipexit").click(function () {
+        window.location.href = "/Login";
     });
 </script>
 </body>
