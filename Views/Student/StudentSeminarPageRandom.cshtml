@@ -1,0 +1,180 @@
+﻿<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>学生查看讨论课（随机）</title>
+    <link href="~/css/student/content.css" rel="stylesheet" type="text/css"/>
+    <link href="~/css/vendor/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div class="top">
+    <div class="font">
+        课堂管理系统
+    </div>
+    <div class="icon">
+        <img id="skiphome" src="~/Img/home.png">首页
+        <img id="skiphelp" src="~/Img/help.png">帮助
+        <img id="skipexit" src="~/Img/exit.png">退出
+    </div>
+    <div class="clear"></div>
+</div>
+<div class="body">
+    <div class="navigation">
+        <div class="courseName">OOAD</div>
+        <div class="line"></div>
+        <div class="courseIntroduction">ooad is xxx</div>
+    </div>
+    <div class="content">
+        <div class="block">
+            <div class="title">讨论课1</div>
+            <div class="returnButton" id="returnpage">返回上一页</div>
+            <div class="line"></div>
+            <div class="itemBody" id="insertinfo">
+
+                <div class="item"></div>
+                <div class="item" id="insertgroup">
+
+                </div>
+            </div>
+        </div>
+        <div class="block">
+            <div class="title">话题</div>
+            <div class="line"></div>
+            <div class="blockBody" id="inserttopic">
+            </div>
+            <div class="item">
+                <button class="uploadbutton" id="uploadReport" data-toggle="modal" data-target="#uploadDialog">上传报告</button>
+            </div>
+            <div class="item">
+                <button class="viewscorebutton" id="checkGrade">查看分数</button>
+                <div class="clear"></div>
+            </div>
+        </div>
+    </div>
+    <div class="clear"></div>
+</div>
+<div class="modal fade" id="uploadDialog" tabindex="-1" role="dialog" aria-labelledby="uploadDialogLabel" aria-hidden="true">
+    <form class="modal-dialog" role="document" method="post">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="uploadDialogLabel">上传报告</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div>
+                    <div class="form-group">
+                        <label for="recipient-name" class="col-form-label">选择文件：</label>
+                        <input type="file" accept="application/pdf" class="form-control" id="recipient-name">
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-primary">提交</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
+            </div>
+        </div>
+    </form>
+</div>
+<script src="~/js/query.js"></script>
+<script src="~/js/jquery.min.js"></script>
+<script async src="~/js/tether.min.js"></script>
+<script defer src="~/js/bootstrap.bundle.min.js"></script>
+<script type="text/javascript">
+    var id = getQuery()["id"];
+    $(function() {
+        $.ajax({
+            url: '/seminar/' + id,
+            type: 'GET',
+            dataType: 'json',
+            success: function(result) {
+                $("#insertinfo").prepend(
+                    "<div class=\"item\">" +
+                    "<label class=\"itemName\">" +
+                    result.description +
+                    "</label>" +
+                    "</div><div class=\"line\"></div>" +
+                    "<div class=\"item\">" +
+                    "<label class=\"itemName\">分组方式：</label>" +
+                    "<label class=\"itemName\">随机分组</label><br/>" +
+                    "<label class=\"itemName\">开始时间：</label>" +
+                    "<label class=\"itemName\">" +
+                    result.startTime +
+                    "</label><br/>" +
+                    "<label class=\"itemName\">结束时间：</label>" +
+                    "<label class=\"itemName\">" +
+                    result.endTime +
+                    "</label></div>" +
+                    "<div class=\"item\">" +
+                    "<div class=\"item\"></div>" +
+                    "</div><br/><div class=\"line\"></div>"
+                );
+                for (var i = result.topics.length; i--;) {
+                    $("#inserttopic").prepend(
+                        "<div class=\"smallblock\" id=" +
+                        i +
+                        ">" +
+                        "<div class=\"blockFont\">" +
+                        result.topics[i].name +
+                        "</div>" +
+                        "</div>"
+                    );
+                    $("#" + i).click(function() {
+                        window.location.href = "/Student/Seminar/Topic/Random?id=" + id;
+                    });
+                }
+
+            }
+        });
+    });
+    $(function () {
+        $("form").attr("action", window.location.href);
+        $.ajax({
+            url: '/group/' + id,
+            type: 'GET',
+            dataType: 'json',
+            success: function(result) {
+                $("#insertgroup").prepend(
+                    "<label class=\"itemName\">选择话题：</label>" +
+                    "<label class=\"itemName\">A</label><br/>" +
+                    "<label class=\"itemName\">组号：</label>" +
+                    "<label class=\"itemName\">" +
+                    result.groupOrder +
+                    "</label><br/>" +
+                    "<label class=\"itemName\">组长：</label>" +
+                    "<label class=\"itemName\">" +
+                    result.leader.name +
+                    "</label><br/>" +
+                    "<label class=\"itemName\">组员：</label>" +
+                    "<label class=\"itemName\">" +
+                    result.members[0].name +
+                    "、</label >" +
+                    "<label class=\"itemName\">" +
+                    result.members[1].name +
+                    "</label>"
+                );
+            }
+        });
+    });
+    $("#checkGrade").click(function() {
+        window.location.href = "/Student/Seminar/Grade/Fixed?id=" + id;
+    });
+    $("#skiphome").click(function() {
+        window.location.href = "/Student";
+    });
+    $("#skiphelp").click(function() {
+        alert("需要帮助吗？");
+    });
+    $("#skipexit").click(function() {
+        window.location.href = "/Login";
+    });
+    $("#returnpage").click(function() {
+        window.location.href = "/Student/Course/Courseinfo?id=" + id;
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,100 @@
+﻿<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>讨论课修改</title>
+    <link rel="stylesheet" href="./bootstrap.min.css">
+    <link rel="stylesheet" href="~/css/teacher/content.css">
+</head>
+<body>
+    
+        <div class="top">
+          <div class="font">
+            课堂管理系统
+          </div>
+          <div class="icon">
+             <img src="~/Img/home.png">首页
+             <img src="~/Img/home.png">帮助
+             <img src="~/Img/home.png">退出
+          </div>
+          <div class="clear"></div>
+        </div>
+<div class="body">
+    <div class="navigation">
+        <div class="courseName">OOAD</div>
+        <div class="line"></div>
+        <div class="courseIntroduction">ooad is xxx</div>
+    </div>
+    <div class="content">
+        <div class="block">
+            <div class="title">话题</div>
+            <div class="returnButton">返回上一页</div>
+            <div class="line"></div>
+            <div class="itemBody">
+                <div class="item">
+                    <label class="itemName">话题名称:</label>
+                    <input type="text" id="name" name="seminarName" class="bigInput">
+                </div>
+                <div class="item" style="height:40%;">
+                    <label class="itemName">话题说明:</label>
+                    <textarea id="description" class="textStyle"></textarea>
+                </div>
+                <div class="item">
+                    <label class="itemName">话题小组限制:</label>
+                    <input type="text" id="groupLimit" name="seminarName" class="bigInput">
+                </div>
+                <div class="item">
+                    <label class="itemName">话题小组人数限制</label>
+                    <input type="text" id="groupMemberLimit" name="seminarName" class="bigInput">
+                </div>
+                <div class="item">
+                    <button class="submit" type="button">提 交</button>
+                    <button class="reset" type="reset">重 置</button>
+                    <div class="clear"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="clear"></div>
+</div>
+<script src="~/js/query.js"></script>
+<script src="~/js/jquery.min.js"></script>
+<script type="text/javascript">
+    var id = getQuery()["id"];
+    var course = getQuery()["course"];
+    var seminar = getQuery()["seminar"];
+    $(function () {
+        $("form").attr("action", window.location.href);
+        $.ajax({
+            url: '/topic/' + id,
+            type: 'GET',
+            dataType: 'json',
+            success: function(result) {
+                $("#name").val(result.name);
+                $("#description").val(result.description);
+                $("#groupLimit").val(result.groupLimit);
+                $("#groupMemberLimit").val(result.groupMemberLimit);
+            }
+        });
+        $(".submit").click(function (e) {
+            e.preventDefault();
+            $.ajax({
+                url: '/topic/' + id,
+                type: 'PUT',
+                contentType: 'application/json',
+                dataType: 'json',
+                data: JSON.stringify({
+                    name: $("#name").val(),
+                    description: $("#description").val(),
+                    groupMemberLimit: $("#groupMemberLimit").val(),
+                    groupLimit: $("#groupLimit").val()
+                }),
+                success: function() {
+                    window.location.href = '/Teacher/Topic?id=' + id + "&seminar=" + seminar + "&course=" + course;
+                }
+            });
+        });
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,128 @@
+﻿<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>修改班级</title>
+    <link rel="stylesheet" href="{$base}/raffle/bootstrap.min.css">
+    <link rel="stylesheet" href="~/css/teacher/content.css">
+</head>
+<body>
+
+<div class="top">
+    <div class="font">
+        课堂管理系统
+    </div>
+    <div class="icon">
+        <img src="~/Img/home.png">首页
+        <img src="~/Img/help.png">帮助
+        <img src="~/Img/exit.png">退出
+    </div>
+    <div class="clear"></div>
+</div>
+<div class="body">
+    <div class="navigation">
+        <div class="courseName">OOAD</div>
+        <div class="line"></div>
+        <div class="courseIntroduction">ooad is xxx</div>
+    </div>
+    <div class="content">
+        <div class="block">
+            <div class="title">修改班级信息</div>
+            <div class="returnButton">返回上一页</div>
+            <div class="line"></div>
+            <form class="itemBody" method="post">
+                <div class="item">
+                    <label class="itemName">班级名称:</label>
+                    <input type="text" name="className" id="name" class="bigInput">
+                </div>
+                <div class="item">
+                    <label class="itemName">上课地点:</label>
+                    <input type="text" name="classNickname" id="site" class="bigInput">
+                </div>
+                <div class="item">
+                    <label class="itemName">上课时间:</label>
+                    <input type="text" name="classNickname" id="time" class="bigInput">
+                </div>
+                <div class="item">
+                    <label class="itemName">评分规则:</label>
+                    <label class="itemName">讨论课分数占比</label>
+                    <input type="text" name="seminarGrade" class="smallInput" id="presentation">
+                    <label class="itemName">报告分数占比</label>
+                    <input type="text" name="seminarGrade" class="smallInput" id="report">
+                </div>
+                <div class="item" style="margin-left: 18%">
+                    <label class="itemName">5分占比</label>
+                    <input type="text" name="seminarGrade" class="smallInput" id="a">
+                    <label class="itemName">4分占比</label>
+                    <input type="text" name="seminarGrade" class="smallInput" id="b">
+                    <label class="itemName">3分占比</label>
+                    <input type="text" name="seminarGrade" class="smallInput" id="c">
+                </div>
+                <div class="item">
+                    <label class="itemName">导入学生名单:</label>
+                    <input type="file" class="itemName" value="student.xlsx"/>
+                    <button class="selectFile">选择文件</button>
+                </div>
+                <div class="item">
+                    <button class="submit" type="submit">提交</button>
+                    <button class="reset" type="reset">重置</button>
+                    <div class="clear"></div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="clear"></div>
+</div>
+<script src="~/js/query.js"></script>
+<script src="~/js/jquery.min.js"></script>
+<script type="text/javascript">
+    var id = getQuery()["id"];
+    var course = getQuery()["course"];
+    $(function () {
+        $("form").attr("action", window.location.href);
+        $.ajax({
+            url: '/class/' + id,
+            type: 'GET',
+            dataType: 'json',
+            success: function(result) {
+                $("#name").val(result.name);
+                $("#time").val(result.time);
+                $("#site").val(result.site);
+                $("#presentation").val(result.proportions.presentation);
+                $("#report").val(result.proportions.report);
+                $("#c").val(result.proportions.c);
+                $("#b").val(result.proportions.b);
+                $("#a").val(result.proportions.a);
+                $("#roster").click(function() {
+                    window.location.href = result.roster;
+                });
+            }
+        });
+        $(".submit").click(function (e) {
+            e.preventDefault();
+            $.ajax({
+                url: '/class/' + id,
+                type: 'PUT',
+                contentType: 'application/json',
+                dataType: 'json',
+                data: JSON.stringify({
+                    name: $("#name").val(),
+                    time: $("#time").val(),
+                    site: $("#site").val(),
+                    proportions: {
+                        presentation: $("#presentation").valueOf(),
+                        report: $("#report").valueOf(),
+                        c: $("#c").valueOf(),
+                        b: $("#b").valueOf(),
+                        a: $("#a").valueOf()
+                    }
+                }),
+                success: function() {
+                    window.location.href = '/Teacher/Class?id=' + id;
+                }
+            });
+        });
+    });
+</script>
+</body>
+</html>

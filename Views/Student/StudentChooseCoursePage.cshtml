@@ -1,0 +1,93 @@
+﻿<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>选择课程</title>
+    <link href="~/css/student/StudentChooseCoursePage.css" rel="stylesheet" type="text/css"/>
+    
+</head>
+<body>
+<div class="top">
+    <div class="font">
+        课堂管理系统
+    </div>
+    <div class="icon">
+        <img id="skiphome" src="~/Img/home.png">首页
+        <img id="skiphelp" src="~/Img/help.png">帮助
+        <img id="skipexit" src="~/Img/exit.png">退出
+    </div>
+    <div class="clear"></div>
+</div>
+<div class="body">
+    
+    <div class="navigation">
+        <div class="title">导航</div>
+        <div class="line"></div>
+        <div class="courseIntroduction">
+            <a class="guidefont" href="~/Student">基本信息</a>
+            <a class="guidefont" href="~/Student/Course">课程信息</a>
+            <a class="guidefont" href="~/Student/Choosecourse">选择课程</a>
+        </div>
+    </div>
+    <div class="content">
+        <div class="title">选择课程</div>
+        <hr class="line"/>
+
+        <div id="insertinfo" class="checkcourse">
+            <form class="itemName">
+                任课教师：<input type="text" name="teacher"><br/>
+                课程名称：<input type="text" name="course"><input type="submit" value="查询">
+            </form>
+        </div>
+        
+    </div>
+    <div class="clear"></div>
+</div>
+<script src="~/js/jquery.min.js"></script>
+<script async src="~/js/tether.min.js"></script>
+<script defer src="~/js/bootstrap.bundle.min.js"></script>
+@*<script type="text/javascript">
+    $("#classclick").click(function () {
+        window.location.href = "/Student/Course/Courseinfo";
+    });
+</script>*@
+<script type="text/javascript">
+    $(function () {
+        //本json中，由于numStudent是通过service层对用户统计得来的，因此统计数据通过常数展示在这里
+        $.ajax({
+            url: '/class',
+            type: 'GET',
+            dataType: 'json',
+            success: function(result) {
+                for (var i = result.length; i--;) {
+                    $("#insertinfo").after(
+                        "<div class=\"main_box_right_content\">" +
+                        "<h3 class=\"classtitle\">" + result[i].courseName+
+                        "<button id="+i+">选择课程</button></h3><div class=\"divideline\"></div>"+
+                        "<div class=\"classinfo\">"+
+                        "<table class=\"table\"><tr>" +
+                        "<td class=\"tabletext\">班级：<span>" + result[i].name + "</span></td>" +
+                        "<td class=\"tabletext\">课程地点：" + result[i].site + "</td>" +
+                        "</tr><tr><td class=\"tabletext\">班级人数：" + 60 + "</td>" +
+                        "<td class=\"tabletext\">时间：" + result[i].time +
+                        "</td></tr></table></div>");
+                    $("#" + i).click(function () {
+                        alert("选课成功");
+                    });
+                }
+                
+            }
+        });
+    });
+    $("#skiphome").click(function () {
+        window.location.href = "/Student";
+    });
+    $("#skiphelp").click(function () {
+        alert("需要帮助吗？");
+    });
+    $("#skipexit").click(function () {
+        window.location.href = "/Login";
+    });
+</script>
+</body>
+</html>

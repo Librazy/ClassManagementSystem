@@ -1,0 +1,100 @@
+﻿<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>学生课程首页</title>
+   <link href="~/css/student/StudentCourseInformation.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+        <div class="top">
+            <div class="font">
+                课堂管理系统
+            </div>
+            <div class="icon">
+                <img id="skiphome" src="~/Img/home.png">首页
+                <img id="skiphelp" src="~/Img/help.png">帮助
+                <img id="skipexit" src="~/Img/exit.png">退出
+            </div>
+            <div class="clear"></div>
+        </div>
+<div class="body">
+    <div class="navigation">
+        <div class="courseName">OOAD</div>
+        <div class="line"></div>
+        <div class="courseIntroduction">ooad is xxx</div>
+    </div>
+    <div class="content">
+        <div class="classInfo">
+            <div class="title">讨论课</div>
+            <div class="returnButton" id="returnpage">返回上一页</div>
+            <div class="line" id="insertinfo"></div>
+            <div class="blockBody" id="seminars">
+                
+            </div>
+        </div>
+        <div class="seminarInfo">
+            <div class="title">课程分组</div>
+            <div class="line"></div>
+            <div class="blockBody">
+                <div class="block" id="groupclick"><div class="blockFont">固定分组</div></div>
+            </div>
+        </div>
+        <div class="clear"></div>
+    </div>
+</div>
+<script src="~/js/query.js"></script>
+<script src="~/js/jquery.min.js"></script>
+<script async src="~/js/tether.min.js"></script>
+<script defer src="~/js/bootstrap.bundle.min.js"></script>
+<script type="text/javascript">
+    var id = getQuery()["id"];
+    $(function () {
+        $.ajax({
+            url: '/course/'+id+"/seminar",
+            type: 'GET',
+            dataType: 'json',
+            success: function (result) {
+                for (var i = result.length; i--;) {
+                    $("#seminars").prepend("<div class=\"block seminarblock\" id=" +
+                        i +
+                        " data-seminar-id=" +
+                        result[i].id +
+                        "> <div class=\"blockFont\">" +
+                        result[i].name +
+                        "</div></div>");
+                    
+                    if (result[i].groupingMethod === "fixed") {
+                        $("#" + i).click(function () {
+                            window.location.href = "/Student/Seminar/Fixed?id=" + id;
+                        });
+                    } else {
+                        $("#" + i).click(function () {
+                            window.location.href = "/Student/Seminar/Random?id=" + id;
+                        });
+                    }
+                }
+                
+            }
+        });
+    });
+    $("#groupclick").click(function () {
+        window.location.href = "/Student/Course/Group?id=" + id;
+    });
+    $("#skiphome").click(function () {
+        window.location.href = "/Student";
+    });
+    $("#skiphelp").click(function () {
+        alert("需要帮助吗？");
+    });
+    $("#skipexit").click(function () {
+        window.location.href = "/Login";
+    });
+    $("#returnpage").click(function() {
+        window.location.href = "/Student/Course?id=" + id;
+    });
+</script>
+</body>
+</html>
