@@ -1,5 +1,4 @@
-﻿
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 <head lang="en">
     <meta charset="UTF-8">
@@ -15,7 +14,7 @@
         课堂管理系统
     </div>
     <div class="icon">
-       <img src="~/Img/home.png">首页
+        <img src="~/Img/home.png">首页
         <img src="~/Img/help.png">帮助
         <img src="~/Img/exit.png">退出
     </div>
@@ -28,70 +27,124 @@
         <div class="courseIntroduction">ooad is xxx</div>
     </div>
     <div class="content">
-    <div class="contentBlock">
-        <div class="title">评分</div>
-        <div class="returnButton" >返回上一页</div>
-        <div class="line"></div>
-        <div class="itemBody">
-            <table class="table table-striped">
-                <thead class="tableTitle">
-                <tr>
-                    <th>Topic</th>
-                    <th>组名</th>
-                    <th>组长</th>
-                    <th>课堂讨论得分</th>
-                    <th>报告提交情况</th>
-                    <th>报告分数</th>
-                    <th>总分</th>
-                    <th>报告</th>
-                </tr>
-                </thead>
-                <tbody class="tableContent">
-                <tr>
-                    <td>A</td>
-                    <td>Bangalore</td>
-                    <td>xxx</td>
-                    <td>5</td>
-                    <td>已提交</td>
-                    <td>5</td>
-                    <td>5</td>
-                    <td>
-                        <img src="~/Img/view.png" alt="预览">
-                        <img src="~/Img/download.png" alt="下载">
-                    </td>
-                </tr>
-                <tr>
-                    <td>A</td>
-                    <td>Bangalore</td>
-                    <td>xxx</td>
-                    <td>5</td>
-                    <td>已提交</td>
-                    <td>5</td>
-                    <td>5</td>
-                    <td>
-                         <img src="~/Img/view.png" alt="预览">
-                        <img src="~/Img/download.png" alt="下载">
-                    </td>
-                </tr>
-                <tr>
-                    <td>A</td>
-                    <td>Bangalore</td>
-                    <td>xxx</td>
-                    <td>5</td>
-                    <td>已提交</td>
-                    <td>5</td>
-                    <td>5</td>
-                    <td>
-                         <img src="~/Img/view.png" alt="预览">
-                        <img src="~/Img/download.png" alt="下载">
-                    </td>
-                </tr>
-                </tbody>
-            </table>
+        <div class="contentBlock">
+            <div class="title">评分</div>
+            <div class="returnButton">返回上一页</div>
+            <div class="line"></div>
+            <div class="itemBody">
+                <table class="table table-striped">
+                    <thead class="tableTitle">
+                    <tr>
+                        <th>Topic</th>
+                        <th>组名</th>
+                        <th>组长</th>
+                        <th>课堂讨论得分</th>
+                        <th>报告提交情况</th>
+                        <th>报告分数</th>
+                        <th>总分</th>
+                        <th>报告</th>
+                    </tr>
+                    </thead>
+                    <tbody class="tableContent">
+                    <tr>
+                        <td>A</td>
+                        <td>Bangalore</td>
+                        <td>xxx</td>
+                        <td>5</td>
+                        <td>已提交</td>
+                        <td>5</td>
+                        <td>5</td>
+                        <td>
+                            <img src="~/Img/view.png" alt="预览">
+                            <img src="~/Img/download.png" alt="下载">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>A</td>
+                        <td>Bangalore</td>
+                        <td>xxx</td>
+                        <td>5</td>
+                        <td>已提交</td>
+                        <td>5</td>
+                        <td>5</td>
+                        <td>
+                            <img src="~/Img/view.png" alt="预览">
+                            <img src="~/Img/download.png" alt="下载">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>A</td>
+                        <td>Bangalore</td>
+                        <td>xxx</td>
+                        <td>5</td>
+                        <td>已提交</td>
+                        <td>5</td>
+                        <td>5</td>
+                        <td>
+                            <img src="~/Img/view.png" alt="预览">
+                            <img src="~/Img/download.png" alt="下载">
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
-</div>
     <div class="clear"></div>
 </div>
+<script src="~/js/query.js"></script>
+<script src="~/js/jquery.min.js"></script>
+<script type="text/javascript">
+    var id = getQuery()["id"];
+    var course = getQuery()["course"];
+    $(function() {
+        $.ajax({
+            url: '/seminar/' + id,
+            type: 'GET',
+            dataType: 'json',
+            success: function(result) {
+                $("#name").text(result.name);
+                $("#description").text(result.description);
+                $("#groupingMethod").text(result.groupingMethod === "fixed" ? "固定分组" : "随机分组");
+                $("#startTime").text(result.startTime);
+                $("#endTime").text(result.endTime);
+                for (var i = result.topics.length; i--;) {
+                    $(".topicBlockBody").prepend("<div class=\"topicBlock\" data-topic-id=\"" + result.topics[i].id + "\"><div class=\"topicBlockFont\">"+ result.topics[i].name +"</div></div>");
+                }
+                $(".topicBlock").click(function () {
+                    if ($(this).attr("data-topic-id")) {
+                        window.location.href = "/TeacherTopicInfo?id=" +
+                            $(this).attr("data-topic-id") +
+                            "&course=" +
+                            course +
+                            "&seminar=" +
+                            id;
+                    } else {
+                        window.location.href = "/TeacherCreateSeminar?id=" +
+                            $(this).attr("data-topic-id") +
+                            "&course=" +
+                            course +
+                            "&seminar=" +
+                            id;
+                    }
+                });
+            }
+        });
+        $("#update").click(function() {
+            window.location.href = "/TeacherUpdateSeminar?id=" + id + "&course=" + course;
+        });
+        $("#delete").click(function() {
+            if (confirm("是否确认删除讨论课？")) {
+                $.ajax({
+                    url: '/seminar/' + id,
+                    type: 'DELETE',
+                    success: function() {
+                        window.location.href = "/TeacherCourseInformation?id=" + course;
+                    }
+                });
+            }
+        });
+    });
+</script>
 </body>
 </html>

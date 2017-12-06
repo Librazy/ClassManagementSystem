@@ -38,7 +38,14 @@ namespace ClassManagementSystem.Controllers
         [HttpGet("/course/{courseId:long}")]
         public IActionResult GetCourseById([FromRoute] long courseId)
         {
-            return Json(new Course(0), Ignoring("Classes", "Proportions", "Teacher", "Seminars"));
+            var c2 = new Course(2)
+            {
+                Name = "J2EE",
+                Description = "Description",
+                EndTime = "2017-12-31",
+                StartTime = "2017-10-01"
+            };
+            return Json(c2, Ignoring("Classes", "Proportions", "Teacher", "Seminars"));
         }
 
         [HttpDelete("/course/{courseId:long}")]
