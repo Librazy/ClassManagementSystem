@@ -53,7 +53,7 @@
                     "<td>用户名：<span>" + result.phone + "</span ></td >" +
                     "<td>学号：<span>" + result.number + "</span ></td >" +
                     "</tr><tr class=\"itemName\"><td>姓名：<span>" + result.name + "</span></td>" +
-                    "<td>性别：<span>" + result.gender + "</span ></td >" +
+                    "<td>性别：<span>" + (result.gender === "male" ? "男" : "女") + "</span ></td >" +
                     "</tr ><tr class=\"itemName\"><td>学校：<span>"+result.school.name+"</span></td>"+
                     "<td>学历：<span>" + result.title + "</span></td>" +
                     "</tr ><tr class=\"itemName\"><td>E-mail：<span>" + result.email + "</span ></td >" +

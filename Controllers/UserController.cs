@@ -1,4 +1,5 @@
-﻿using ClassManagementSystem.Models;
+﻿using System;
+using ClassManagementSystem.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -47,7 +48,14 @@ namespace ClassManagementSystem.Controllers
         [HttpPost("/signin")]
         public IActionResult SigninPassword([FromBody] UsernameAndPassword uap)
         {
-            return Json(new SigninResult());
+            return Json(new SigninResult
+            {
+                Exp = DateTime.UtcNow.AddDays(7)
+                    .Subtract(new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc)).Seconds,
+                Id = 1,
+                Type = uap.Phone.EndsWith('1') ? "student" : "teacher",
+                Name = "张三"
+            });
         }
 
         [HttpPost("/register")]
@@ -59,7 +67,7 @@ namespace ClassManagementSystem.Controllers
         [HttpPost("/upload/avatar")]
         public IActionResult UploadAvatar(IFormFile file)
         {
-            return Created("/upload/avatar.png", new { url = "/upload/avatar.png"});
+            return Created("/upload/avatar.png", new {url = "/upload/avatar.png"});
         }
 
         public class UsernameAndPassword

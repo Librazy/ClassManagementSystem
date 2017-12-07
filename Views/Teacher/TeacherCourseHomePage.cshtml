@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>教师主页</title>
     <link href="~/css/teacher/TeacherCourseHomePage.css" rel="stylesheet" type="text/css"/>
+    <link href="~/css/vendor/bootstrap.min.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
 <div class="top">
@@ -22,9 +23,9 @@
         <div class="title">导航</div>
         <div class="line"></div>
         <div class="courseIntroduction">
-            <a class="guidefont" href="#">基本信息</a>
-            <a class="guidefont" href="#">课程信息</a>
-            <a class="guidefont" href="#">新建课程</a>
+            <a class="guidefont" href="/Teacher">基本信息</a>
+            <a class="guidefont" href="/Teacher/Course">课程信息</a>
+            <a class="guidefont" href="/Teacher/Course/Create">新建课程</a>
         </div>
     </div>
     <div class="content">
@@ -35,6 +36,42 @@
         </div>
     </div>
     <div class="clear"></div>
+</div>
+<div class="modal fade" id="updateCourseDialog" tabindex="-1" role="dialog" aria-labelledby="updateCourse" aria-hidden="true">
+    <form class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="updateCourse">修改课程</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div>
+                    <div class="form-group">
+                        <label for="name" class="col-form-label">课程名称：</label>
+                        <input type="text" class="form-control" id="name">
+                    </div>
+                    <div class="form-group">
+                        <label for="startTime" class="col-form-label">开始时间：</label>
+                        <input type="date" name="begintime" id="startTime"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="endTime" class="col-form-label">结束时间：</label>
+                        <input type="date" name="endtime" id="endTime"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="description" class="col-form-label">课程介绍：</label>
+                        <textarea class="form-control" id="description"></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" id="updateConfirm">确认</button>
+                <button type="reset" class="btn btn-secondary">重置</button>
+            </div>
+        </div>
+    </form>
 </div>
 <script src="~/js/jquery.min.js"></script>
 <script async src="~/js/tether.min.js"></script>
@@ -54,7 +91,7 @@
                         i +
                         ">" +
                         result[i].name +
-                        "<button>删除课程</button> <button>修改课程</button></h3><div class=\"divideline\"></div><div  class=\"classinfo\"><table class=\"table\"><tr><td>班级数：<span>" +
+                        "<button class=\"delete\">删除课程</button> <button class=\"update\">修改课程</button></h3><div class=\"divideline\"></div><div  class=\"classinfo\"><table class=\"table\"><tr><td>班级数：<span>" +
                         result[i].numClass +
                         "</span></td>  <td>学生人数：" +
                         result[i].numStudent +
@@ -66,6 +103,58 @@
                 }
                 $(".courseinfo").click(function() {
                     window.location.href = "/Teacher/Course/Courseinfo?id=" + $(this).attr("data-course-id");
+                });
+                $('.update').click(function(e) {
+                    e.stopPropagation();
+                    e.preventDefault();
+                    $('#updateCourseDialog').modal();
+                    var course = $(this).parent().attr("data-course-id");
+                    $.ajax({
+                        url: '/course/' + course,
+                        type: 'GET',
+                        dataType: 'json',
+                        success: function(result) {
+                            window.localStorage.setItem("course" + course, JSON.stringify(result));
+                            $("#updateConfirm").attr("data-course-id", course);
+                            $("#name").val(result.name);
+                            $("#startTime").val(result.startTime);
+                            $("#endTime").val(result.endTime);
+                            $("#description").val(result.description);
+                        }
+                    });
+                });
+                $("#updateConfirm").click(function(e) {
+                    e.preventDefault();
+                    var course = $(this).attr("data-course-id");
+                    $.ajax({
+                        url: '/course/' + course,
+                        type: 'PUT',
+                        contentType: 'application/json',
+                        dataType: 'json',
+                        data: JSON.stringify({
+                            name: $("#name").val(),
+                            startTime: $("#startTime").val(),
+                            endTime: $("#endTime").val(),
+                            description: $("#description").val(),
+                        }),
+                        success: function() {
+                            window.location.reload();
+                        }
+                    });
+                });
+                $(".delete").click(function (e) {
+                    e.stopPropagation();
+                    e.preventDefault();
+                    var course = $(this).parent().attr("data-course-id");
+                    if (confirm("是否确认删除课程？")) {
+                        $.ajax({
+                            url: '/course/' + course,
+                            type: 'DELETE',
+                            success: function() {
+                                window.location.reload();
+                            }
+                        });
+                    }
                 });
             }
         });
