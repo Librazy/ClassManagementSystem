@@ -3,7 +3,7 @@
 <head lang="en">
     <meta charset="UTF-8">
     <title>讨论课修改</title>
-    <link rel="stylesheet" href="./bootstrap.min.css">
+    <link rel="stylesheet" href="~/css/vendor/bootstrap.min.css">
     <link rel="stylesheet" href="~/css/teacher/content.css">
 </head>
 <body>
@@ -83,6 +83,11 @@
     var id = getQuery()["id"];
     var course = getQuery()["course"];
     $(function() {
+        if (window.localStorage.getItem("course" + id)) {
+            var c = JSON.parse(window.localStorage.getItem("course" + id));
+            $(".courseName").text(c.name);
+            $(".courseIntroduction").text(c.description);
+        }
         $("form").attr("action", window.location.href);
         $.ajax({
             url: '/seminar/' + id,

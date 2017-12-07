@@ -58,6 +58,7 @@
             type: 'GET',
             dataType: 'json',
             success: function(result) {
+                window.localStorage.setItem("course" + id, JSON.stringify(result));
                 $(".courseName").text(result.name);
                 $(".courseIntroduction").text(result.description);
             }
@@ -66,9 +67,13 @@
             url: '/course/' + id + "/class",
             type: 'GET',
             dataType: 'json',
-            success: function (result) {
+            success: function(result) {
                 for (var i = result.length; i--;) {
-                    $("#classes").prepend("<div class=\"block classblock\" data-class-id=" + result[i].id + "> <div class=\"blockFont\">" + result[i].name + "</div></div>");
+                    $("#classes").prepend("<div class=\"block classblock\" data-class-id=" +
+                        result[i].id +
+                        "> <div class=\"blockFont\">" +
+                        result[i].name +
+                        "</div></div>");
                 }
                 $(".classblock").click(function() {
                     if ($(this).attr("data-class-id")) {
@@ -85,11 +90,15 @@
             url: '/course/' + id + "/seminar",
             type: 'GET',
             dataType: 'json',
-            success: function (result) {
+            success: function(result) {
                 for (var i = result.length; i--;) {
-                    $("#seminars").prepend("<div class=\"block seminarblock\" data-seminar-id=" + result[i].id + "> <div class=\"blockFont\">" + result[i].name + "</div></div>");
+                    $("#seminars").prepend("<div class=\"block seminarblock\" data-seminar-id=" +
+                        result[i].id +
+                        "> <div class=\"blockFont\">" +
+                        result[i].name +
+                        "</div></div>");
                 }
-                $(".seminarblock").click(function () {
+                $(".seminarblock").click(function() {
                     if ($(this).attr("data-seminar-id")) {
                         window.location.href =
                             "/Teacher/Seminar?id=" + $(this).attr("data-seminar-id") + "&course=" + id;

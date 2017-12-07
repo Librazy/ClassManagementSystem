@@ -3,7 +3,7 @@
 <head lang="zh">
     <meta charset="UTF-8">
     <title>创建班级</title>
-    <link rel="stylesheet" href="{$base}/raffle/bootstrap.min.css">
+    <link rel="stylesheet" href="~/css/vendor/bootstrap.min.css">
     <link rel="stylesheet" href="~/css/teacher/content.css">
 </head>
 <body>
@@ -78,6 +78,11 @@
 <script type="text/javascript">
     var course = getQuery()["course"];
     $(function() {
+        if (window.localStorage.getItem("course" + id)) {
+            var c = JSON.parse(window.localStorage.getItem("course" + id));
+            $(".courseName").text(c.name);
+            $(".courseIntroduction").text(c.description);
+        }
         $("form").attr("action", window.location.href);
         $(".submit").click(function(e) {
             e.preventDefault();

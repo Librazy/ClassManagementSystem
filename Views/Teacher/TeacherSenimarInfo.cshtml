@@ -73,6 +73,11 @@
     var id = getQuery()["id"];
     var course = getQuery()["course"];
     $(function() {
+        if (window.localStorage.getItem("course" + id)) {
+            var c = JSON.parse(window.localStorage.getItem("course" + id));
+            $(".courseName").text(c.name);
+            $(".courseIntroduction").text(c.description);
+        }
         $.ajax({
             url: '/seminar/' + id,
             type: 'GET',
@@ -85,9 +90,13 @@
                 $("#endTime").text(result.endTime);
                 window.localStorage.setItem("seminar" + id, JSON.stringify(result));
                 for (var i = result.topics.length; i--;) {
-                    $(".topicBlockBody").prepend("<div class=\"topicBlock\" data-topic-id=\"" + result.topics[i].id + "\"><div class=\"topicBlockFont\">"+ result.topics[i].name +"</div></div>");
+                    $(".topicBlockBody").prepend("<div class=\"topicBlock\" data-topic-id=\"" +
+                        result.topics[i].id +
+                        "\"><div class=\"topicBlockFont\">" +
+                        result.topics[i].name +
+                        "</div></div>");
                 }
-                $(".topicBlock").click(function () {
+                $(".topicBlock").click(function() {
                     if ($(this).attr("data-topic-id")) {
                         window.location.href = "/Teacher/Topic?id=" +
                             $(this).attr("data-topic-id") +

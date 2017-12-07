@@ -5,7 +5,7 @@
     <meta name="viewport"
           content="width=device-width,height=device-height,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title></title>
-    <link rel="stylesheet" href="~/css/common/bootstrap.min.css">
+    <link rel="stylesheet" href="~/css/vendor/bootstrap.min.css">
     <link rel="stylesheet" href="~/css/teacher/content.css">
 </head>
 <body>
@@ -81,8 +81,13 @@
                 "</td><td>" +
                 (hasReport
                     ? (
-                    "<a href=\"/Teacher/Seminar/GroupReport?" +
-                            "id=" + groups[i].id + "&course=" + course + "&seminar=" + id +
+                        "<a href=\"/Teacher/Seminar/GroupReport?" +
+                            "id=" +
+                            groups[i].id +
+                            "&course=" +
+                            course +
+                            "&seminar=" +
+                            id +
                             "\"><img src=\"/img/view.png\" alt=\"预览\"></a><a href=\"" +
                             groups[i].report +
                             "\"><img src=\"/img/download.png\" alt=\"下载\"></a>")

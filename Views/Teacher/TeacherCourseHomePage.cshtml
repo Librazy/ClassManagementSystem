@@ -48,7 +48,11 @@
             success: function(result) {
                 for (var i = result.length; i--;) {
                     $("#courses").after(
-                        "<div class=\"main_box_right_content courseinfo\" data-course-id=" + i + "><h3 class=\"classtitle\" data-course-id=" + i + ">" +
+                        "<div class=\"main_box_right_content courseinfo\" data-course-id=" +
+                        i +
+                        "><h3 class=\"classtitle\" data-course-id=" +
+                        i +
+                        ">" +
                         result[i].name +
                         "<button>删除课程</button> <button>修改课程</button></h3><div class=\"divideline\"></div><div  class=\"classinfo\"><table class=\"table\"><tr><td>班级数：<span>" +
                         result[i].numClass +

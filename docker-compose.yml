@@ -1,0 +1,8 @@
+version: '3'
+
+services:
+  classmanagementsystem:
+    image: classmanagementsystem
+    build:
+      context: .
+      dockerfile: Dockerfile

@@ -3,7 +3,7 @@
 <head lang="en">
     <meta charset="UTF-8">
     <title>教师查看学生报告</title>
-    <link rel="stylesheet" href="{$base}/raffle/bootstrap.min.css">
+    <link rel="stylesheet" href="~/css/vendor/bootstrap.min.css">
     <style>
         html {
             height: 100%;
@@ -108,7 +108,7 @@
                 type: 'PUT',
                 dataType: 'json',
                 contentType: 'application/json',
-                data: JSON.stringify({reportGrade: $("#score").val()}),
+                data: JSON.stringify({ reportGrade: $("#score").val() }),
                 success: function() {
                     window.location.href = "/Teacher/Seminar/Score?id=" + seminar + "&course=" + course;
                 }

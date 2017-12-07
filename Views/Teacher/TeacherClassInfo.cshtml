@@ -87,11 +87,17 @@
     var id = getQuery()["id"];
     var course = getQuery()["course"];
     $(function() {
+        if (window.localStorage.getItem("course" + id)) {
+            var c = JSON.parse(window.localStorage.getItem("course" + id));
+            $(".courseName").text(c.name);
+            $(".courseIntroduction").text(c.description);
+        }
         $.ajax({
             url: '/class/' + id,
             type: 'GET',
             dataType: 'json',
             success: function(result) {
+                window.localStorage.setItem("class" + id, JSON.stringify(result));
                 $("#name").text(result.name);
                 $("#time").text(result.time);
                 $("#site").text(result.site);

@@ -3,22 +3,22 @@
 <head lang="en">
     <meta charset="UTF-8">
     <title>讨论课修改</title>
-    <link rel="stylesheet" href="./bootstrap.min.css">
+    <link rel="stylesheet" href="~/css/vendor/bootstrap.min.css">
     <link rel="stylesheet" href="~/css/teacher/content.css">
 </head>
 <body>
-    
-        <div class="top">
-          <div class="font">
-            课堂管理系统
-          </div>
-          <div class="icon">
-             <img src="~/Img/home.png">首页
-             <img src="~/Img/home.png">帮助
-             <img src="~/Img/home.png">退出
-          </div>
-          <div class="clear"></div>
-        </div>
+
+<div class="top">
+    <div class="font">
+        课堂管理系统
+    </div>
+    <div class="icon">
+        <img src="~/Img/home.png">首页
+        <img src="~/Img/home.png">帮助
+        <img src="~/Img/home.png">退出
+    </div>
+    <div class="clear"></div>
+</div>
 <div class="body">
     <div class="navigation">
         <div class="courseName">OOAD</div>
@@ -35,7 +35,7 @@
                     <label class="itemName">话题名称:</label>
                     <input type="text" id="name" name="seminarName" class="bigInput">
                 </div>
-                <div class="item" style="height:40%;">
+                <div class="item" style="height: 40%;">
                     <label class="itemName">话题说明:</label>
                     <textarea id="description" class="textStyle"></textarea>
                 </div>
@@ -63,7 +63,12 @@
     var id = getQuery()["id"];
     var course = getQuery()["course"];
     var seminar = getQuery()["seminar"];
-    $(function () {
+    $(function() {
+        if (window.localStorage.getItem("course" + id)) {
+            var c = JSON.parse(window.localStorage.getItem("course" + id));
+            $(".courseName").text(c.name);
+            $(".courseIntroduction").text(c.description);
+        }
         $("form").attr("action", window.location.href);
         $.ajax({
             url: '/topic/' + id,
@@ -76,7 +81,7 @@
                 $("#groupMemberLimit").val(result.groupMemberLimit);
             }
         });
-        $(".submit").click(function (e) {
+        $(".submit").click(function(e) {
             e.preventDefault();
             $.ajax({
                 url: '/topic/' + id,

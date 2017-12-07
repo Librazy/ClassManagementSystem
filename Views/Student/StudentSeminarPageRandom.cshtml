@@ -91,7 +91,8 @@
             url: '/seminar/' + id,
             type: 'GET',
             dataType: 'json',
-            success: function(result) {
+            success: function (result) {
+                window.localStorage.setItem("seminar" + id, JSON.stringify(result));
                 $("#insertinfo").prepend(
                     "<div class=\"item\">" +
                     "<label class=\"itemName\">" +

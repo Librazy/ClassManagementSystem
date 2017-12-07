@@ -3,7 +3,7 @@
 <head lang="en">
     <meta charset="UTF-8">
     <title>创建话题</title>
-    <link rel="stylesheet" href="./bootstrap.min.css">
+    <link rel="stylesheet" href="~/css/vendor/bootstrap.min.css">
     <link rel="stylesheet" href="~/css/teacher/content.css">
     <link rel="stylesheet" href="~/css/teacher/frame.css">
 </head>
@@ -64,6 +64,11 @@
     var course = getQuery()["course"];
     var seminar = getQuery()["seminar"];
     $(function() {
+        if (window.localStorage.getItem("course" + id)) {
+            var c = JSON.parse(window.localStorage.getItem("course" + id));
+            $(".courseName").text(c.name);
+            $(".courseIntroduction").text(c.description);
+        }
         $("form").attr("action", window.location.href);
         $(".submit").click(function(e) {
             e.preventDefault();

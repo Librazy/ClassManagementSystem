@@ -3,23 +3,23 @@
 <head lang="en">
     <meta charset="UTF-8">
     <title>查看话题</title>
-    <link rel="stylesheet" href="./bootstrap.min.css">
+    <link rel="stylesheet" href="~/css/vendor/bootstrap.min.css">
     <link rel="stylesheet" href="~/css/teacher/content.css">
-  
+
 </head>
 <body>
-    
-        <div class="top">
-          <div class="font">
-            课堂管理系统
-          </div>
-          <div class="icon">
-            <img src="~/Img/home.png">首页
-            <img src="~/Img/help.png">帮助
-            <img src="~/Img/exit.png">退出
-          </div>
-          <div class="clear"></div>
-        </div>
+
+<div class="top">
+    <div class="font">
+        课堂管理系统
+    </div>
+    <div class="icon">
+        <img src="~/Img/home.png">首页
+        <img src="~/Img/help.png">帮助
+        <img src="~/Img/exit.png">退出
+    </div>
+    <div class="clear"></div>
+</div>
 <div class="body">
     <div class="navigation">
         <div class="courseName">OOAD</div>
@@ -33,17 +33,17 @@
             <div class="line"></div>
             <div class="itemBody">
                 <div class="item">
-                    <label class="itemName">题   目 : <span id="name"></span></label>
+                    <label class="itemName">题 目 : <span id="name"></span></label>
                 </div>
-                <div class="item" style="height:40%;">
-                    <label class="itemName">说   明 : <span id="description"></span></label>
+                <div class="item" style="height: 40%;">
+                    <label class="itemName">说 明 : <span id="description"></span></label>
                 </div>
                 <div class="item">
                     <label class="itemName">组数限制: <span id="groupLimit"></span></label>
                 </div>
                 <div class="item">
                     <label class="itemName">组内人数上限: <span id="groupMemberLimit"></span></label>
-                     
+
                 </div>
                 <div class="item">
                     <label class="itemName">已选小组: </label>
@@ -66,6 +66,11 @@
     var course = getQuery()["course"];
     var seminar = getQuery()["seminar"];
     $(function() {
+        if (window.localStorage.getItem("course" + id)) {
+            var c = JSON.parse(window.localStorage.getItem("course" + id));
+            $(".courseName").text(c.name);
+            $(".courseIntroduction").text(c.description);
+        }
         $.ajax({
             url: '/topic/' + id,
             type: 'GET',
@@ -81,7 +86,7 @@
             url: '/topic/' + id + '/group',
             type: 'GET',
             dataType: 'json',
-            success: function (result) {
+            success: function(result) {
                 for (var i = result.length; i--;) {
                     $("#groups").prepend("<li>" + result[i].name + "</li>");
                 }

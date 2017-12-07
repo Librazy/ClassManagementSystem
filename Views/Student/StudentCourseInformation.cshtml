@@ -52,6 +52,16 @@
 <script type="text/javascript">
     var id = getQuery()["id"];
     $(function () {
+         $.ajax({
+            url: '/course/' + id,
+            type: 'GET',
+            dataType: 'json',
+            success: function (result) {
+                window.localStorage.setItem("course" + id, JSON.stringify(result));
+                $(".courseName").text(result.name);
+                $(".courseIntroduction").text(result.description);
+            }
+        });
         $.ajax({
             url: '/course/'+id+"/seminar",
             type: 'GET',
