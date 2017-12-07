@@ -105,7 +105,12 @@
         };
     }
 
-    $(function() {
+    $(function () {
+        if (window.localStorage.getItem("course" + course)) {
+            var c = JSON.parse(window.localStorage.getItem("course" + course));
+            $(".courseName").text(c.name);
+            $(".courseIntroduction").text(c.description);
+        }
         $.ajax({
             url: '/seminar/' + id + '/group',
             type: 'GET',

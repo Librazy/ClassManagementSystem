@@ -78,8 +78,8 @@
 <script type="text/javascript">
     var course = getQuery()["course"];
     $(function() {
-        if (window.localStorage.getItem("course" + id)) {
-            var c = JSON.parse(window.localStorage.getItem("course" + id));
+        if (window.localStorage.getItem("course" + course)) {
+            var c = JSON.parse(window.localStorage.getItem("course" + course));
             $(".courseName").text(c.name);
             $(".courseIntroduction").text(c.description);
         }
