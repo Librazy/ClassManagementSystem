@@ -59,7 +59,7 @@
 <script defer src="~/js/bootstrap.bundle.min.js"></script>
 <script type="text/javascript">
     var id = getQuery()["id"];
-    var course = getQuery()["course"];
+    var course = getQuery()["id"];
     $(function () {
         if (window.localStorage.getItem("course" + course)) {
             var c = JSON.parse(window.localStorage.getItem("course" + course));
