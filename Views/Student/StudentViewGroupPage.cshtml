@@ -61,7 +61,7 @@
     var id = getQuery()["id"];
     $(function() {
         $.ajax({
-            url: '/class/'+id+"/classgroup",
+            url: '/class/' + id + "/classgroup",
             type: 'GET',
             dataType: 'json',
             success: function(result) {
@@ -112,19 +112,19 @@
             }
         });
     });
-    $("#modify").click(function () {
+    $("#modify").click(function() {
         window.location.href = "/Student/Course/Managegroup?id=" + id;
     });
-    $("#skiphome").click(function () {
+    $("#skiphome").click(function() {
         window.location.href = "/Student";
     });
-    $("#skiphelp").click(function () {
+    $("#skiphelp").click(function() {
         alert("需要帮助吗？");
     });
-    $("#skipexit").click(function () {
+    $("#skipexit").click(function() {
         window.location.href = "/Login";
     });
-    $("#returnpage").click(function () {
+    $("#returnpage").click(function() {
         window.location.href = "/Student/Course/Courseinfo?id=" + id;
     });
 </script>

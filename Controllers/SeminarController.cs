@@ -24,6 +24,14 @@ namespace ClassManagementSystem.Controllers
                     {
                         Name = "领域模型与模块"
                     }
+                },
+                Proportions = new Proportions
+                {
+                    A = 20,
+                    B = 70,
+                    C = 10,
+                    Presentation = 40,
+                    Report = 60
                 }
             };
             var s2 = new Seminar(29)
@@ -38,6 +46,14 @@ namespace ClassManagementSystem.Controllers
                     {
                         Name = "界面原型设计"
                     }
+                },
+                Proportions = new Proportions
+                {
+                    A = 20,
+                    B = 70,
+                    C = 10,
+                    Presentation = 40,
+                    Report = 60
                 }
             };
             return Json(seminarId == 1 ? s2 : s1);

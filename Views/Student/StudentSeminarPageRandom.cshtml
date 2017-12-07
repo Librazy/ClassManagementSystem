@@ -91,7 +91,7 @@
             url: '/seminar/' + id,
             type: 'GET',
             dataType: 'json',
-            success: function (result) {
+            success: function(result) {
                 window.localStorage.setItem("seminar" + id, JSON.stringify(result));
                 $("#insertinfo").prepend(
                     "<div class=\"item\">" +
@@ -132,7 +132,7 @@
             }
         });
     });
-    $(function () {
+    $(function() {
         $("form").attr("action", window.location.href);
         $.ajax({
             url: '/group/' + id,

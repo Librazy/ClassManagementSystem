@@ -15,9 +15,9 @@
         课堂管理系统
     </div>
     <div class="icon">
-        <img src="~/img/home.png">首页
-        <img src="~/img/help.png">帮助
-        <img src="~/img/exit.png">退出
+        <a href="/Teacher" style="color: white"><img src="~/img/home.png" alt="">首页</a>
+        <a href="#" style="color: white"><img src="~/img/help.png" alt="">帮助</a>
+        <a href="/Login" style="color: white"><img src="~/img/exit.png" alt="">退出</a>
     </div>
     <div class="clear"></div>
 </div>
@@ -45,7 +45,7 @@
                     <label class="itemName" id="startTime">2017</label><br/>
                     <label class="itemName">结束时间：</label>
                     <label class="itemName" id="endTime">2017</label><br/>
-                    <button class="leftButton">评分</button>
+                    <button class="leftButton" id="grade">评分</button>
                     <button class="middleButton" id="update">修改</button>
                     <button class="rightButton" id="delete">删除讨论课</button>
                 </div>
@@ -105,7 +105,7 @@
                             "&seminar=" +
                             id;
                     } else {
-                        window.location.href = "/Teacher/Seminar/Create?id=" +
+                        window.location.href = "/Teacher/Topic/Create?id=" +
                             $(this).attr("data-topic-id") +
                             "&course=" +
                             course +
@@ -114,6 +114,9 @@
                     }
                 });
             }
+        });
+        $("#grade").click(function() {
+            window.location.href = "/Teacher/Seminar/Score?id=" + id + "&course=" + course;
         });
         $("#update").click(function() {
             window.location.href = "/Teacher/Seminar/Update?id=" + id + "&course=" + course;
@@ -128,6 +131,9 @@
                     }
                 });
             }
+        });
+        $(".returnButton").click(function() {
+            window.history.back();
         });
     });
 </script>

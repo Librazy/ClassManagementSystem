@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>选择课程</title>
     <link href="~/css/student/StudentChooseCoursePage.css" rel="stylesheet" type="text/css"/>
-    
+
 </head>
 <body>
 <div class="top">
@@ -19,7 +19,7 @@
     <div class="clear"></div>
 </div>
 <div class="body">
-    
+
     <div class="navigation">
         <div class="title">导航</div>
         <div class="line"></div>
@@ -39,7 +39,7 @@
                 课程名称：<input type="text" name="course"><input type="submit" value="查询">
             </form>
         </div>
-        
+
     </div>
     <div class="clear"></div>
 </div>
@@ -47,7 +47,7 @@
 <script async src="~/js/tether.min.js"></script>
 <script defer src="~/js/bootstrap.bundle.min.js"></script>
 <script type="text/javascript">
-    $(function () {
+    $(function() {
         //本json中，由于numStudent是通过service层对用户统计得来的，因此统计数据通过常数展示在这里
         $.ajax({
             url: '/class',
@@ -57,30 +57,40 @@
                 for (var i = result.length; i--;) {
                     $("#insertinfo").after(
                         "<div class=\"main_box_right_content\">" +
-                        "<h3 class=\"classtitle\">" + result[i].courseName+
-                        "<button id="+i+">选择课程</button></h3><div class=\"divideline\"></div>"+
-                        "<div class=\"classinfo\">"+
+                        "<h3 class=\"classtitle\">" +
+                        result[i].courseName +
+                        "<button id=" +
+                        i +
+                        ">选择课程</button></h3><div class=\"divideline\"></div>" +
+                        "<div class=\"classinfo\">" +
                         "<table class=\"table\"><tr>" +
-                        "<td class=\"tabletext\">班级：<span>" + result[i].name + "</span></td>" +
-                        "<td class=\"tabletext\">课程地点：" + result[i].site + "</td>" +
-                        "</tr><tr><td class=\"tabletext\">班级人数：" + 60 + "</td>" +
-                        "<td class=\"tabletext\">时间：" + result[i].time +
+                        "<td class=\"tabletext\">班级：<span>" +
+                        result[i].name +
+                        "</span></td>" +
+                        "<td class=\"tabletext\">课程地点：" +
+                        result[i].site +
+                        "</td>" +
+                        "</tr><tr><td class=\"tabletext\">班级人数：" +
+                        60 +
+                        "</td>" +
+                        "<td class=\"tabletext\">时间：" +
+                        result[i].time +
                         "</td></tr></table></div>");
-                    $("#" + i).click(function () {
+                    $("#" + i).click(function() {
                         alert("选课成功");
                     });
                 }
-                
+
             }
         });
     });
-    $("#skiphome").click(function () {
+    $("#skiphome").click(function() {
         window.location.href = "/Student";
     });
-    $("#skiphelp").click(function () {
+    $("#skiphelp").click(function() {
         alert("需要帮助吗？");
     });
-    $("#skipexit").click(function () {
+    $("#skipexit").click(function() {
         window.location.href = "/Login";
     });
 </script>

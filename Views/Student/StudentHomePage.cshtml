@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>学生基本信息</title>
     <link href="~/css/common/HomePage.css" rel="stylesheet" type="text/css"/>
-    
+
 </head>
 <body>
 <div class="top">
@@ -22,16 +22,18 @@
     <div class="navigation">
         <div class="title">导航</div>
         <div class="line"></div>
-        <div class="courseIntroduction"><a class="guidefont" href="~/Student">基本信息</a>
+        <div class="courseIntroduction">
+            <a class="guidefont" href="~/Student">基本信息</a>
             <a class="guidefont" href="~/Student/Course">课程信息</a>
             <a class="guidefont" href="~/Student/Choosecourse">选择课程</a>
         </div>
     </div>
     <div class="content">
-            
+
         <div class="title">基本信息</div>
         <div class="line"></div>
-        <div id="insertinfo" class="imgarea"><img class="img" src="~/img/link.jpg"/>
+        <div id="insertinfo" class="imgarea">
+            <img class="img" src="~/img/link.jpg"/>
         </div>
     </div>
     <div class="clear"></div>
@@ -45,34 +47,50 @@
             url: '/me',
             type: 'GET',
             dataType: 'json',
-            success: function (result) {
+            success: function(result) {
                 $("#insertinfo").after(
-                    "<div class=\"info\">"+
+                    "<div class=\"info\">" +
                     "<table class=\"table\">" +
                     "\<tr class=\"itemName\">" +
-                    "<td>用户名：<span>" + result.phone + "</span ></td >" +
-                    "<td>学号：<span>" + result.number + "</span ></td >" +
-                    "</tr><tr class=\"itemName\"><td>姓名：<span>" + result.name + "</span></td>" +
-                    "<td>性别：<span>" + (result.gender === "male" ? "男" : "女") + "</span ></td >" +
-                    "</tr ><tr class=\"itemName\"><td>学校：<span>"+result.school.name+"</span></td>"+
-                    "<td>学历：<span>" + result.title + "</span></td>" +
-                    "</tr ><tr class=\"itemName\"><td>E-mail：<span>" + result.email + "</span ></td >" +
-                    "<td>联系方式：<span>" + result.phone + "</span ></td >" +
+                    "<td>用户名：<span>" +
+                    result.phone +
+                    "</span ></td >" +
+                    "<td>学号：<span>" +
+                    result.number +
+                    "</span ></td >" +
+                    "</tr><tr class=\"itemName\"><td>姓名：<span>" +
+                    result.name +
+                    "</span></td>" +
+                    "<td>性别：<span>" +
+                    (result.gender === "male" ? "男" : "女") +
+                    "</span ></td >" +
+                    "</tr ><tr class=\"itemName\"><td>学校：<span>" +
+                    result.school.name +
+                    "</span></td>" +
+                    "<td>学历：<span>" +
+                    result.title +
+                    "</span></td>" +
+                    "</tr ><tr class=\"itemName\"><td>E-mail：<span>" +
+                    result.email +
+                    "</span ></td >" +
+                    "<td>联系方式：<span>" +
+                    result.phone +
+                    "</span ></td >" +
                     "</tr ></table>" +
                     "<br/><br/><br/><br/><div id=\"modify\" class=\"button\"><button>修改</button></div></div>");
-                $("#modify").click(function () {
+                $("#modify").click(function() {
                     window.location.href = "/Student/Modify";
                 });
             }
         });
     });
-    $("#skiphome").click(function () {
+    $("#skiphome").click(function() {
         window.location.href = "/Student";
     });
-    $("#skiphelp").click(function () {
+    $("#skiphelp").click(function() {
         alert("需要帮助吗？");
     });
-    $("#skipexit").click(function () {
+    $("#skipexit").click(function() {
         window.location.href = "/Login";
     });
 </script>

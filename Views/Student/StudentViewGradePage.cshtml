@@ -2,7 +2,7 @@
 <html>
 <head lang="en">
     <meta charset="UTF-8">
-	<meta name="viewport"
+    <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>学生查看成绩</title>
@@ -55,12 +55,12 @@
 <script defer src="~/js/bootstrap.bundle.min.js"></script>
 <script type="text/javascript">
     var id = getQuery()["id"];
-    $(function () {
+    $(function() {
         $.ajax({
             url: '/course/' + id + "/grade",
             type: 'GET',
             dataType: 'json',
-            success: function (result) {
+            success: function(result) {
                 for (var i = result.length; i--;) {
                     if (i % 2) {
                         $("#insertinfo").after(
@@ -109,13 +109,13 @@
             }
         });
     });
-    $("#skiphome").click(function () {
+    $("#skiphome").click(function() {
         window.location.href = "/Student";
     });
-    $("#skiphelp").click(function () {
+    $("#skiphelp").click(function() {
         alert("需要帮助吗？");
     });
-    $("#skipexit").click(function () {
+    $("#skipexit").click(function() {
         window.location.href = "/Login";
     });
 </script>

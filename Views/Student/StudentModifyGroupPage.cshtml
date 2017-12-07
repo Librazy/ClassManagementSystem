@@ -2,7 +2,7 @@
 <html>
 <head lang="en">
     <meta charset="UTF-8">
-	<meta name="viewport"
+    <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>学生上传固定分组</title>
@@ -65,17 +65,23 @@
                             <tr>
                                 <td>24320152201111</td>
                                 <td>李四</td>
-                                <td><img src="~/img/home.png"></td>
+                                <td>
+                                    <img src="~/img/home.png">
+                                </td>
                             </tr>
                             <tr class="alt">
                                 <td>24320152202222</td>
                                 <td>李五</td>
-                                <td><img src="~/img/home.png"></td>
+                                <td>
+                                    <img src="~/img/home.png">
+                                </td>
                             </tr>
                             <tr>
                                 <td>24320152203333</td>
                                 <td>李六</td>
-                                <td><img src="~/img/home.png"></td>
+                                <td>
+                                    <img src="~/img/home.png">
+                                </td>
                             </tr>
                         </table>
                     </div>
@@ -93,7 +99,7 @@
     var id = getQuery()["id"];
     $(function() {
         $.ajax({
-            url: '/class/'+id+"/classgroup",
+            url: '/class/' + id + "/classgroup",
             type: 'GET',
             dataType: 'json',
             success: function(result) {
@@ -139,21 +145,21 @@
                                 "<td><img src=\"../../img/home.png\"></td></tr>");
                         }
                     }
-                    
+
                 }
             }
         });
     });
-    $("#skiphome").click(function () {
+    $("#skiphome").click(function() {
         window.location.href = "/Student";
     });
-    $("#skiphelp").click(function () {
+    $("#skiphelp").click(function() {
         alert("需要帮助吗？");
     });
-    $("#skipexit").click(function () {
+    $("#skipexit").click(function() {
         window.location.href = "/Login";
     });
-    $("#returnpage").click(function () {
+    $("#returnpage").click(function() {
         window.location.href = "/Student/Course/Group?id=" + id;
     });
 </script>
