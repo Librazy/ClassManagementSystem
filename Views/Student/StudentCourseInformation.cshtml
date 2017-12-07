@@ -80,11 +80,11 @@
 
                     if (result[i].groupingMethod === "fixed") {
                         $("#" + i).click(function() {
-                            window.location.href = "/Student/Seminar/Fixed?id=" + id;
+                            window.location.href = "/Student/Seminar/Fixed?id=" + id + "&course=" + id;
                         });
                     } else {
                         $("#" + i).click(function() {
-                            window.location.href = "/Student/Seminar/Random?id=" + id;
+                            window.location.href = "/Student/Seminar/Random?id=" + id + "&course=" + id;
                         });
                     }
                 }

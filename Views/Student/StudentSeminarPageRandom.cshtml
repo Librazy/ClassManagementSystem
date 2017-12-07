@@ -86,7 +86,19 @@
 <script defer src="~/js/bootstrap.bundle.min.js"></script>
 <script type="text/javascript">
     var id = getQuery()["id"];
-    $(function() {
+    var course = getQuery()["course"];
+
+    function cb(i) {
+        return function() {
+            window.location.href = "/Student/Seminar/Topic/Random?id=" + i + "&course=" + course + "&seminar" + id;
+        }
+    }
+    $(function () {
+        if (window.localStorage.getItem("course" + course)) {
+            var c = JSON.parse(window.localStorage.getItem("course" + course));
+            $(".courseName").text(c.name);
+            $(".courseIntroduction").text(c.description);
+        }
         $.ajax({
             url: '/seminar/' + id,
             type: 'GET',
@@ -124,9 +136,7 @@
                         "</div>" +
                         "</div>"
                     );
-                    $("#" + i).click(function() {
-                        window.location.href = "/Student/Seminar/Topic/Random?id=" + id;
-                    });
+                    $("#" + i).click(cb(i));
                 }
 
             }

@@ -59,7 +59,13 @@
 <script defer src="~/js/bootstrap.bundle.min.js"></script>
 <script type="text/javascript">
     var id = getQuery()["id"];
-    $(function() {
+    var course = getQuery()["course"];
+    $(function () {
+        if (window.localStorage.getItem("course" + course)) {
+            var c = JSON.parse(window.localStorage.getItem("course" + course));
+            $(".courseName").text(c.name);
+            $(".courseIntroduction").text(c.description);
+        }
         $.ajax({
             url: '/class/' + id + "/classgroup",
             type: 'GET',
@@ -113,7 +119,7 @@
         });
     });
     $("#modify").click(function() {
-        window.location.href = "/Student/Course/Managegroup?id=" + id;
+        window.location.href = "/Student/Course/Managegroup?id=" + id + "&course=" + course;
     });
     $("#skiphome").click(function() {
         window.location.href = "/Student";
@@ -125,7 +131,7 @@
         window.location.href = "/Login";
     });
     $("#returnpage").click(function() {
-        window.location.href = "/Student/Course/Courseinfo?id=" + id;
+        window.location.href = "/Student/Course/Courseinfo?id=" + course;
     });
 </script>
 </body>

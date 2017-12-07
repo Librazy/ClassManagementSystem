@@ -42,7 +42,14 @@
 <script defer src="~/js/bootstrap.bundle.min.js"></script>
 <script type="text/javascript">
     var id = getQuery()["id"];
-    $(function() {
+    var course = getQuery()["course"];
+    var seminar = getQuery()["seminar"];
+    $(function () {
+        if (window.localStorage.getItem("course" + course)) {
+            var c = JSON.parse(window.localStorage.getItem("course" + course));
+            $(".courseName").text(c.name);
+            $(".courseIntroduction").text(c.description);
+        }
         $.ajax({
             url: '/Topic/' + id,
             type: 'GET',
@@ -73,7 +80,7 @@
                     "<div id=\"choosetopic\" class=\"modifyButton\">选择话题</div></div></div>"
                 );
                 $("#choosetopic").click(function() {
-                    window.location.href = "/Student/Seminar/Fixed?id=" + id;
+                    window.location.href = "/Student/Seminar/Fixed?id=" + seminar + "&course=" + course;
                 });
             }
         });
@@ -88,7 +95,7 @@
         window.location.href = "/Login";
     });
     $("#returnpage").click(function() {
-        window.location.href = "/Student/Seminar/Fixed?id=" + id;
+        window.location.href = "/Student/Seminar/Fixed?id=" + seminar + "&course=" + course;
     });
 </script>
 </body>
