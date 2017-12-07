@@ -31,7 +31,7 @@
     <div class="content">
         <div class="title">课程信息</div>
         <hr class="line" id="courses"/>
-        <div class="main_box_right_content">
+        <div class="main_box_right_content courseinfo">
             <img class="addcourse" src="~/img/add.png" alt="">
         </div>
     </div>
@@ -85,10 +85,10 @@
             success: function(result) {
                 for (var i = result.length; i--;) {
                     $("#courses").after(
-                        "<div class=\"main_box_right_content courseinfo\" data-course-id=" +
-                        i +
-                        "><h3 class=\"classtitle\" data-course-id=" +
-                        i +
+                        "<div class=\"main_box_right_content courseinfo\" style=\"font:1rem\" data-course-id=" +
+                        result[i].id +
+                        "><h3 class=\"classtitle\" style=\"height:35%\" data-course-id=" +
+                        result[i].id +
                         ">" +
                         result[i].name +
                         "<button class=\"delete\">删除课程</button> <button class=\"update\">修改课程</button></h3><div class=\"divideline\"></div><div  class=\"classinfo\"><table class=\"table\"><tr><td>班级数：<span>" +
@@ -101,8 +101,13 @@
                         result[i].endTime +
                         "</td></tr></table></div></div>");
                 }
-                $(".courseinfo").click(function() {
-                    window.location.href = "/Teacher/Course/Courseinfo?id=" + $(this).attr("data-course-id");
+                $(".courseinfo").click(function () {
+                    if ($(this).attr("data-course-id")) {
+                        window.location.href = "/Teacher/Course/Courseinfo?id=" + $(this).attr("data-course-id");
+                    } else {
+                        window.location.href = "/Teacher/Course/Create";
+
+                    }
                 });
                 $('.update').click(function(e) {
                     e.stopPropagation();

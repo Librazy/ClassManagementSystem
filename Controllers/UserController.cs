@@ -26,7 +26,8 @@ namespace ClassManagementSystem.Controllers
                     City = "厦门"
                 },
                 Email = "23320152202333@stu.xmu.edu.cn",
-                Title = "本科"
+                Title = "本科",
+                Avatar = "/upload/avatar/Logo_Li.png"
             };
 
             return Json(u1);
