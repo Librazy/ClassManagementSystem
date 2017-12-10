@@ -71,11 +71,14 @@
 <script src="~/js/query.js"></script>
 <script src="~/js/jquery.min.js"></script>
 <script type="text/javascript">
+    var token = window.localStorage.getItem("jwt");
+
     $(function() {
         $.ajax({
             url: '/me',
             type: 'GET',
             dataType: 'json',
+            headers: {"Authorization": "Bearer " + token},
             success: function(result) {
                 $("#name").text(result.name);
                 $("#phone").text(result.phone);
