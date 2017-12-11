@@ -7,6 +7,7 @@ using System.Security.Claims;
 using System.Security.Cryptography;
 using Microsoft.AspNetCore.Cryptography.KeyDerivation;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Serialization;
 
 namespace ClassManagementSystem.Controllers
@@ -71,7 +72,8 @@ namespace ClassManagementSystem.Controllers
 
         public static JsonSerializerSettings Ignoring(params string[] strs) => new JsonSerializerSettings
         {
-            ContractResolver = new ShouldSerializeContractResolver(new List<string>(strs))
+            ContractResolver = new ShouldSerializeContractResolver(new List<string>(strs)),
+            Converters = new List<JsonConverter> { new StringEnumConverter() }
         };
 
         public class ShouldSerializeContractResolver : DefaultContractResolver
