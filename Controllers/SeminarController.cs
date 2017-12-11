@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using ClassManagementSystem.Models;
 using Microsoft.AspNetCore.Mvc;
-using static ClassManagementSystem.Controllers.Util;
+using static ClassManagementSystem.Controllers.Utils;
 
 namespace ClassManagementSystem.Controllers
 {

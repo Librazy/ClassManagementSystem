@@ -7,6 +7,8 @@ using ClassManagementSystem.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using static ClassManagementSystem.Controllers.Utils;
 
 namespace ClassManagementSystem.Controllers
 {
@@ -25,12 +27,12 @@ namespace ClassManagementSystem.Controllers
         [HttpGet("/me")]
         public async Task<IActionResult> GetCurrentUser()
         {
-            var user = await _db.Users.FindAsync(User.Id());
+            var user = await _db.Users.Include(u => u.School).SingleOrDefaultAsync(u => u.Id == User.Id());
             if (user == null)
             {
                 return StatusCode(404, new { msg = "用户不存在" });
             }
-            return Json(user);
+            return Json(user, Ignoring("City", "Province"));
         }
 
         [HttpPut("/me")]

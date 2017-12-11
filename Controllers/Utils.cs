@@ -2,11 +2,14 @@
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
+using System.Reflection;
 using System.Security.Claims;
 using System.Security.Cryptography;
 using Microsoft.AspNetCore.Cryptography.KeyDerivation;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 
-namespace ClassManagementSystem
+namespace ClassManagementSystem.Controllers
 {
     public static class Utils
     {
@@ -64,6 +67,39 @@ namespace ClassManagementSystem
                 diff |= (uint) (a[i] ^ b[i]);
             }
             return diff == 0;
+        }
+
+        public static JsonSerializerSettings Ignoring(params string[] strs) => new JsonSerializerSettings
+        {
+            ContractResolver = new ShouldSerializeContractResolver(new List<string>(strs))
+        };
+
+        public class ShouldSerializeContractResolver : DefaultContractResolver
+        {
+            private readonly List<string> _ignored;
+
+            public ShouldSerializeContractResolver(List<string> ignored)
+            {
+                NamingStrategy = new CamelCaseNamingStrategy
+                {
+                    ProcessDictionaryKeys = true,
+                    OverrideSpecifiedNames = true
+                };
+                _ignored = ignored;
+            }
+
+            protected override JsonProperty CreateProperty(MemberInfo member, MemberSerialization memberSerialization)
+            {
+                var property = base.CreateProperty(member, memberSerialization);
+                if (_ignored.Any(s =>
+                    s.EndsWith('*')
+                        ? property.PropertyName.StartsWith(s.TrimEnd('*'), StringComparison.InvariantCultureIgnoreCase)
+                        : property.PropertyName.Equals(s, StringComparison.InvariantCultureIgnoreCase)))
+                {
+                    property.Ignored = true;
+                }
+                return property;
+            }
         }
     }
 }

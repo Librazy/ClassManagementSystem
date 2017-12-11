@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
+using ClassManagementSystem.Controllers;
 using ClassManagementSystem.Models;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
@@ -30,6 +31,8 @@ namespace ClassManagementSystem
                             Province = "福建"
                         });
 
+                        await db.SaveChangesAsync();
+
                         await db.Users.AddAsync(new User(0)
                         {
                             Avatar = "/upload/avatar/Logo_Li.png",
@@ -39,7 +42,7 @@ namespace ClassManagementSystem
                             Number = "123456",
                             Password = Utils.HashString("123"),
                             Phone = "1234",
-                            School = school.Entity,
+                            School = await db.Schools.FindAsync(school.Entity.Id),
                             Title = "大一",
                             Type = User.UserType.Student
                         });
@@ -53,7 +56,7 @@ namespace ClassManagementSystem
                             Number = "134254",
                             Password = Utils.HashString("456"),
                             Phone = "123",
-                            School = school.Entity,
+                            School = await db.Schools.FindAsync(school.Entity.Id),
                             Title = "教授",
                             Type = User.UserType.Teacher
                         });

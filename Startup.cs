@@ -3,6 +3,7 @@ using System.Collections.ObjectModel;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Text;
+using ClassManagementSystem.Controllers;
 using ClassManagementSystem.Models;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
@@ -13,6 +14,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.Net.Http.Headers;
+using Newtonsoft.Json.Converters;
 
 namespace ClassManagementSystem
 {
@@ -155,7 +157,9 @@ namespace ClassManagementSystem
                 services.AddDbContext<CrmsContext>(options => options.UseInMemoryDatabase("CRMS"));
             }
 
-            services.AddMvc();
+            services.AddMvc().AddJsonOptions(
+                option => { option.SerializerSettings.Converters.Add(new StringEnumConverter()); }
+            );
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
