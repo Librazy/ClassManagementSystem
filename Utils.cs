@@ -24,6 +24,20 @@ namespace ClassManagementSystem
             }
         }
 
+        public static Tuple<byte[], byte[]> ReadHashString(string hash)
+        {
+            var part = hash.Split('$');
+            var salts = Convert.FromBase64String(part[0]);
+            var hashs = Convert.FromBase64String(part[1]);
+            return Tuple.Create(salts, hashs);
+        }
+
+        public static string HashString(string password)
+        {
+            var salt = GenerateSalt();
+            return Convert.ToBase64String(salt) + "$" + Convert.ToBase64String(Hash(password, salt));
+        }
+
         public static string HashString(string password, byte[] salt) =>
             Convert.ToBase64String(salt) + "$" + Convert.ToBase64String(Hash(password, salt));
 
@@ -36,8 +50,11 @@ namespace ClassManagementSystem
                 10000,
                 256 / 8);
 
-        public static bool IsExpectedPassword(string password, byte[] salt, byte[] expectedHash) => 
+        public static bool IsExpectedPassword(string password, byte[] salt, byte[] expectedHash) =>
             ConstantTimeEquals(Hash(password, salt), expectedHash);
+
+        internal static bool IsExpectedPassword(string password, Tuple<byte[], byte[]> tuple) =>
+            IsExpectedPassword(password, tuple.Item1, tuple.Item2);
 
         private static bool ConstantTimeEquals(IReadOnlyList<byte> a, IReadOnlyList<byte> b)
         {

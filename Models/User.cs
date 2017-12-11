@@ -7,23 +7,23 @@ namespace ClassManagementSystem.Models
 {
     public class User
     {
+        public enum GenderType
+        {
+            [EnumMember(Value = "male")] Male,
+            [EnumMember(Value = "female")] Female
+        }
+
         public enum UserType
         {
             [EnumMember(Value = "student")] Student,
             [EnumMember(Value = "teacher")] Teacher,
-            [EnumMember(Value = "unbinded")] Unbinded,
-
+            [EnumMember(Value = "unbinded")] Unbinded
         }
 
-        public enum GenderType
-        {
-            [EnumMember(Value = "male")] Male,
-            [EnumMember(Value = "female")] Female,
-        }
+        public User(long id) => Id = id;
 
-        public User(long id)
+        public User()
         {
-            Id = id;
         }
 
         [Key]

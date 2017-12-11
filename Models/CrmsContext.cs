@@ -47,7 +47,8 @@ namespace ClassManagementSystem.Models
                 .HasAlternateKey(u => u.Phone);
 
             modelBuilder.Entity<User>()
-                .HasAlternateKey(u => u.UnionId);
+                .HasIndex(u => u.UnionId)
+                .IsUnique();
         }
     }
 }
