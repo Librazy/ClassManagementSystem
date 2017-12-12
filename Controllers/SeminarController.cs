@@ -12,7 +12,7 @@ namespace ClassManagementSystem.Controllers
         [HttpGet("/seminar/{seminarId:long}")]
         public IActionResult GetSeminarByIdRandom([FromRoute] long seminarId)
         {
-            var s1 = new Seminar(32)
+            var s1 = new Seminar
             {
                 Name = "概要设计",
                 Description = "模型层与数据库设计",
@@ -20,7 +20,7 @@ namespace ClassManagementSystem.Controllers
                 EndTime = "2017-10-24",
                 Topics = new List<Topic>
                 {
-                    new Topic(257)
+                    new Topic
                     {
                         Name = "领域模型与模块"
                     }
@@ -34,7 +34,7 @@ namespace ClassManagementSystem.Controllers
                     Report = 60
                 }
             };
-            var s2 = new Seminar(29)
+            var s2 = new Seminar
             {
                 Name = "界面原型设计",
                 Description = "界面原型设计",
@@ -42,7 +42,7 @@ namespace ClassManagementSystem.Controllers
                 EndTime = "2017-10-09",
                 Topics = new List<Topic>
                 {
-                    new Topic(344)
+                    new Topic
                     {
                         Name = "界面原型设计"
                     }
@@ -86,7 +86,7 @@ namespace ClassManagementSystem.Controllers
         [HttpGet("/seminar/{seminarId:long}/group")]
         public IActionResult GetGroupsBySeminarId([FromRoute] long seminarId)
         {
-            var ta = new Topic(3)
+            var ta = new Topic
             {
                 Description = "Topic Topic A A",
                 Name = "Topic A",
@@ -94,7 +94,7 @@ namespace ClassManagementSystem.Controllers
                 GroupMemberLimit = 4,
                 Serial = "A"
             };
-            var tb = new Topic(5)
+            var tb = new Topic
             {
                 Description = "Topic Topic B B",
                 Name = "Topic B",
@@ -104,7 +104,7 @@ namespace ClassManagementSystem.Controllers
             };
             return Json(new List<Group>
             {
-                new Group(0)
+                new Group
                 {
                     Name = "1A1",
                     Grade = new GroupGrade
@@ -116,14 +116,14 @@ namespace ClassManagementSystem.Controllers
                         },
                         ReportGrade = 5
                     },
-                    Leader = new User(34) {Type = Models.User.UserType.Student, Name = "伊艾一"},
+                    Leader = new User {Type = Models.User.UserType.Student, Name = "伊艾一"},
                     Topics = new List<Topic>
                     {
                         ta
                     },
                     Report = "/upload/report/0_3.pdf"
                 },
-                new Group(1)
+                new Group
                 {
                     Name = "1A2",
                     Grade = new GroupGrade
@@ -135,13 +135,13 @@ namespace ClassManagementSystem.Controllers
                         },
                         ReportGrade = 5
                     },
-                    Leader = new User(45) {Type = Models.User.UserType.Student, Name = "伊艾尔"},
+                    Leader = new User {Type = Models.User.UserType.Student, Name = "伊艾尔"},
                     Topics = new List<Topic>
                     {
                         ta
                     }
                 },
-                new Group(2)
+                new Group
                 {
                     Name = "2B1",
                     Grade = new GroupGrade
@@ -153,7 +153,7 @@ namespace ClassManagementSystem.Controllers
                         },
                         ReportGrade = 5
                     },
-                    Leader = new User(435) {Type = Models.User.UserType.Student, Name = "贰碧一"},
+                    Leader = new User {Type = Models.User.UserType.Student, Name = "贰碧一"},
                     Topics = new List<Topic>
                     {
                         tb

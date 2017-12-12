@@ -9,11 +9,6 @@ namespace ClassManagementSystem.Models
 {
     public class School
     {
-        public School()
-        {
-            Id = 0;
-        }
-
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Column("id", TypeName = "BIGINT(20)")]

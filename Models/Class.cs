@@ -13,12 +13,7 @@ namespace ClassManagementSystem.Models
 
     public class Class
     {
-        public Class(long id)
-        {
-            Id = id;
-        }
-
-        public long Id { get; }
+        public long Id { get; protected set; }
 
         public int NumStudent => Students.Count;
 

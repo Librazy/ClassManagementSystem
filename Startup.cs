@@ -150,11 +150,12 @@ namespace ClassManagementSystem
             if (!_hostingEnvironment.IsDevelopment())
             {
                 _connString = Configuration.GetConnectionString("MYSQL57");
-                services.AddDbContext<CrmsContext>(options => options.UseMySql(_connString));
+                services.AddDbContextPool<CrmsContext>(options => options.UseMySql(_connString));
             }
             else
             {
-                services.AddDbContext<CrmsContext>(options => options.UseInMemoryDatabase("CRMS"));
+                //$env:ASPNETCORE_ENVIRONMENT="Production"
+                services.AddDbContextPool<CrmsContext>(options => options.UseInMemoryDatabase("CRMS"));
             }
 
             services.AddMvc().AddJsonOptions(

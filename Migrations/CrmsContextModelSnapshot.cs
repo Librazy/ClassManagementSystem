@@ -43,6 +43,7 @@ namespace ClassManagementSystem.Migrations
                         .ValueGeneratedOnAdd();
 
                     b.Property<DateTime>("gmt_modified")
+                        .IsConcurrencyToken()
                         .ValueGeneratedOnAddOrUpdate();
 
                     b.HasKey("Id");
@@ -93,11 +94,10 @@ namespace ClassManagementSystem.Migrations
                         .HasColumnType("VARCHAR(11)");
 
                     b.Property<int>("Type")
-                        .HasColumnName("is_male")
+                        .HasColumnName("is_student")
                         .HasColumnType("TINYINT(1)");
 
                     b.Property<string>("UnionId")
-                        .IsRequired()
                         .HasColumnName("wechat_id")
                         .HasColumnType("VARCHAR(50)");
 
@@ -105,6 +105,7 @@ namespace ClassManagementSystem.Migrations
                         .ValueGeneratedOnAdd();
 
                     b.Property<DateTime>("gmt_modified")
+                        .IsConcurrencyToken()
                         .ValueGeneratedOnAddOrUpdate();
 
                     b.Property<long?>("school_id");
@@ -119,8 +120,8 @@ namespace ClassManagementSystem.Migrations
 
                     b.HasAlternateKey("Phone");
 
-
-                    b.HasAlternateKey("UnionId");
+                    b.HasIndex("UnionId")
+                        .IsUnique();
 
                     b.HasIndex("school_id");
 

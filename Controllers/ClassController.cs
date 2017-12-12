@@ -12,7 +12,7 @@ namespace ClassManagementSystem.Controllers
         [HttpGet("/class")]
         public IActionResult GetUserClasses()
         {
-            var c1 = new Class(23)
+            var c1 = new Class
             {
                 Name= "周三1-2节",
                 Site="公寓405",
@@ -21,7 +21,7 @@ namespace ClassManagementSystem.Controllers
                 Teacher="邱明",
                 Time= "周三1-2、周五1-2"  
             };
-            var c2 = new Class(42)
+            var c2 = new Class
             {
                 Name = "一班",
                 Site = "海韵202",
@@ -41,7 +41,7 @@ namespace ClassManagementSystem.Controllers
         [HttpGet("/class/{classId:long}")]
         public IActionResult GetClassById([FromRoute] long classId)
         {
-            var c2 = new Class(42)
+            var c2 = new Class
             {
                 Name = "一班",
                 Site = "海韵202",

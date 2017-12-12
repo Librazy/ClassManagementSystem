@@ -17,7 +17,7 @@ namespace ClassManagementSystem.Models
         {
             modelBuilder.Entity<School>()
                 .Property<DateTime>("gmt_modified")
-                .ValueGeneratedOnAddOrUpdate();
+                .IsRowVersion();
 
             modelBuilder.Entity<School>()
                 .Property<DateTime>("gmt_create")
@@ -28,7 +28,7 @@ namespace ClassManagementSystem.Models
 
             modelBuilder.Entity<User>()
                 .Property<DateTime>("gmt_modified")
-                .ValueGeneratedOnAddOrUpdate();
+                .IsRowVersion();
 
             modelBuilder.Entity<User>()
                 .Property<DateTime>("gmt_create")

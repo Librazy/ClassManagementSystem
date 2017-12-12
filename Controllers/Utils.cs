@@ -14,11 +14,14 @@ namespace ClassManagementSystem.Controllers
 {
     public static class Utils
     {
+        private static readonly List<JsonConverter> _StringEnumConverter =
+            new List<JsonConverter> {new StringEnumConverter()};
+
         public static JwtHeader JwtHeader { get; set; }
 
         public static long Id(this ClaimsPrincipal user) => long.Parse(user.Claims.Single(c => c.Type == "id").Value);
 
-        public static byte[] GenerateSalt(int saltSize = 15)
+        public static byte[] GenerateSalt(int saltSize = 3)
         {
             using (var rng = new RNGCryptoServiceProvider())
             {
@@ -30,20 +33,19 @@ namespace ClassManagementSystem.Controllers
 
         public static Tuple<byte[], byte[]> ReadHashString(string hash)
         {
-            var part = hash.Split('$');
-            var salts = Convert.FromBase64String(part[0]);
-            var hashs = Convert.FromBase64String(part[1]);
+            var salts = Convert.FromBase64String(hash.Substring(0, 4));
+            var hashs = Convert.FromBase64String(hash.Substring(5));
             return Tuple.Create(salts, hashs);
         }
 
         public static string HashString(string password)
         {
             var salt = GenerateSalt();
-            return Convert.ToBase64String(salt) + "$" + Convert.ToBase64String(Hash(password, salt));
+            return Convert.ToBase64String(salt) + Convert.ToBase64String(Hash(password, salt));
         }
 
         public static string HashString(string password, byte[] salt) =>
-            Convert.ToBase64String(salt) + "$" + Convert.ToBase64String(Hash(password, salt));
+            Convert.ToBase64String(salt) + Convert.ToBase64String(Hash(password, salt));
 
 
         public static byte[] Hash(string password, byte[] salt) =>
@@ -52,7 +54,7 @@ namespace ClassManagementSystem.Controllers
                 salt,
                 KeyDerivationPrf.HMACSHA256,
                 10000,
-                256 / 8);
+                9);
 
         public static bool IsExpectedPassword(string password, byte[] salt, byte[] expectedHash) =>
             ConstantTimeEquals(Hash(password, salt), expectedHash);
@@ -72,28 +74,45 @@ namespace ClassManagementSystem.Controllers
 
         public static JsonSerializerSettings Ignoring(params string[] strs) => new JsonSerializerSettings
         {
-            ContractResolver = new ShouldSerializeContractResolver(new List<string>(strs)),
-            Converters = new List<JsonConverter> { new StringEnumConverter() }
+            ContractResolver = ShouldSerializeContractResolverFactory.Get(new HashSet<string>(strs)),
+            Converters = _StringEnumConverter
         };
+
+        public static class ShouldSerializeContractResolverFactory
+        {
+            private static readonly SortedDictionary<HashSet<string>, ShouldSerializeContractResolver> _Instances =
+                new SortedDictionary<HashSet<string>, ShouldSerializeContractResolver>(
+                    Comparer<HashSet<string>>.Create((a, b) =>
+                        a.IsProperSubsetOf(b)
+                            ? 1
+                            : (a.IsProperSupersetOf(b) ? -1 : 0)));
+
+            public static ShouldSerializeContractResolver Get(HashSet<string> ignored)
+            {
+                _Instances.TryGetValue(ignored, out var v);
+                return v ?? new ShouldSerializeContractResolver(ignored, _Instances);
+            }
+        }
 
         public class ShouldSerializeContractResolver : DefaultContractResolver
         {
-            private readonly List<string> _ignored;
+            internal readonly HashSet<string> Ignored;
 
-            public ShouldSerializeContractResolver(List<string> ignored)
+            public ShouldSerializeContractResolver(HashSet<string> ignored, SortedDictionary<HashSet<string>, ShouldSerializeContractResolver> ins)
             {
                 NamingStrategy = new CamelCaseNamingStrategy
                 {
                     ProcessDictionaryKeys = true,
                     OverrideSpecifiedNames = true
                 };
-                _ignored = ignored;
+                Ignored = ignored;
+                ins.Add(ignored, this);
             }
 
             protected override JsonProperty CreateProperty(MemberInfo member, MemberSerialization memberSerialization)
             {
                 var property = base.CreateProperty(member, memberSerialization);
-                if (_ignored.Any(s =>
+                if (Ignored.Any(s =>
                     s.EndsWith('*')
                         ? property.PropertyName.StartsWith(s.TrimEnd('*'), StringComparison.InvariantCultureIgnoreCase)
                         : property.PropertyName.Equals(s, StringComparison.InvariantCultureIgnoreCase)))

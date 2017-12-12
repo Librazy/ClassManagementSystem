@@ -23,14 +23,9 @@ namespace ClassManagementSystem.Models
 
     public class Group
     {
-        public Group(long id)
-        {
-            Id = id;
-        }
-
         public string Name { get; set; }
 
-        public long Id { get; }
+        public long Id { get; protected set; }
 
         public User Leader { get; set; }
 

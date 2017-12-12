@@ -12,21 +12,21 @@ namespace ClassManagementSystem.Controllers
         [HttpGet("/course")]
         public IActionResult GetUserCourses()
         {
-            var c1 = new Course(0)
+            var c1 = new Course
             {
                 Name = "OOAD",
                 Description = "Description",
                 EndTime = "2017-12-31",
                 StartTime = "2017-10-01",
-                Classes = new List<Class> { new Class(1), new Class(2), new Class(3) }
+                Classes = new List<Class> { new Class(), new Class(), new Class() }
             };
-            var c2 = new Course(1)
+            var c2 = new Course
             {
                 Name = "J2EE",
                 Description = "Description",
                 EndTime = "2017-12-31",
                 StartTime = "2017-10-01",
-                Classes = new List<Class> { new Class(1), new Class(2) }
+                Classes = new List<Class> { new Class(), new Class() }
             };
             return Json(new List<Course> { c1, c2 }, Ignoring("Classes", "Proportions", "TeacherName", "Teacher", "TeacherEmail", "Seminars"));
         }
@@ -40,21 +40,21 @@ namespace ClassManagementSystem.Controllers
         [HttpGet("/course/{courseId:long}")]
         public IActionResult GetCourseById([FromRoute] long courseId)
         {
-            var c1 = new Course(0)
+            var c1 = new Course
             {
                 Name = "OOAD",
                 Description = "Description",
                 EndTime = "2018-1-15",
                 StartTime = "2017-10-01",
-                Classes = new List<Class> { new Class(1), new Class(2), new Class(3) }
+                Classes = new List<Class> { new Class(), new Class(), new Class() }
             };
-            var c2 = new Course(1)
+            var c2 = new Course
             {
                 Name = "J2EE",
                 Description = "Description",
                 EndTime = "2017-12-31",
                 StartTime = "2017-10-01",
-                Classes = new List<Class> { new Class(1), new Class(2) }
+                Classes = new List<Class> { new Class(), new Class() }
             };
             return Json(courseId == 0 ? c1 : c2, Ignoring("Classes", "Proportions", "Teacher", "Seminars"));
         }
@@ -74,11 +74,11 @@ namespace ClassManagementSystem.Controllers
         [HttpGet("/course/{courseId:long}/class")]
         public IActionResult GetClassesByCourseId([FromRoute] long courseId)
         {
-            var c1 = new Class(1)
+            var c1 = new Class
             {
                 Name = "周三1-2"
             };
-            var c2 = new Class(1)
+            var c2 = new Class
             {
                 Name = "周三910"
             };
@@ -94,7 +94,7 @@ namespace ClassManagementSystem.Controllers
         [HttpGet("/course/{courseId:long}/seminar")]
         public IActionResult GetSeminarsByCourseId([FromRoute] long courseId)
         {
-            var s1 = new Seminar(29)
+            var s1 = new Seminar
             {
                 Name = "界面原型设计",
                 Description = "界面原型设计",
@@ -102,7 +102,7 @@ namespace ClassManagementSystem.Controllers
                 StartTime = "2017-09-25",
                 EndTime = "2017-10-09",
             };
-            var s2 = new Seminar(32)
+            var s2 = new Seminar
             {
                 Name = "概要设计",
                 Description = "模型层与数据库设计",
@@ -122,7 +122,7 @@ namespace ClassManagementSystem.Controllers
         [HttpGet("/course/{courseId:long}/grade")]
         public IActionResult GetGradeByCourseId([FromRoute] long courseId)
         {
-            var gd1 = new Grade(1)
+            var gd1 = new Grade
             {
                 SeminarName="需求分析",
                 GroupName="3A2",
@@ -131,7 +131,7 @@ namespace ClassManagementSystem.Controllers
                 ReportGrade=4,
                 FinalGrade=4
             };
-            var gd2 = new Grade(2)
+            var gd2 = new Grade
             {
                 SeminarName="界面原型设计",
                 GroupName="3A3",

@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace ClassManagementSystem.Migrations
 {
-    public partial class INIT : Migration
+    public partial class Init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -41,7 +41,8 @@ namespace ClassManagementSystem.Migrations
                     user_password = table.Column<string>(type: "VARCHAR(16)", nullable: true),
                     phone_number = table.Column<string>(type: "CHAR(11)", nullable: false),
                     title = table.Column<string>(type: "VARCHAR(11)", nullable: true),
-                    wechat_id = table.Column<string>(type: "VARCHAR(50)", nullable: false),
+                    is_student = table.Column<int>(type: "TINYINT(1)", nullable: false),
+                    wechat_id = table.Column<string>(type: "VARCHAR(50)", nullable: true),
                     gmt_create = table.Column<DateTime>(nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     gmt_modified = table.Column<DateTime>(nullable: false),
@@ -53,7 +54,6 @@ namespace ClassManagementSystem.Migrations
                     table.UniqueConstraint("AK_Users_email", x => x.email);
                     table.UniqueConstraint("AK_Users_number", x => x.number);
                     table.UniqueConstraint("AK_Users_phone_number", x => x.phone_number);
-                    table.UniqueConstraint("AK_Users_wechat_id", x => x.wechat_id);
                     table.ForeignKey(
                         name: "FK_Users_Schools_school_id",
                         column: x => x.school_id,
@@ -61,6 +61,12 @@ namespace ClassManagementSystem.Migrations
                         principalColumn: "id",
                         onDelete: ReferentialAction.Restrict);
                 });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Users_wechat_id",
+                table: "Users",
+                column: "wechat_id",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_Users_school_id",

@@ -7,12 +7,7 @@ namespace ClassManagementSystem.Models
 {
     public class Topic
     {
-        public Topic(long id)
-        {
-            Id = id;
-        }
-
-        public long Id { get; }
+        public long Id { get; protected set; }
 
         public string Name { get; set; }
 

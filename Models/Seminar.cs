@@ -7,12 +7,7 @@ namespace ClassManagementSystem.Models
 {
     public class Seminar
     {
-        public Seminar(long id)
-        {
-            Id = id;
-        }
-
-        public long Id { get; }
+        public long Id { get; protected set; }
 
         public string Name { get; set; }
 

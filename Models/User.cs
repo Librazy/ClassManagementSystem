@@ -5,6 +5,7 @@ using Newtonsoft.Json;
 
 namespace ClassManagementSystem.Models
 {
+    [Table("user_info")]
     public class User
     {
         public enum GenderType
@@ -20,17 +21,11 @@ namespace ClassManagementSystem.Models
             [EnumMember(Value = "unbinded")] Unbinded
         }
 
-        public User(long id) => Id = id;
-
-        public User()
-        {
-        }
-
         [Key]
         [Column("id", TypeName = "BIGINT(20)")]
         public long Id { get; protected set; }
 
-        [Column("is_male", TypeName = "TINYINT(1)")]
+        [Column("is_student", TypeName = "TINYINT(1)")]
         public UserType Type { get; set; }
 
         [Column("number", TypeName = "VARCHAR(20)")]

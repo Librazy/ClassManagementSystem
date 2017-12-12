@@ -5,18 +5,13 @@ namespace ClassManagementSystem.Models
 {
     public class Course
     {
-        public Course(long id)
-        {
-            Id = id;
-        }
-
-        public long Id { get; }
+        public long Id { get; protected set; }
 
         public string Name { get; set; }
 
         public int NumClass => Classes.Count;
 
-        public User Teacher { get; set; } = new User(0) {Type = User.UserType.Teacher};
+        public User Teacher { get; set; } = new User {Type = User.UserType.Teacher};
 
         public string TeacherName => Teacher.Name;
 

@@ -7,12 +7,7 @@ namespace ClassManagementSystem.Models
 {
     public class Grade
     {
-        public Grade(long id)
-        {
-            Id = id;
-        }
-
-        public long Id { get; set; }
+        public long Id { get; protected set; }
 
         public string SeminarName { get; set; }
 
