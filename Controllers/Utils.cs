@@ -1,11 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Reflection;
 using System.Security.Claims;
 using System.Security.Cryptography;
+using System.Text;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Cryptography.KeyDerivation;
+using Microsoft.AspNetCore.Http;
+using Microsoft.IdentityModel.Tokens;
+using Microsoft.Net.Http.Headers;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Serialization;
@@ -70,6 +77,79 @@ namespace ClassManagementSystem.Controllers
                 diff |= (uint) (a[i] ^ b[i]);
             }
             return diff == 0;
+        }
+
+
+        internal static async Task OnChallenge(JwtBearerChallengeContext eventContext)
+        {
+            if (eventContext.AuthenticateFailure != null)
+            {
+                if (string.IsNullOrEmpty(eventContext.Error) && string.IsNullOrEmpty(eventContext.ErrorDescription) && string.IsNullOrEmpty(eventContext.ErrorUri))
+                {
+                    eventContext.Response.Headers.Append(HeaderNames.WWWAuthenticate, eventContext.Options.Challenge);
+                }
+                else
+                {
+                    // https://tools.ietf.org/html/rfc6750#section-3.1
+                    // WWW-Authenticate: Bearer realm="example", error="invalid_token", error_description="The access token expired"
+                    var builder = new StringBuilder(eventContext.Options.Challenge);
+                    if (eventContext.Options.Challenge.IndexOf(" ", StringComparison.Ordinal) > 0)
+                    {
+                        // Only add a comma after the first param, if any
+                        builder.Append(',');
+                    }
+                    if (!string.IsNullOrEmpty(eventContext.Error))
+                    {
+                        builder.Append(" error=\"");
+                        builder.Append(eventContext.Error);
+                        builder.Append("\"");
+                    }
+                    if (!string.IsNullOrEmpty(eventContext.ErrorDescription))
+                    {
+                        if (!string.IsNullOrEmpty(eventContext.Error))
+                        {
+                            builder.Append(",");
+                        }
+
+                        builder.Append(" error_description=\"");
+                        builder.Append(eventContext.ErrorDescription);
+                        builder.Append('\"');
+                    }
+                    if (!string.IsNullOrEmpty(eventContext.ErrorUri))
+                    {
+                        if (!string.IsNullOrEmpty(eventContext.Error) || !string.IsNullOrEmpty(eventContext.ErrorDescription))
+                        {
+                            builder.Append(",");
+                        }
+
+                        builder.Append(" error_uri=\"");
+                        builder.Append(eventContext.ErrorUri);
+                        builder.Append('\"');
+                    }
+
+                    eventContext.Response.Headers.Append(HeaderNames.WWWAuthenticate, builder.ToString());
+                }
+                eventContext.Response.StatusCode = 401;
+                eventContext.Response.Headers.Append(HeaderNames.ContentType, "application/json");
+
+                eventContext.HandleResponse();
+                var msg = "登录无效";
+
+                var ex = eventContext.AuthenticateFailure;
+                var exceptions = new ReadOnlyCollection<Exception>(new[] { ex });
+                if (ex is AggregateException agEx)
+                {
+                    exceptions = agEx.InnerExceptions;
+                }
+                if (exceptions.Select(e => e is SecurityTokenExpiredException).Any())
+                {
+                    msg = "登录已过期，请重新登录";
+                }
+                // 检查更多错误情况
+                var json = $"{{\"msg\": \"{msg}\"}}";
+                var b = Encoding.UTF8.GetBytes(json);
+                await eventContext.Response.Body.WriteAsync(b, 0, b.Length);
+            }
         }
 
         public static JsonSerializerSettings Ignoring(params string[] strs) => new JsonSerializerSettings
